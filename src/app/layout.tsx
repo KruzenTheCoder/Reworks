@@ -6,6 +6,9 @@ import Footer from "@/components/sections/Footer";
 import ClientWrapper from "@/components/ui/ClientWrapper";
 import ChatWidget from "@/components/ui/ChatWidget";
 import ClientScrollTop from "@/components/ClientScrollTop";
+import GlobalBlur from "@/components/visuals/GlobalBlur";
+import SplashCursor from "@/components/SplashCursor";
+//import ScrollStack from "@/components/visuals/ScrollStack";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -97,6 +100,21 @@ export default function RootLayout({
         </ClientWrapper>
         
         <ChatWidget />
+
+        {/* Global splash cursor effect across the site */}
+        <SplashCursor />
+
+        {/* Site-wide bottom blur overlay that hides when footer is visible */}
+        <GlobalBlur
+          position="bottom"
+          height="6rem"
+          strength={2}
+          divCount={5}
+          curve="bezier"
+          exponential
+          opacity={1}
+          disableOnRoutes={["/"]}
+        />
       </body>
     </html>
   );

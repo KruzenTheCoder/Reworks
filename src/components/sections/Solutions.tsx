@@ -172,7 +172,13 @@ export default function Solutions() {
   return (
     <section id="solutions" className="py-24 bg-white">
           <MotionSection className="section-wrap" variant="fadeUp">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.15, margin: '-100px' }}
+        >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             <TypewriterText
               text="So many ways, so much potential"
@@ -187,14 +193,17 @@ export default function Solutions() {
           <p className="text-sm text-blue-600 font-medium">
             ReWorks Solutions is compliant with HIPAA Privacy Standards
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
           {industries.map((industry, index) => (
             <motion.div
               key={index}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15, margin: '-100px' }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.05 }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
               className="luxury-card glass-card rounded-xl p-6 group relative overflow-hidden"
             >
               {/* Animated gradient accent line */}
@@ -230,14 +239,26 @@ export default function Solutions() {
           ))}
         </div>
 
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.15, margin: '-100px' }}
+        >
           <Button variant="primary" size="lg">
             BUILD MY TEAM
           </Button>
-        </div>
+        </motion.div>
 
         {/* Case Study Section */}
-        <div className="mt-24 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12">
+        <motion.div
+          className="mt-24 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.15, margin: '-100px' }}
+        >
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
               Imagine the ways we can transform your operations
@@ -281,7 +302,7 @@ export default function Solutions() {
               BUILD MY TEAM
             </Button>
           </div>
-        </div>
+        </motion.div>
           </MotionSection>
     </section>
   )

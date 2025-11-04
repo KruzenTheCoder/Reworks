@@ -9,9 +9,21 @@ interface MotionSectionProps {
   className?: string
   variant?: Variant
   delay?: number
+  // Viewport controls for in-view triggering
+  viewportOnce?: boolean
+  viewportAmount?: number
+  viewportMargin?: string
 }
 
-export default function MotionSection({ children, className, variant = 'fadeUp', delay = 0 }: MotionSectionProps) {
+export default function MotionSection({
+  children,
+  className,
+  variant = 'fadeUp',
+  delay = 0,
+  viewportOnce = true,
+  viewportAmount = 0.15,
+  viewportMargin = '-100px'
+}: MotionSectionProps) {
   const getInitial = () => {
     switch (variant) {
       case 'fadeUp':
@@ -51,7 +63,7 @@ export default function MotionSection({ children, className, variant = 'fadeUp',
       initial={getInitial()}
       whileInView={getAnimate()}
       transition={{ duration: 0.75, ease: 'easeInOut', delay }}
-      viewport={{ once: false, amount: 0.2 }}
+      viewport={{ once: viewportOnce, amount: viewportAmount, margin: viewportMargin }}
       className={className}
     >
       {children}

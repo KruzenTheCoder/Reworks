@@ -83,7 +83,7 @@ export default function ChatWidget() {
   };
 
   return (
-    <motion.div layout className="fixed bottom-4 right-4 z-[60]">
+    <motion.div layout className="fixed bottom-4 right-4 z-[2000]">
       {/* Toggle button */}
       <motion.button
         aria-label={open ? "Close chat" : "Open chat"}
