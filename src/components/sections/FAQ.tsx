@@ -63,7 +63,7 @@ const TypewriterMessage = ({ text, onComplete }: { text: string, onComplete?: ()
       const timeout = setTimeout(() => {
         setDisplayedText(prev => prev + text[currentIndex]);
         setCurrentIndex(prev => prev + 1);
-      }, 20);
+      }, 24);
       return () => clearTimeout(timeout);
     } else if (onComplete) {
       onComplete();

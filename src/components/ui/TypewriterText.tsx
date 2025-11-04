@@ -36,12 +36,13 @@ export default function TypewriterText({
     const startAnimation = () => {
       setIsTyping(true);
       startTimeRef.current = performance.now();
+      const speedMultiplier = 1.2; // Slow down globally by ~20%
       
       const animate = (currentTime: number) => {
         if (!startTimeRef.current) return;
         
         const elapsed = currentTime - startTimeRef.current;
-        const expectedChars = Math.floor(elapsed / speed);
+        const expectedChars = Math.floor(elapsed / (speed * speedMultiplier));
         
         if (expectedChars <= text.length) {
           setDisplayedText(text.slice(0, expectedChars));
