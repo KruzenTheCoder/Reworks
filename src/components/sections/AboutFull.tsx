@@ -188,7 +188,7 @@ export default function AboutFull() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900">
-                      {leader.name} – {getInitials(leader.name)} - {leader.name}
+                      {leader.name}
                     </h3>
                     <p className="text-sm text-slate-600 font-semibold">
                       {leader.role}
