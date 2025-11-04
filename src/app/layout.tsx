@@ -14,7 +14,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "ReWorks – Premium Remote Staffing & Outsourcing",
+    default: "ReWorks Solution – Premium Remote Staffing & Outsourcing",
     template: "%s · ReWorks",
   },
   description:
@@ -73,15 +73,29 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} antialiased font-sans`}
+        className={`${inter.variable} antialiased font-sans overflow-x-hidden`}
       >
-        {/* Mount global scroll control immediately so it runs before content gating/preloader */}
+        {/* Mount global scroll control immediately */}
         <ClientScrollTop />
+        
         <ClientWrapper>
+          {/* Fixed header */}
           <Header />
-          <main>{children}</main>
+          
+          {/* Main content wrapper */}
+          <div className="relative">
+            {/* Invisible spacer for fixed header - prevents content from hiding behind it */}
+            <div className="h-[72px] pointer-events-none" aria-hidden="true" />
+            
+            {/* Main content */}
+            <main className="relative z-0">
+              {children}
+            </main>
+          </div>
+          
           <Footer />
         </ClientWrapper>
+        
         <ChatWidget />
       </body>
     </html>

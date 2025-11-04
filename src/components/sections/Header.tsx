@@ -27,31 +27,35 @@ export default function Header() {
   const headerBlur = useTransform(scrollY, [0, 100], [10, 20]);
   const headerBackgroundOpacity = useTransform(scrollY, [0, 100], [0.7, 0.85]);
   
-  // Gradual size transformations (slimmer header)
+  // Gradual padding transformations (keeping these for vertical spacing)
   const headerPaddingY = useTransform(scrollY, [0, 100], [16, 12]); // py-4 to py-3
-  const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
-  const navItemPadding = useTransform(scrollY, [0, 100], [8, 6]);
-  const buttonScale = useTransform(scrollY, [0, 100], [1, 0.95]);
   
-  // Container stays constrained and centered (avoid full-width feel)
+  // MAIN CHANGE: Container starts at 90% width and gradually narrows to max-w-7xl
   const containerMaxWidth = useTransform(
     scrollY, 
-    [0, 200],
-    ["80rem", "80rem"] // always max-w-7xl
+    [0, 300], // Smooth transition over 300px of scroll
+    ["90%", "80rem"] // Start at 90% width, end at max-w-7xl
   );
   
-  // Keep horizontal padding steady for cleaner look
+  // Horizontal padding adjusts with scroll - less padding when full width
   const containerPaddingX = useTransform(
     scrollY, 
-    [0, 200],
-    [24, 24] // px-6 constant
+    [0, 300],
+    [24, 24] // Keep consistent padding (px-6)
   );
   
-  // Always center the container
-  const containerMarginX = useTransform(
+  // NAV SPACING: Links spread out more when header is wider
+  const navGap = useTransform(
     scrollY,
-    [0, 200],
-    ["auto", "auto"]
+    [0, 300],
+    [16, 8] // Start with larger gap (gap-4), end with gap-2
+  );
+  
+  // Individual nav item padding for better spacing
+  const navItemPaddingX = useTransform(
+    scrollY,
+    [0, 300],
+    [12, 8] // More horizontal padding when spread out
   );
 
   useEffect(() => {
@@ -86,12 +90,12 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
     >
-      {/* Container with gradual width and centering transformation */}
+      {/* Container with gradual width transformation */}
       <motion.div
+        className="mx-auto transition-all duration-300" // Always centered with smooth transition
         style={{
           maxWidth: containerMaxWidth,
-          marginLeft: containerMarginX,
-          marginRight: containerMarginX,
+          width: "100%", // Ensure it uses full available width up to maxWidth
         }}
       >
         <motion.div
@@ -103,9 +107,8 @@ export default function Header() {
             paddingBottom: headerPaddingY,
           }}
         >
-          {/* Logo with smooth scale */}
+          {/* Logo - no scaling */}
           <motion.div 
-            style={{ scale: logoScale }}
             whileHover={{ scale: 1.05 }} 
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -122,8 +125,13 @@ export default function Header() {
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden gap-2 md:flex items-center">
+          {/* Desktop Navigation with dynamic spacing */}
+          <motion.nav 
+            className="hidden md:flex items-center"
+            style={{
+              gap: navGap, // Dynamic gap between nav items
+            }}
+          >
             {navItems.map((item, index) => {
               const isActive = pathname === item.href;
               return (
@@ -132,22 +140,25 @@ export default function Header() {
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  style={{ padding: navItemPadding }}
                 >
                   <Link
                     href={item.href}
                     className="relative group"
                   >
                     <motion.div
-                      className={`relative px-3 py-1.5 rounded-full font-medium transition-all duration-300 ${
+                      className={`relative py-1.5 rounded-full font-medium transition-all duration-300 ${
                         isActive
                           ? 'text-white'
                           : 'text-text-base hover:text-primary-blue'
                       }`}
+                      style={{
+                        paddingLeft: navItemPaddingX,
+                        paddingRight: navItemPaddingX,
+                      }}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      {/* Glassmorphism background for active state - using original colors */}
+                      {/* Glassmorphism background for active state */}
                       {isActive && (
                         <motion.div
                           className="absolute inset-0 rounded-full bg-gradient-to-r from-primary-blue to-accent-blue"
@@ -182,17 +193,16 @@ export default function Header() {
                 </motion.div>
               );
             })}
-          </nav>
+          </motion.nav>
 
-          {/* CTA Buttons with smooth scale */}
+          {/* CTA Buttons - no scaling */}
           <motion.div 
             className="hidden md:flex items-center gap-3"
-            style={{ scale: buttonScale }}
           >
-            <Button href="/contact" variant="luxury" size={isScrolled ? "sm" : "md"}>
+            <Button href="/contact" variant="luxury" size="md">
               Start Hiring
             </Button>
-            <Button href="/roles" variant="ghost" size={isScrolled ? "sm" : "md"}>
+            <Button href="/roles" variant="ghost" size="md">
               Find a Job
             </Button>
           </motion.div>
@@ -271,7 +281,7 @@ export default function Header() {
                     }`}
                     whileTap={{ scale: 0.97 }}
                   >
-                    {/* Glassmorphism background for active state - using original colors */}
+                    {/* Glassmorphism background for active state */}
                     {isActive && (
                       <motion.div
                         className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary-blue to-accent-blue"

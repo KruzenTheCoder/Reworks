@@ -354,3 +354,24 @@ body {
   -webkit-text-fill-color: transparent;
   animation: shimmer-sweep 3s ease-in-out infinite;
 }
+/* Ensure smooth scroll behavior but not for programmatic scrolls */
+html {
+  scroll-behavior: auto;
+}
+
+/* Smooth scroll only for anchor links */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Prevent horizontal overflow from animations */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure animations don't cause layout shift */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+

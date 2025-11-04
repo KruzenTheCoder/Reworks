@@ -2,16 +2,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react'
-import Button from "@/components/common/Button";
+import { Linkedin, Twitter, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 
 const navigationLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "#about" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Process", href: "#process" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Process", href: "/process" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Hire", href: "/hire" },
+  { label: "Jobs", href: "/jobs" },
 ];
 
 const socialLinks = [
@@ -20,108 +19,190 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer id="contact" className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
-        {/* Main Footer Content */}
-        <div className="py-18">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16">
-            {/* Brand Column */}
-            <div>
-              <Link href="/" className="inline-block mb-6">
-                <Image
-                  src="/logo.svg"
-                  alt="ReWorks Solutions"
-                  width={160}
-                  height={48}
-                  className="h-10 w-auto"
-                  priority
+    <footer className="relative bg-gray-900 text-white border-t border-gray-800 overflow-hidden">
+      {/* Animated Background Pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }} />
+      </div>
+
+      {/* Gradient Orbs for Depth */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl" />
+
+      {/* Animated Top Border Gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Main Footer Content - 20% taller */}
+        <div className="py-20">
+          <div className="grid grid-cols-1 md:grid-cols-6 gap-16">
+            {/* Brand - 2 columns */}
+            <motion.div 
+              className="md:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <Link href="/" className="inline-block mb-6 group">
+                <Image 
+                  src="/logo.svg" 
+                  alt="ReWorks Solutions" 
+                  width={140} 
+                  height={40} 
+                  className="h-10 w-auto opacity-95 group-hover:opacity-100 transition-opacity" 
+                  priority 
                 />
               </Link>
-              <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8 max-w-md">
-                Premium Remote Staffing Without Compromise. Native English-speaking professionals, white-glove management, and proactive support.
+              <p className="text-gray-300 text-base font-medium leading-relaxed mb-8">
+                Premium remote staffing<br />without compromise.
               </p>
               
-              {/* Social Links */}
-              <div className="flex gap-4">
-                {socialLinks.map((social) => (
-                  <a
+              {/* Social Links with Glow Effect */}
+              <div className="flex gap-3">
+                {socialLinks.map((social, index) => (
+                  <motion.a
                     key={social.name}
                     href={social.href}
-                    className="w-12 h-12 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-colors duration-300"
+                    className="relative w-11 h-11 rounded-full bg-gray-800 hover:bg-blue-600 flex items-center justify-center transition-all duration-300 group"
+                    aria-label={social.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    <social.icon className="w-5 h-5" />
-                  </a>
+                    {/* Glow effect on hover */}
+                    <div className="absolute inset-0 rounded-full bg-blue-600 opacity-0 group-hover:opacity-20 blur-lg transition-opacity duration-300" />
+                    <social.icon className="relative w-4 h-4 text-gray-300 group-hover:text-white transition-colors" />
+                  </motion.a>
                 ))}
               </div>
-            </div>
 
-            {/* Navigation Columns (spans two columns) */}
-            <div className="md:col-span-2">
-              <h3 className="text-lg font-semibold mb-6">Navigation</h3>
-              <ul className="grid grid-cols-2 gap-x-10 gap-y-4">
-                {navigationLinks.map((link) => (
-                  <li key={link.label}>
+              {/* Decorative Line */}
+              <div className="mt-8 w-16 h-0.5 bg-gradient-to-r from-blue-600 to-transparent" />
+            </motion.div>
+
+            {/* Navigation - 2 columns split into 2 sub-columns */}
+            <motion.div 
+              className="md:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+                <span className="w-1 h-4 bg-blue-600 rounded-full" />
+                Quick Links
+              </h3>
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
+                {navigationLinks.map((link, index) => (
+                  <motion.li 
+                    key={link.label}
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.05 }}
+                    viewport={{ once: true }}
+                  >
                     <Link
                       href={link.href}
-                      className="text-gray-300 hover:text-white transition-colors duration-300"
+                      className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 relative group inline-flex items-center gap-1"
                     >
-                      {link.label}
+                      <span>{link.label}</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-1 group-hover:translate-x-0 transition-all duration-300" />
+                      <span className="absolute left-0 -bottom-1 w-0 h-px bg-gradient-to-r from-blue-400 to-blue-600 group-hover:w-full transition-all duration-300" />
                     </Link>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
 
-            {/* Contact Column */}
-            <div>
-              <h3 className="text-lg font-semibold mb-6">Contact</h3>
+            {/* Contact - 2 columns */}
+            <motion.div 
+              className="md:col-span-2"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-6 flex items-center gap-2">
+                <span className="w-1 h-4 bg-blue-600 rounded-full" />
+                Contact
+              </h3>
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <Mail className="w-5 h-5 text-blue-400" />
-                  <a href="mailto:info@reworkssolutions.com" className="text-gray-300 hover:text-white transition-colors duration-300">
-                    info@reworkssolutions.com
-                  </a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-blue-400" />
-                  <a href="tel:+18452106070" className="text-gray-300 hover:text-white transition-colors duration-300">
-                    +1 845-210-6070
-                  </a>
-                </div>
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-blue-400 mt-0.5" />
-                  <span className="text-gray-300">
+                <a 
+                  href="mailto:info@reworkssolutions.com" 
+                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group"
+                >
+                  <div className="relative w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition-colors overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Mail className="relative w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="group-hover:translate-x-0.5 transition-transform">info@reworkssolutions.com</span>
+                </a>
+                <a 
+                  href="tel:+18452106070" 
+                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group"
+                >
+                  <div className="relative w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition-colors overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Phone className="relative w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="group-hover:translate-x-0.5 transition-transform">+1 845-210-6070</span>
+                </a>
+                <div className="flex items-start gap-3 text-sm font-medium text-gray-300">
+                  <div className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-4 h-4 text-blue-400" />
+                  </div>
+                  <span className="leading-relaxed pt-1.5">
                     11C Monsey Blvd<br />
                     Monsey, NY 10952
                   </span>
                 </div>
               </div>
-              
-              <div className="mt-8">
-                <Button variant="primary" size="md" className="w-full">
-                  SCHEDULE A CONSULT
-                </Button>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 py-8">
+        <div className="relative border-t border-gray-800/50 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-gray-400">
-              © {new Date().getFullYear()} ReWorks Solutions. All rights reserved.
-            </div>
-            <div className="flex items-center gap-6 text-sm text-gray-400">
-              <Link href="#" className="hover:text-white transition-colors duration-300">
+            <motion.div 
+              className="text-xs font-medium text-gray-400"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              © {currentYear} ReWorks Solutions. All rights reserved.
+            </motion.div>
+            <motion.div 
+              className="flex items-center gap-6 text-xs font-medium text-gray-400"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Link href="/privacy" className="hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-white transition-colors duration-300">
+              <Link href="/terms" className="hover:text-white transition-colors">
                 Terms of Service
               </Link>
-              <span>HIPAA Compliant</span>
-            </div>
+              <span className="relative px-3 py-1.5 bg-gray-800/50 border border-gray-700/50 rounded-full text-[10px] font-semibold uppercase tracking-wider text-gray-300 overflow-hidden group">
+                <span className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-blue-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <span className="relative">HIPAA Compliant</span>
+              </span>
+            </motion.div>
           </div>
         </div>
       </div>
