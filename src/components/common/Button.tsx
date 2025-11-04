@@ -1,0 +1,104 @@
+"use client";
+import Link from "next/link";
+import { ComponentProps, ReactNode } from "react";
+import { motion, Variants, HTMLMotionProps } from "framer-motion";
+
+type ButtonVariant = "primary" | "secondary" | "ghost" | "luxury" | "glow";
+
+type BaseProps = {
+  variant?: ButtonVariant;
+  className?: string;
+  children: ReactNode;
+  size?: "sm" | "md" | "lg";
+};
+
+type ButtonProps = BaseProps & (Omit<HTMLMotionProps<"button">, "ref"> & { href?: undefined });
+type LinkProps = BaseProps & { href: string } & ComponentProps<typeof Link>;
+
+function getVariantClasses(variant: ButtonVariant = "primary", size: "sm" | "md" | "lg" = "md") {
+  const sizeClasses = {
+    sm: "px-4 py-2 text-sm gap-2",
+    md: "px-6 py-3 text-base gap-2",
+    lg: "px-8 py-4 text-lg gap-3"
+  };
+
+  const base = `relative overflow-hidden inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300 btn-shimmer ${sizeClasses[size]}`;
+  
+  const map: Record<ButtonVariant, string> = {
+    // Blue-forward palette with pronounced gradient hover across all variants
+    primary: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:from-primary-blue hover:to-accent-blue hover:brightness-110 hover:saturate-125 border-0",
+    secondary: "border-2 border-primary-blue text-primary-blue bg-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue hover:text-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
+    ghost: "text-slate-700 bg-white/90 backdrop-blur-sm border border-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue shadow-sm hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
+    luxury: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
+    glow: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:brightness-110 hover:saturate-125 pulse-glow border-0"
+  };
+  
+  return `${base} ${map[variant]}`;
+}
+
+const buttonVariants: Variants = {
+  initial: { scale: 1 },
+  hover: { 
+    scale: 1,
+    transition: { type: "tween", duration: 0.2 } as const
+  },
+  tap: { 
+    scale: 0.98,
+    transition: { type: "tween", duration: 0.1 } as const
+  }
+};
+
+const luxuryVariants: Variants = {
+  initial: { scale: 1 },
+  hover: { 
+    scale: 1,
+    transition: { type: "tween", duration: 0.2 } as const
+  },
+  tap: { 
+    scale: 0.98,
+    transition: { type: "tween", duration: 0.1 } as const
+  }
+};
+
+export default function Button(props: ButtonProps | LinkProps) {
+  const { variant = "primary", size = "md", className = "", children } = props;
+  const classes = `${getVariantClasses(variant, size)} ${className}`.trim();
+  const variants = variant === "luxury" ? luxuryVariants : buttonVariants;
+
+  const ButtonContent = () => (
+    <>
+      <span className="relative z-10 flex items-center">{children}</span>
+    </>
+  );
+
+  if ("href" in props && props.href) {
+    const { href, size: _, variant: _variant, className: _className, children: _children, ...rest } = props as LinkProps;
+    return (
+      <motion.div
+        variants={variants}
+        initial="initial"
+        whileHover="hover"
+        whileTap="tap"
+        className="inline-block"
+      >
+        <Link href={href} {...rest} className={classes}>
+          <ButtonContent />
+        </Link>
+      </motion.div>
+    );
+  }
+
+  const { size: _, variant: _variant, className: _className, children: _children, ...rest } = props as ButtonProps;
+  return (
+    <motion.button
+      {...rest}
+      className={classes}
+      variants={variants}
+      initial="initial"
+      whileHover="hover"
+      whileTap="tap"
+    >
+      <ButtonContent />
+    </motion.button>
+  );
+}
