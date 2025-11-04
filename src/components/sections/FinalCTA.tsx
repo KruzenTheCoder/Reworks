@@ -3,46 +3,33 @@ import { motion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
 import { Zap, Shield, Globe, ArrowRight, PlayCircle } from "lucide-react";
 import Button from "@/components/common/Button";
+import PixelBlast from "@/components/PixelBlast";
 
 export default function FinalCTA() {
   return (
     <MotionSection className="relative bg-gradient-to-br from-primary-blue via-blue-700 to-indigo-800 text-white py-24 overflow-hidden" variant="fadeUp">
-      {/* Background Elements */}
+      {/* PixelBlast Background */}
       <div className="absolute inset-0">
-        <motion.div
-          className="absolute top-10 left-10 w-96 h-96 bg-gradient-to-r from-white/5 to-blue-300/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            x: [0, 50, 0],
-            y: [0, -30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+        <PixelBlast
+          variant="circle"
+          pixelSize={6}
+          color="#B19EEF"
+          patternScale={3}
+          patternDensity={1.2}
+          pixelSizeJitter={0.5}
+          enableRipples
+          rippleSpeed={0.4}
+          rippleThickness={0.12}
+          rippleIntensityScale={1.5}
+          liquid
+          liquidStrength={0.12}
+          liquidRadius={1.2}
+          liquidWobbleSpeed={5}
+          speed={0.6}
+          edgeFade={0.25}
+          transparent
+          style={{ width: '100%', height: '100%', position: 'relative' }}
         />
-        <motion.div
-          className="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-r from-purple-400/8 to-pink-600/8 rounded-full blur-2xl"
-          animate={{
-            scale: [1, 0.8, 1],
-            x: [0, -40, 0],
-            y: [0, 20, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        
-        {/* Animated grid pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }} />
-        </div>
       </div>
 
       <div className="relative z-10 section-wrap">

@@ -72,6 +72,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const enableSplashCursor = process.env.NEXT_PUBLIC_ENABLE_SPLASH_CURSOR === "true";
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -101,8 +102,8 @@ export default function RootLayout({
         
         <ChatWidget />
 
-        {/* Global splash cursor effect across the site */}
-        <SplashCursor />
+        {/* Global splash cursor effect across the site (feature-flagged) */}
+        {enableSplashCursor && <SplashCursor />}
 
         {/* Site-wide bottom blur overlay that hides when footer is visible */}
         <GlobalBlur

@@ -38,7 +38,7 @@ const steps = [
 
 export default function Process() {
   const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const headerInView = useInView(headerRef, { once: true, margin: "0px" });
 
   return (
     <MotionSection className="relative bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 py-24 overflow-hidden" variant="fadeUp">
@@ -120,7 +120,7 @@ export default function Process() {
                 key={step.number}
                 initial={{ opacity: 0, y: 50, rotateY: -30 }}
                 whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, amount: 0.1, margin: "0px" }}
                 transition={{ 
                   duration: 0.8, 
                   delay: index * 0.2,
@@ -266,7 +266,7 @@ export default function Process() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, amount: 0.1, margin: "0px" }}
           transition={{ duration: 0.8 }}
           className="mt-24"
         >

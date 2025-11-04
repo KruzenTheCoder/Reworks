@@ -2,12 +2,13 @@
 import Button from "@/components/common/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Rocket } from "lucide-react";
 import TypewriterText from "../ui/TypewriterText";
 
 export default function Hero() {
   const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -17,17 +18,24 @@ export default function Hero() {
   // Begin fading earlier so content below appears sooner
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.6], [1, 0.92, 0]);
 
+  useEffect(() => {
+    const onResize = () => setIsMobile(window.innerWidth < 640);
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <section 
       id="home"
       ref={ref}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"
+      className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Orbs */}
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"
+          className="absolute top-20 left-10 w-44 h-44 sm:w-72 sm:h-72 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"
           animate={{
             x: [0, 100, 0],
             y: [0, -50, 0],
@@ -40,7 +48,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/15 to-pink-600/15 rounded-full blur-3xl"
+          className="absolute top-40 right-20 w-56 h-56 sm:w-96 sm:h-96 bg-gradient-to-r from-purple-400/15 to-pink-600/15 rounded-full blur-3xl"
           animate={{
             x: [0, -80, 0],
             y: [0, 60, 0],
@@ -53,7 +61,7 @@ export default function Hero() {
           }}
         />
         <motion.div
-          className="absolute bottom-20 left-1/3 w-64 h-64 bg-gradient-to-r from-indigo-400/25 to-blue-600/25 rounded-full blur-2xl"
+          className="absolute bottom-20 left-1/3 w-40 h-40 sm:w-64 sm:h-64 bg-gradient-to-r from-indigo-400/25 to-blue-600/25 rounded-full blur-2xl"
           animate={{
             x: [0, 120, 0],
             y: [0, -40, 0],
@@ -68,17 +76,17 @@ export default function Hero() {
 
       {/* Parallax Content */}
       <motion.div 
-        style={{ y, opacity }}
-        className="relative z-10 flex min-h-screen items-center"
+        style={{ y: isMobile ? undefined : y, opacity: isMobile ? 1 : opacity }}
+        className="relative z-10 flex min-h-[85vh] sm:min-h-screen items-center"
       >
-        <div className="mx-auto max-w-7xl px-6 pt-28 pb-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20">
           <div className="text-center">
             {/* Animated Badge (Trusted-by pill) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mt-4 mb-8 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-6 py-2 text-sm font-medium text-primary-blue shadow-lg border border-white/20"
+              className="mt-4 mb-8 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-primary-blue shadow-lg border border-white/20"
             >
               <span className="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
           Trusted by thousands of Companies Worldwide
@@ -91,7 +99,7 @@ export default function Hero() {
               transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
               className="mb-10"
             >
-              <h1 className="mb-6 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-text-base font-display tracking-tight">
+              <h1 className="mb-6 text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-text-base font-display tracking-tight">
                 <TypewriterText 
                   text="Premium Remote Staffing Without Compromise"
                   speed={25}
@@ -119,18 +127,18 @@ export default function Hero() {
               transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
               className="mb-14"
             >
-              <p className="mb-12 mx-auto max-w-3xl text-lg sm:text-xl text-text-muted leading-relaxed font-medium tracking-wide">
+              <p className="mb-12 mx-auto max-w-3xl text-base sm:text-xl text-text-muted leading-relaxed font-medium tracking-wide">
                 Bringing you the top rigorously vetted, native English-speaking professionals,
                 backed by white-glove management and powered by proactive support.
               </p>
 
               {/* CTA Buttons with Enhanced Spacing and Animations */}
-              <motion.div 
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-                className="flex flex-col sm:flex-row items-center justify-center gap-6"
-              >
+            <motion.div 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-6"
+            >
                 <Button href="#contact" variant="luxury" size="lg" className="flex items-center gap-2">
                   <Rocket className="w-5 h-5" />
                   Schedule Your Free Consultation
@@ -147,8 +155,8 @@ export default function Hero() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 1.6, ease: "easeOut" }}
-              className="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-10 max-w-5xl mx-auto"
-            >
+            className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 max-w-5xl mx-auto px-2"
+          >
               {[
                 { number: "30% – 40%", label: "Increased Productivity" },
                 { number: "Up to 70%", label: "Saving on Payroll" },

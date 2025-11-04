@@ -22,8 +22,17 @@ export default function MotionSection({
   delay = 0,
   viewportOnce = true,
   viewportAmount = 0.15,
-  viewportMargin = '-100px'
+  viewportMargin = '0px'
 }: MotionSectionProps) {
+  // Adjust viewport settings for small screens to ensure animations trigger reliably
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+
+  const effectiveViewport = {
+    once: viewportOnce,
+    amount: isMobile ? Math.min(viewportAmount, 0.1) : viewportAmount,
+    margin: isMobile ? '0px' : viewportMargin,
+  }
+
   const getInitial = () => {
     switch (variant) {
       case 'fadeUp':
@@ -63,7 +72,7 @@ export default function MotionSection({
       initial={getInitial()}
       whileInView={getAnimate()}
       transition={{ duration: 0.75, ease: 'easeInOut', delay }}
-      viewport={{ once: viewportOnce, amount: viewportAmount, margin: viewportMargin }}
+      viewport={effectiveViewport}
       className={className}
     >
       {children}
