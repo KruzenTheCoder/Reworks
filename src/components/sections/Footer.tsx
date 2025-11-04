@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 import Button from "@/components/common/Button";
@@ -21,16 +22,23 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer id="contact" className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
         {/* Main Footer Content */}
-        <div className="py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <div className="py-18">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16">
             {/* Brand Column */}
-            <div className="lg:col-span-2">
+            <div>
               <Link href="/" className="inline-block mb-6">
-                <span className="text-2xl font-bold text-white">ReWorks Solutions</span>
+                <Image
+                  src="/logo.svg"
+                  alt="ReWorks Solutions"
+                  width={160}
+                  height={48}
+                  className="h-10 w-auto"
+                  priority
+                />
               </Link>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8 max-w-md">
+              <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8 max-w-md">
                 Premium Remote Staffing Without Compromise. Native English-speaking professionals, white-glove management, and proactive support.
               </p>
               
@@ -48,10 +56,10 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Navigation Column */}
-            <div>
+            {/* Navigation Columns (spans two columns) */}
+            <div className="md:col-span-2">
               <h3 className="text-lg font-semibold mb-6">Navigation</h3>
-              <ul className="space-y-4">
+              <ul className="grid grid-cols-2 gap-x-10 gap-y-4">
                 {navigationLinks.map((link) => (
                   <li key={link.label}>
                     <Link

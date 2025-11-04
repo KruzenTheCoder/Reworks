@@ -81,7 +81,7 @@ export default function Hero() {
               className="mt-4 mb-8 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-6 py-2 text-sm font-medium text-primary-blue shadow-lg border border-white/20"
             >
               <span className="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              Trusted by 4,000+ Companies Worldwide
+          Trusted by thousands of Companies Worldwide
             </motion.div>
 
             {/* Main Heading with Enhanced Typewriter Animation */}

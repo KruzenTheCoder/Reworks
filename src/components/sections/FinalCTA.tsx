@@ -89,7 +89,7 @@ export default function FinalCTA() {
             >
               Book a call today. It's fast, flexible, and fully supported.
               <br />
-              <span className="font-semibold text-yellow-300">Join 4,000+ companies saving millions on payroll.</span>
+        <span className="font-semibold text-yellow-300">Trusted by thousands of Companies Worldwide</span>
             </motion.p>
           </motion.div>
 

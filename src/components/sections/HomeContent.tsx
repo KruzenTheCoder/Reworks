@@ -82,7 +82,11 @@ export default function HomeContent() {
           transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
           className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed tracking-wide"
         >
-          Your vision, our solutions. Exceptional results
+          <TypewriterText 
+            text="Your vision, our solutions. Exceptional results" 
+            speed={30}
+            caretHeightClass="h-6"
+          />
         </motion.p>
         
         <motion.div
@@ -441,7 +445,11 @@ export default function HomeContent() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-slate-700 mb-6"
         >
-          Or you can make it happen with ReWorks Solutions.
+          <TypewriterText 
+            text="Or you can make it happen with ReWorks Solutions." 
+            speed={35}
+            caretHeightClass="h-6"
+          />
         </motion.p>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}

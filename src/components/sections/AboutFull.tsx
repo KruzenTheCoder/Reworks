@@ -126,7 +126,7 @@ export default function AboutFull() {
             </motion.p>
           </motion.div>
 
-          {/* Leadership */}
+          {/* Leadership - Big card styled with avatar initials and portrait */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
@@ -134,6 +134,7 @@ export default function AboutFull() {
                 role: "CEO",
                 bio: "Moshe connects businesses with growth opportunities, leveraging strategic relationships and keen insight. He goes beyond hiring, recognizing how the right talent and ambitious goals drive transformation.",
                 quote: "ReWorks is not just about providing employees – it's about building your crew, understanding where your company is going, and helping you grow bigger, faster. That's our mission."
+                
               },
               {
                 name: "Faigy Weinstock",
@@ -171,7 +172,7 @@ export default function AboutFull() {
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-50/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
                 />
 
-                {/* Profile Image */}
+                {/* Header: Circle avatar with initials and name-initials line */}
                 <motion.div
                   className="relative z-20 flex items-center gap-4 mb-4"
                   initial={{ opacity: 0, x: -20 }}
@@ -179,16 +180,15 @@ export default function AboutFull() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 + 0.3 }}
                 >
-                  <Image
-                    src={placeholderSrc}
-                    alt={`${leader.name} placeholder`}
-                    width={64}
-                    height={64}
-                    className="w-16 h-16 rounded-full object-cover ring-1 ring-gray-200 shadow-lg"
-                  />
+                  <div
+                    className={`w-16 h-16 rounded-full bg-gradient-to-br ${getGradientForName(leader.name)} flex items-center justify-center ring-1 ring-gray-200 shadow-lg text-white font-bold text-lg`}
+                    aria-label={`${leader.name} avatar`}
+                  >
+                    {getInitials(leader.name)}
+                  </div>
                   <div>
                     <h3 className="text-xl font-bold text-gray-900">
-                      {leader.name}
+                      {leader.name} – {getInitials(leader.name)} - {leader.name}
                     </h3>
                     <p className="text-sm text-slate-600 font-semibold">
                       {leader.role}
@@ -197,24 +197,45 @@ export default function AboutFull() {
                 </motion.div>
 
                 <div className="relative z-20">
-                  <motion.p 
-                    className="text-gray-700 leading-relaxed"
+                  {/* Portrait photo (falls back to placeholder if unavailable) */}
+                  <motion.div
+                    className="mt-2"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2 + 0.6 }}
                   >
-                    {leader.bio}
-                  </motion.p>
+                    <Image
+                      src="/images/team/portrait-placeholder.svg"
+                      alt={`${leader.name} portrait placeholder`}
+                      width={800}
+                      height={450}
+                      className="w-full h-64 md:h-72 object-cover rounded-xl border border-gray-200 shadow-md"
+                    />
+                 
+                  </motion.div>
+
+                  {/* Little saying directly below the image */}
                   <motion.blockquote 
                     className="mt-4 text-slate-800 italic border-l-4 border-primary-blue pl-4 bg-blue-50/50 py-2 rounded-r-lg"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 + 0.8 }}
+                    transition={{ delay: index * 0.2 + 0.7 }}
                   >
                     "{leader.quote}"
                   </motion.blockquote>
+
+                  {/* Bio below quote */}
+                  <motion.p 
+                    className="mt-4 text-gray-700 leading-relaxed"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.2 + 0.8 }}
+                  >
+                    {leader.bio}
+                  </motion.p>
                 </div>
               </motion.div>
             ))}
@@ -273,22 +294,22 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Profile Image */}
-                  <div className="relative z-20 flex items-center gap-3 mb-2">
+                  {/* Portrait placeholder image */}
+                  <div className="relative z-20 mb-3">
                     <Image
-                      src={placeholderSrc}
-                      alt={`${person.name} placeholder`}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover ring-1 ring-gray-200 shadow-md"
+                      src="/images/team/portrait-placeholder.svg"
+                      alt={`${person.name} portrait placeholder`}
+                      width={800}
+                      height={450}
+                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-gray-200 shadow-md"
                     />
-                    <div className="flex-1">
-                      <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
-                        {person.name}
-                      </div>
-                      <div className="text-sm text-slate-700">
-                        {person.role}
-                      </div>
+                  </div>
+                  <div className="relative z-20">
+                    <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
+                      {person.name}
+                    </div>
+                    <div className="text-sm text-slate-700">
+                      {person.role}
                     </div>
                   </div>
                 </motion.div>
@@ -350,22 +371,22 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Profile Image */}
-                  <div className="relative z-20 flex items-center gap-3 mb-2">
+                  {/* Portrait placeholder image */}
+                  <div className="relative z-20 mb-3">
                     <Image
-                      src={placeholderSrc}
-                      alt={`${person.name} placeholder`}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover ring-1 ring-gray-200 shadow-md"
+                      src="/images/team/portrait-placeholder.svg"
+                      alt={`${person.name} portrait placeholder`}
+                      width={800}
+                      height={450}
+                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-slate-200 shadow-md"
                     />
-                    <div className="flex-1">
-                      <div className="font-semibold text-text-base group-hover:gradient-text transition-all duration-300">
-                        {person.name}
-                      </div>
-                      <div className="text-sm text-text-muted">
-                        {person.role}
-                      </div>
+                  </div>
+                  <div className="relative z-20">
+                    <div className="font-semibold text-text-base group-hover:gradient-text transition-all duration-300">
+                      {person.name}
+                    </div>
+                    <div className="text-sm text-text-muted">
+                      {person.role}
                     </div>
                   </div>
                 </motion.div>
@@ -425,22 +446,22 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Profile Image */}
-                  <div className="relative z-20 flex items-center gap-3 mb-2">
+                  {/* Portrait placeholder image */}
+                  <div className="relative z-20 mb-3">
                     <Image
-                      src={placeholderSrc}
-                      alt={`${person.name} placeholder`}
-                      width={48}
-                      height={48}
-                      className="w-12 h-12 rounded-full object-cover ring-1 ring-gray-200 shadow-md"
+                      src="/images/team/portrait-placeholder.svg"
+                      alt={`${person.name} portrait placeholder`}
+                      width={800}
+                      height={450}
+                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-gray-200 shadow-md"
                     />
-                    <div className="flex-1">
-                      <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
-                        {person.name}
-                      </div>
-                      <div className="text-sm text-slate-700">
-                        {person.role}
-                      </div>
+                  </div>
+                  <div className="relative z-20">
+                    <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
+                      {person.name}
+                    </div>
+                    <div className="text-sm text-slate-700">
+                      {person.role}
                     </div>
                   </div>
                 </motion.div>
