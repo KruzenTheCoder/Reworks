@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
@@ -10,8 +10,8 @@ import GlobalBlur from "@/components/visuals/GlobalBlur";
 import SplashCursor from "@/components/SplashCursor";
 //import ScrollStack from "@/components/visuals/ScrollStack";
 
-const inter = Inter({
-  variable: "--font-inter",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -77,7 +77,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${inter.variable} antialiased font-sans overflow-x-hidden`}
+        className={`${jakarta.variable} antialiased font-sans overflow-x-hidden`}
       >
         {/* Mount global scroll control immediately */}
         <ClientScrollTop />

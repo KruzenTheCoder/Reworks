@@ -138,14 +138,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         }
       }
 
-      let translateY = 0;
-      const isPinned = scrollTop >= pinStart && scrollTop <= pinEnd;
-
-      if (isPinned) {
-        translateY = scrollTop - cardTop + stackPositionPx + itemStackDistance * i;
-      } else if (scrollTop > pinEnd) {
-        translateY = pinEnd - cardTop + stackPositionPx + itemStackDistance * i;
-      }
+      // Sticky cards handle vertical pinning; keep translateY neutral
+      const translateY = 0;
 
       const newTransform = {
         translateY: Math.round(translateY * 100) / 100,
@@ -277,6 +271,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (i < cards.length - 1) {
         card.style.marginBottom = `${itemDistance}px`;
       }
+      // Pin each card using sticky positioning and layer them top-down
+      const { containerHeight } = getScrollData();
+      const stackPositionPx = parsePercentage(stackPosition, containerHeight);
+      card.style.position = 'sticky';
+      card.style.top = `${stackPositionPx}px`;
+      card.style.zIndex = String(cards.length - i);
+
       card.style.willChange = 'transform, filter';
       card.style.transformOrigin = 'top center';
       card.style.backfaceVisibility = 'hidden';
@@ -319,7 +320,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   ]);
 
   return (
-    <div className={`scroll-stack-scroller ${className}`.trim()} ref={scrollerRef}>
+    <div className={`scroll-stack-scroller ${useWindowScroll ? 'window-scroll' : ''} ${className}`.trim()} ref={scrollerRef}>
       <div className="scroll-stack-inner">
         {children}
         {/* Spacer so the last pin can release cleanly */}

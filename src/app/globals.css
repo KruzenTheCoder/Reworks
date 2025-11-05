@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -15,8 +15,8 @@
   --color-gray-light: #F8FAFC;
   --color-text-base: #1E293B;
   --color-text-muted: #64748B;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+  --font-display: 'nohemi', var(--font-jakarta), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 
   /* Luxury Gradients */
@@ -85,6 +85,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+/* Apply Nohemi (fallbacks to Jakarta Sans) for headings and title utilities */
+h1,
+h2,
+h3,
+h4,
+.title-gradient,
+.heading,
+.font-display {
+  font-family: var(--font-display);
 }
 
 /* Custom scrollbar */
@@ -167,6 +178,30 @@ body {
   background-clip: text;
 }
 
+/* Animated gradient shimmer for headings/text with background-clip */
+.gradient-animate {
+  background-size: 300% 300%;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Premium interactive title utility */
+.interactive-title {
+  letter-spacing: 0.06em;
+  display: inline-block;
+  transition: letter-spacing 250ms ease, transform 250ms ease, text-shadow 250ms ease;
+}
+.interactive-title:hover {
+  letter-spacing: 0.12em;
+  transform: translateY(-1px);
+  text-shadow: 0 2px 12px rgba(24, 136, 197, 0.25);
+}
+
 /* Luxury button base */
 .btn-luxury {
   position: relative;
@@ -235,6 +270,10 @@ body {
 
 .pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.shiny-strong {
+  filter: saturate(1.25) contrast(1.1);
 }
 
 /* Soft fade/slide animations */
@@ -474,4 +513,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-

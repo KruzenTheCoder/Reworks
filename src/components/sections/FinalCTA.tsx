@@ -54,11 +54,11 @@ export default function FinalCTA() {
                 className="relative inline-block"
                 whileHover={{ scale: 1.05 }}
               >
-                <span className="bg-gradient-to-r from-yellow-300 to-orange-300 bg-clip-text text-transparent">
+                <span className="text-yellow-300">
                   top global talent?
                 </span>
                 <motion.div
-                  className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-full"
+                  className="absolute -bottom-2 left-0 h-1 bg-yellow-300 rounded-full"
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
                   transition={{ duration: 1, delay: 0.8 }}
@@ -88,15 +88,15 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
-            {/* Primary CTA - Bright and prominent */}
+            {/* Primary CTA - Blue gradient with hover shine sweep (clipped to rounded shape) */}
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-orange-400 text-blue-900 font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-yellow-400/50">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-blue to-accent-blue rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
+              <div className="relative flex items-center gap-2 bg-gradient-to-r from-primary-blue to-accent-blue text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-blue-400/40 overflow-hidden btn-shimmer">
                 <span className="text-lg">Start Hiring Now</span>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
@@ -105,22 +105,6 @@ export default function FinalCTA() {
                   <ArrowRight className="w-5 h-5" />
                 </motion.div>
               </div>
-              {/* Shimmer effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.7) 50%, transparent 60%)',
-                  backgroundSize: '200% 100%',
-                }}
-                animate={{
-                  backgroundPosition: ['200% 0', '-200% 0'],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  repeatDelay: 2,
-                }}
-              />
             </motion.a>
             
             {/* Secondary CTA - Glass effect */}

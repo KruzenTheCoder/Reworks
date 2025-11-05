@@ -63,7 +63,7 @@ export default function Footer() {
                   priority 
                 />
               </Link>
-              <p className="text-gray-300 text-base font-medium leading-relaxed mb-8">
+              <p className="text-gray-300 text-base font-medium leading-relaxed mb-8 interactive-title">
                 Premium remote staffing<br />without compromise.
               </p>
               

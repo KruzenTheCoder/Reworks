@@ -87,7 +87,7 @@ export default function ChatWidget() {
       {/* Toggle button */}
       <motion.button
         aria-label={open ? "Close chat" : "Open chat"}
-        className="shadow-lg rounded-full bg-primary-blue text-white p-3 flex items-center justify-center hover:bg-blue-600 focus:outline-none"
+        className="shadow-lg rounded-full bg-gradient-to-r from-primary-blue to-accent-blue text-white p-3 flex items-center justify-center focus:outline-none btn-shimmer hover:brightness-110 hover:saturate-125"
         whileTap={{ scale: 0.95 }}
         animate={{ scale: open ? 0.96 : 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
@@ -145,7 +145,7 @@ export default function ChatWidget() {
                       layout
                       className={`rounded-2xl px-3 py-2 text-sm shadow-sm max-w-[80%] ${
                         m.author === "user"
-                          ? "bg-blue-600 text-white"
+                          ? "bg-gradient-to-r from-primary-blue to-accent-blue text-white"
                           : "bg-gray-100 text-gray-800"
                       }`}
                     >
@@ -188,7 +188,7 @@ export default function ChatWidget() {
               />
               <button
                 onClick={sendMessage}
-                className="inline-flex items-center gap-1 rounded-lg bg-primary-blue text-white px-3 py-2 text-sm hover:bg-blue-600"
+                className="inline-flex items-center gap-1 rounded-lg bg-gradient-to-r from-primary-blue to-accent-blue text-white px-3 py-2 text-sm btn-shimmer hover:brightness-110 hover:saturate-125"
               >
                 <Send className="w-4 h-4" />
                 Send

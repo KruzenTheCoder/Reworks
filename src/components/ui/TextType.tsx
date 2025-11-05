@@ -3,6 +3,7 @@
 import { ElementType, useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './TextType.css';
+import ShinyText from './ShinyText';
 
 interface TextTypeProps {
   className?: string;
@@ -23,6 +24,7 @@ interface TextTypeProps {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
+  shimmerOnComplete?: boolean;
 }
 
 const TextType = ({
@@ -44,6 +46,7 @@ const TextType = ({
   onSentenceComplete,
   startOnVisible = false,
   reverseMode = false,
+  shimmerOnComplete = false,
   ...props
 }: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -51,6 +54,7 @@ const TextType = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const [isFinished, setIsFinished] = useState(false);
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
@@ -135,10 +139,14 @@ const TextType = ({
             },
             variableSpeed ? getRandomSpeed() : typingSpeed
           );
-        } else if (textArray.length > 1) {
+        } else {
+          // Finished typing current text
+          setIsFinished(true);
+          if (textArray.length > 1) {
           timeout = setTimeout(() => {
             setIsDeleting(true);
           }, pauseDuration);
+          }
         }
       }
     };
@@ -168,7 +176,7 @@ const TextType = ({
   ]);
 
   const shouldHideCursor =
-    hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
+    (hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting)) || isFinished;
 
   return createElement(
     Component,
@@ -177,9 +185,12 @@ const TextType = ({
       className: `text-type ${className}`,
       ...props
     },
-    <span className="text-type__content" style={{ color: getCurrentTextColor() || 'inherit' }}>
-      {displayedText}
-    </span>,
+    <ShinyText
+      text={displayedText}
+      disabled={!shimmerOnComplete || !isFinished}
+      speed={3}
+      className={className}
+    />,
     showCursor && (
       <span
         ref={cursorRef}

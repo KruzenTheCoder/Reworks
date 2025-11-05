@@ -21,7 +21,7 @@ export default function TypewriterText({
   className = "title-gradient",
   caretHeightClass = "h-6",
   onComplete,
-  shimmerOnComplete = false,
+  shimmerOnComplete = true,
 }: TypewriterProps) {
   return (
     <TextType
@@ -37,6 +37,7 @@ export default function TypewriterText({
       cursorClassName={caretHeightClass}
       className={className}
       as={"span"}
+      shimmerOnComplete={shimmerOnComplete}
       onSentenceComplete={() => {
         if (onComplete) onComplete();
       }}

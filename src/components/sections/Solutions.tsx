@@ -1,9 +1,11 @@
 "use client"
+import { useState } from 'react'
 import Button from '@/components/common/Button'
 import MotionSection from "../ui/MotionSection";
 import { motion } from 'framer-motion'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, ShoppingCart, ClipboardList, Network, Calculator, Factory, Truck, Package, Home, FileCheck, Building } from 'lucide-react'
 import TypewriterText from "../ui/TypewriterText";
+import OperationTabs from './OperationTabs'
 
 const industries = [
   {
@@ -168,7 +170,122 @@ const industries = [
   }
 ]
 
+const operations = [
+  {
+    title: "PHARMACEUTICAL SUPPLY OPERATIONS",
+    icon: Package,
+    problem:
+      "Inventory discrepancies, compliance documentation, and tracking backlogs are slowing down your pharmaceutical distribution.",
+    solution:
+      "ReWorks provides staff across your distribution network to handle inventory records, compliance documentation, and distribution tracking.",
+    outcome:
+      "Distribute more products efficiently, maintain perfect compliance, and expand your distribution network.",
+  },
+  {
+    title: "ABA SERVICE COORDINATION",
+    icon: ClipboardList,
+    problem:
+      "Your therapy center is buried in progress notes, insurance verifications, and provider documentation across multiple cases.",
+    solution:
+      "ReWorks brings in the workforce needed to process therapy notes, insurance paperwork, and clinical documentation.",
+    outcome:
+      "Serve more patients effectively, expand your therapy programs, and strengthen your practice’s reputation.",
+  },
+  {
+    title: "HOME CARE SUPPORT OPERATIONS",
+    icon: Home,
+    problem:
+      "Your home care agency is buried in scheduling conflicts, missed authorizations, and billing backlogs while your clinical staff struggles to keep.",
+    solution:
+      "ReWorks provides your dedicated support team for scheduling, authorization reviews, documentation, and comprehensive billing operations.",
+    outcome:
+      "Run your agency smoothly, increase patient visits, and grow your service area.",
+  },
+  {
+    title: "MEDICAL BILLING OPERATIONS",
+    icon: FileCheck,
+    problem:
+      "Your medical center is struggling to keep up with paperwork, keeps missing claims deadlines, and loses track of invoices and payments.",
+    solution:
+      "ReWorks provides trained staff to handle your claims paperwork, payment posting, and follow-ups from start to finish.",
+    outcome:
+      "Claims get processed faster, payments arrive on time, and you can focus on patient care.",
+  },
+  {
+    title: "NURSING FACILITY COORDINATION",
+    icon: Building,
+    problem:
+      "Documentation demands and insurance delays are slowing down your entire facility’s operations.",
+    solution:
+      "ReWorks sources large-scale back-office staff to process medical records, insurance verification, and claims workload.",
+    outcome:
+      "ReWorks sources large-scale back-office staff to process medical records, insurance verification, and claims workload.",
+  },
+  // New operations provided
+  {
+    title: "E-COMMERCE OPERATIONS",
+    icon: ShoppingCart,
+    problem:
+      "Your online store is losing money and sales due to outdated listings, inventory errors, and delayed customer service responses.",
+    solution:
+      "ReWorks connects you with full-time support to process inventory updates, product listings, and customer inquiries.",
+    outcome:
+      "Process more orders accurately, expand your product lines confidently, and accelerate your market growth.",
+  },
+  {
+    title: "INSURANCE CLAIMS OPERATIONS",
+    icon: ClipboardList,
+    problem:
+      "Your brokerage is overwhelmed with processing claims documentation, coordinating with carriers, and managing client communication across lines.",
+    solution:
+      "ReWorks assigns full teams to manage your claims paperwork, carrier communications, and client updates",
+    outcome:
+      "Process more claims faster, grow your client base steadily, and build stronger carrier relationships.",
+  },
+  {
+    title: "TELECOM NETWORK OPERATIONS",
+    icon: Network,
+    problem:
+      "Your telecom company’s growth means network issues, service requests, and technical support are overwhelming current staff.",
+    solution:
+      "ReWorks assigns teams to handle your support tickets, service coordination, and escalation tracking.",
+    outcome:
+      "ReWorks assigns teams to handle your support tickets, service coordination, and escalation tracking.",
+  },
+  {
+    title: "BOOKKEEPING OPERATIONS",
+    icon: Calculator,
+    problem:
+      "Your company is growing fast, but your staff can’t keep up with the mounting invoices, payroll, and account reconciliation.",
+    solution:
+      "ReWorks delivers comprehensive staffing for accounts payable, payroll, and reconciliation processing.",
+    outcome:
+      "Numbers stay perfect, cash flow accelerates, your strategic vision takes flight.",
+  },
+  {
+    title: "MANUFACTURING OPERATIONS SUPPORT",
+    icon: Factory,
+    problem:
+      "Purchase orders, supplier documentation, and quality control paperwork are overwhelming your manufacturing operations.",
+    solution:
+      "ReWorks equips your operation with dedicated staff for processing vendor records, tracking inventory, maintaining quality documentation.",
+    outcome:
+      "Scale production smoothly, strengthen vendor partnerships, and accelerate your market expansion.",
+  },
+  {
+    title: "LOGISTICS MANAGEMENT",
+    icon: Truck,
+    problem:
+      "Your delivery operations are chaotic with tracking gaps, scheduling conflicts, and communication breakdowns between drivers and dispatch.",
+    solution:
+      "ReWorks provides logistics staff to process your route planning, dispatch coordination, and delivery tracking workload",
+    outcome:
+      "Routes run smoothly, deliveries multiply, territories expand naturally.",
+  },
+]
+
 export default function Solutions() {
+  const [active, setActive] = useState(0);
   return (
     <section id="solutions" className="py-24 bg-white">
           <MotionSection className="section-wrap" variant="fadeUp">
@@ -251,51 +368,35 @@ export default function Solutions() {
           </Button>
         </motion.div>
 
-        {/* Case Study Section */}
+        {/* Case Study Section — tabbed operations panel */}
         <motion.div
-          className="mt-24 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-8 md:p-12"
+          className="mt-24 rounded-2xl p-8 md:p-12 bg-gradient-to-r from-blue-50 to-indigo-50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.1, margin: '0px' }}
         >
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-              Imagine the ways we can transform your operations
+            <h3 className="text-2xl md:text-3xl font-bold text-text-base mb-4 font-display tracking-tight">
+              <TypewriterText 
+                text="Imagine the ways we can transform your operations" 
+                speed={28}
+                caretHeightClass="h-8"
+                shimmerOnComplete
+                className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent"
+              />
             </h3>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 1.2, delay: 2.2, ease: "easeOut" }}
+              className="h-[3px] bg-gradient-to-r from-primary-blue/40 via-accent-blue/60 to-primary-blue/40 rounded-full max-w-xl mx-auto"
+              style={{ transformOrigin: "center" }}
+            />
           </div>
 
-          <div className="luxury-card glass-card rounded-xl p-8 group relative overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary-blue to-accent-blue" />
-            </div>
-            <h4 className="text-xl font-bold text-gray-900 mb-6 text-center">
-              MEDICAL EQUIPMENT OPERATIONS
-            </h4>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
-                <h5 className="font-semibold text-red-600 mb-3">The problem</h5>
-                <p className="text-gray-600 text-sm">
-                  With limited staff, your medical supply business is falling behind on inventory levels, order status, and quality control documentation across distribution centers.
-                </p>
-              </div>
-              
-              <div>
-                <h5 className="font-semibold text-blue-600 mb-3">The solution</h5>
-                <p className="text-gray-600 text-sm">
-                  ReWorks provides the support volume you need to handle all documentation without overloading your team.
-                </p>
-              </div>
-              
-              <div>
-                <h5 className="font-semibold text-green-600 mb-3">The outcome</h5>
-                <p className="text-gray-600 text-sm">
-                  Streamlined operations with up-to-date inventory tracking, efficient order processing, and comprehensive quality control documentation across all locations.
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Tabs + Detail using react-bits */}
+          <OperationTabs operations={operations} />
 
           <div className="text-center mt-8">
             <Button variant="primary" size="lg">
