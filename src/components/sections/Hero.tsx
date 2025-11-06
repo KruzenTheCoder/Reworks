@@ -103,13 +103,13 @@ export default function Hero() {
                 <TypewriterText 
                   text="Premium Remote Staffing Without Compromise"
                   speed={25}
-                  className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent"
+                  className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent gradient-animate"
                   caretHeightClass="h-12"
-                  shimmerOnComplete
+                  shimmerOnComplete={false}
                   onComplete={() => console.log("Hero title complete")}
                 />
               </h1>
-              
+
               {/* Subtle underline animation */}
               <motion.div
                 initial={{ scaleX: 0 }}
