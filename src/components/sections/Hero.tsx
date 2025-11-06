@@ -139,7 +139,7 @@ export default function Hero() {
               transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6"
             >
-                <Button href="#contact" variant="luxury" size="lg" className="flex items-center gap-2">
+                <Button href="contact" variant="luxury" size="lg" className="flex items-center gap-2">
                   <Rocket className="w-5 h-5" />
                   Schedule Your Free Consultation
                 </Button>

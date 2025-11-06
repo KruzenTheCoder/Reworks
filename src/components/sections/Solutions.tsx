@@ -363,7 +363,7 @@ export default function Solutions() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0.1, margin: '0px' }}
         >
-          <Button variant="primary" size="lg">
+          <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" variant="primary" size="lg">
             BUILD MY TEAM
           </Button>
         </motion.div>
@@ -399,7 +399,7 @@ export default function Solutions() {
           <OperationTabs operations={operations} />
 
           <div className="text-center mt-8">
-            <Button variant="primary" size="lg">
+            <Button href="contact" variant="primary" size="lg">
               BUILD MY TEAM
             </Button>
           </div>
