@@ -39,7 +39,7 @@ export default function HirePage() {
         </div>
 
         <div className="text-center mt-10">
-          <Button href="/contact" variant="luxury" size="lg">
+          <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" target="_blank" rel="noopener noreferrer" variant="luxury" size="lg">
             Start Your Hiring Plan
           </Button>
         </div>

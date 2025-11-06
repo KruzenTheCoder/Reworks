@@ -47,13 +47,13 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-6 gap-16">
             {/* Brand - 2 columns */}
             <motion.div 
-              className="md:col-span-2"
+              className="md:col-span-2 flex flex-col items-start"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Link href="/" className="inline-block mb-6 group">
+              <Link href="/" className="block mb-3 group">
                 <Image 
                   src="/logo.svg" 
                   alt="ReWorks Solutions" 
@@ -63,8 +63,9 @@ export default function Footer() {
                   priority 
                 />
               </Link>
-              <p className="text-gray-300 text-base font-medium leading-relaxed mb-8 interactive-title">
-                Premium remote staffing<br />without compromise.
+              <p className="text-gray-300 text-base font-medium leading-relaxed mt-2 mb-8 interactive-title">
+                Premium remote staffing<br />
+                without compromise.
               </p>
               
               {/* Social Links with Glow Effect */}

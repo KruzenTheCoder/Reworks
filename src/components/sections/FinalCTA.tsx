@@ -54,11 +54,12 @@ export default function FinalCTA() {
                 className="relative inline-block"
                 whileHover={{ scale: 1.05 }}
               >
-                <span className="text-yellow-300">
+                <span style={{ color: '#ff9442' }}>
                   top global talent?
                 </span>
                 <motion.div
-                  className="absolute -bottom-2 left-0 h-1 bg-yellow-300 rounded-full"
+                  className="absolute -bottom-2 left-0 h-1 rounded-full"
+                  style={{ backgroundColor: '#ff9442' }}
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
                   transition={{ duration: 1, delay: 0.8 }}
@@ -76,7 +77,7 @@ export default function FinalCTA() {
             >
               Book a call today. It's fast, flexible, and fully supported.
               <br />
-        <span className="font-semibold text-yellow-300">Trusted by thousands of Companies Worldwide</span>
+        <span className="font-semibold" style={{ color: '#ff9442' }}>Trusted by thousands of Companies Worldwide</span>
             </motion.p>
           </motion.div>
 
@@ -95,8 +96,8 @@ export default function FinalCTA() {
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-blue to-accent-blue rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center gap-2 bg-gradient-to-r from-primary-blue to-accent-blue text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-blue-400/40 overflow-hidden btn-shimmer">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
+              <div className="relative flex items-center gap-2 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
                 <span className="text-lg">Start Hiring Now</span>
                 <motion.div
                   animate={{ x: [0, 5, 0] }}
@@ -191,7 +192,8 @@ export default function FinalCTA() {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30">
                   <motion.div 
-                    className="mb-3 text-yellow-400"
+                    className="mb-3"
+                    style={{ color: '#ff9442' }}
                     whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
                     transition={{ duration: 0.5 }}
                   >

@@ -39,8 +39,12 @@ export default function GlobalBlur({
     if (!footerEl) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => setFooterVisible(entry.isIntersecting),
-      { threshold: 0.05 }
+      ([entry]) => {
+        // Hide the blur once any meaningful part of the footer is visible
+        // Lower threshold helps shorter pages like Jobs avoid bottom blur.
+        setFooterVisible(entry.intersectionRatio > 0.2);
+      },
+      { threshold: 0.2 }
     );
     observer.observe(footerEl);
     return () => observer.disconnect();

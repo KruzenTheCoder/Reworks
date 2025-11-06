@@ -28,7 +28,7 @@ function getVariantClasses(variant: ButtonVariant = "primary", size: "sm" | "md"
     // Blue-forward palette with pronounced gradient hover across all variants
     primary: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:from-primary-blue hover:to-accent-blue hover:brightness-110 hover:saturate-125 border-0",
     secondary: "border-2 border-primary-blue text-primary-blue bg-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue hover:text-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
-    ghost: "text-slate-700 bg-white/90 backdrop-blur-sm border border-slate-200 hover:text-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue shadow-sm hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
+    ghost: "text-white bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] shadow-sm hover:shadow-lg hover:brightness-110 hover:saturate-125 border-0",
     luxury: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
     glow: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:brightness-110 hover:saturate-125 pulse-glow border-0"
   };

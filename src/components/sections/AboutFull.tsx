@@ -3,10 +3,33 @@ import Button from '@/components/common/Button'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import Image from 'next/image'
-import { User } from 'lucide-react'
+import { User, Target, Users, Settings } from 'lucide-react'
 import TypewriterText from "../ui/TypewriterText"
 
 // Using shared TypewriterText to ensure text always renders
+
+// External portrait images mapped by display name
+const portraits: Record<string, string> = {
+  "Moshe Sender": "https://i.ibb.co/MzbKKL1/Moshe-Sender.png",
+  "Faigy Weinstock": "https://i.ibb.co/WmznrD1/Faigy-Welnstock.webp",
+  // Sales Team
+  "Meir Kaufman": "https://i.ibb.co/8Ddy1jxM/Meir-Kaufman.webp",
+  "Isaac Conick": "https://i.ibb.co/p6zQZjqF/Isaac-Conick.png",
+  "Shmuel Rabinowitz": "https://i.ibb.co/1Y5y3Hjn/Shmuel-Rabinowitz.png",
+  "Daniel Rabson": "https://i.ibb.co/NdKYT3zR/Daniel-Rabson-1.png",
+  // Management Team
+  "Travis Marshall": "https://i.ibb.co/Qjv7jXHc/Travis-Marshall.png",
+  "Xandria Erasmus": "https://i.ibb.co/k6Vgv7hV/Xandria-Erasmus.png",
+  "Ken Aquitan": "https://i.ibb.co/1fZxGVHT/Ken-Aquitan.png",
+  // Recruiters
+  "Janique Bruyns": "https://i.ibb.co/9mDdb4b7/Janique-Bruyns.png",
+  "Kaylin Lavelot": "https://i.ibb.co/spG0whnk/Kaylin-Lavelot.png",
+  "Kayleigh Pontinhas": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
+  "Kayleigh Pontin": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
+  "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
+};
+
+const getPortraitUrl = (name: string): string | undefined => portraits[name];
 
 // Function to generate gradient based on name
 const getGradientForName = (name: string): string => {
@@ -35,6 +58,8 @@ export default function AboutFull() {
   const introRef = useRef(null);
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
   const placeholderSrc = "/images/team/placeholder.svg";
+  const missionIcons = [Target, Users, Settings];
+  const secondaryOrange = '#ff9442';
 
   return (
     <main className="overflow-hidden">
@@ -141,7 +166,7 @@ export default function AboutFull() {
                 role: "COO",
                 bio: "Faigy brings hands-on experience in managing remote teams, with deep insight into seamless workflows. She perfects operations through strategic team building and process optimization.",
                 quote: "I have hands-on experience leading remote operations. I know what drives and motivates people. This isn't about matching resumes – I invest deeply in every business I work with."
-              }
+  }
             ].map((leader, index) => (
               <motion.div
                 key={leader.name}
@@ -181,23 +206,23 @@ export default function AboutFull() {
                   transition={{ delay: index * 0.2 + 0.3 }}
                 >
                   <div
-                    className={`w-16 h-16 rounded-full bg-gradient-to-br ${getGradientForName(leader.name)} flex items-center justify-center ring-1 ring-gray-200 shadow-lg text-white font-bold text-lg`}
+                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${getGradientForName(leader.name)} flex items-center justify-center ring-1 ring-gray-200 shadow-lg text-white font-bold text-base`}
                     aria-label={`${leader.name} avatar`}
                   >
                     {getInitials(leader.name)}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">
+                    <h3 className="text-lg font-bold text-gray-900">
                       {leader.name}
                     </h3>
-                    <p className="text-sm text-slate-600 font-semibold">
+                    <p className="text-xs text-slate-600 font-semibold">
                       {leader.role}
                     </p>
                   </div>
                 </motion.div>
 
                 <div className="relative z-20">
-                  {/* Portrait photo (falls back to placeholder if unavailable) */}
+                  {/* Portrait photo (portrait layout; never cropped) */}
                   <motion.div
                     className="mt-2"
                     initial={{ opacity: 0, y: 20 }}
@@ -205,19 +230,28 @@ export default function AboutFull() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.2 + 0.6 }}
                   >
-                    <Image
-                      src="/images/team/portrait-placeholder.svg"
-                      alt={`${leader.name} portrait placeholder`}
-                      width={800}
-                      height={450}
-                      className="w-full h-64 md:h-72 object-cover rounded-xl border border-gray-200 shadow-md"
-                    />
-                 
+                    {getPortraitUrl(leader.name) ? (
+                      <img
+                        src={getPortraitUrl(leader.name)!}
+                        alt={`${leader.name} portrait`}
+                        width={800}
+                        height={1200}
+                        className="w-full aspect-[2/3] max-h-[50vh] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/team/portrait-placeholder.svg"
+                        alt={`${leader.name} portrait placeholder`}
+                        width={800}
+                        height={1200}
+                        className="w-full aspect-[2/3] max-h-[50vh] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    )}
                   </motion.div>
 
                   {/* Little saying directly below the image */}
                   <motion.blockquote 
-                    className="mt-4 text-slate-800 italic border-l-4 border-primary-blue pl-4 bg-blue-50/50 py-2 rounded-r-lg"
+                    className="mt-3 text-slate-800 italic border-l-4 border-primary-blue pl-4 bg-blue-50/50 py-2 rounded-r-lg text-sm"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
@@ -228,7 +262,7 @@ export default function AboutFull() {
 
                   {/* Bio below quote */}
                   <motion.p 
-                    className="mt-4 text-gray-700 leading-relaxed"
+                    className="mt-3 text-gray-700 leading-relaxed text-sm"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -294,15 +328,25 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Portrait placeholder image */}
+                  {/* Portrait image (portrait layout; never cropped) */}
                   <div className="relative z-20 mb-3">
-                    <Image
-                      src="/images/team/portrait-placeholder.svg"
-                      alt={`${person.name} portrait placeholder`}
-                      width={800}
-                      height={450}
-                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-gray-200 shadow-md"
-                    />
+                    {getPortraitUrl(person.name) ? (
+                      <img
+                        src={getPortraitUrl(person.name)!}
+                        alt={`${person.name} portrait`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/team/portrait-placeholder.svg"
+                        alt={`${person.name} portrait placeholder`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    )}
                   </div>
                   <div className="relative z-20">
                     <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
@@ -371,15 +415,25 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Portrait placeholder image */}
+                  {/* Portrait image (portrait layout; never cropped) */}
                   <div className="relative z-20 mb-3">
-                    <Image
-                      src="/images/team/portrait-placeholder.svg"
-                      alt={`${person.name} portrait placeholder`}
-                      width={800}
-                      height={450}
-                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-slate-200 shadow-md"
-                    />
+                    {getPortraitUrl(person.name) ? (
+                      <img
+                        src={getPortraitUrl(person.name)!}
+                        alt={`${person.name} portrait`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-slate-200 shadow-md"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/team/portrait-placeholder.svg"
+                        alt={`${person.name} portrait placeholder`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-slate-200 shadow-md"
+                      />
+                    )}
                   </div>
                   <div className="relative z-20">
                     <div className="font-semibold text-text-base group-hover:gradient-text transition-all duration-300">
@@ -446,15 +500,25 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
                   
-                  {/* Portrait placeholder image */}
+                  {/* Portrait image (portrait layout; never cropped) */}
                   <div className="relative z-20 mb-3">
-                    <Image
-                      src="/images/team/portrait-placeholder.svg"
-                      alt={`${person.name} portrait placeholder`}
-                      width={800}
-                      height={450}
-                      className="w-full h-40 md:h-44 object-cover rounded-xl border border-gray-200 shadow-md"
-                    />
+                    {getPortraitUrl(person.name) ? (
+                      <img
+                        src={getPortraitUrl(person.name)!}
+                        alt={`${person.name} portrait`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/team/portrait-placeholder.svg"
+                        alt={`${person.name} portrait placeholder`}
+                        width={600}
+                        height={800}
+                        className="w-full aspect-[3/4] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
+                      />
+                    )}
                   </div>
                   <div className="relative z-20">
                     <div className="font-semibold text-gray-900 group-hover:gradient-text transition-all duration-300">
@@ -500,7 +564,7 @@ export default function AboutFull() {
               We believe that outsourcing + robust strategy create a potent tool, and we're here to give it to you.
             </motion.p>
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
               {[
                 {
                   bg: "bg-blue-50",
@@ -548,8 +612,14 @@ export default function AboutFull() {
                     stiffness: 100
                   }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className={`rounded-2xl ${value.bg} border ${value.border} p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group`}
+                  className={`rounded-2xl ${value.bg} border ${value.border} p-6 shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group text-center`}
                 >
+                  {(() => {
+                    const Icon = missionIcons[index % missionIcons.length];
+                    return (
+                      <Icon size={28} className="mx-auto mb-2" style={{ color: secondaryOrange }} />
+                    );
+                  })()}
                   <motion.div
                     className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue z-10"
                     initial={{ scaleX: 0 }}
@@ -559,10 +629,10 @@ export default function AboutFull() {
                     style={{ transformOrigin: "left" }}
                   />
 
-                  <h4 className={`relative z-20 text-lg font-bold ${value.titleColor} mb-4`}>
+                  <h4 className={`relative z-20 text-lg font-bold ${value.titleColor} mb-3`}>
                     {value.title}
                   </h4>
-                  <ul className={`relative z-20 space-y-2 ${value.textColor} text-sm`}>
+                  <ul className={`relative z-20 space-y-2 ${value.textColor} text-sm text-center`}>
                     {value.items.map((item, i) => (
                       <motion.li
                         key={i}
@@ -570,10 +640,11 @@ export default function AboutFull() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.15 + i * 0.1 + 0.3 }}
-                        className="flex items-start"
+                        className="flex items-center justify-center"
                       >
                         <motion.span
-                          className="inline-block w-1.5 h-1.5 bg-primary-blue rounded-full mr-3 mt-1.5 flex-shrink-0"
+                          className="inline-block w-1.5 h-1.5 rounded-full mr-3 mt-1.5 flex-shrink-0"
+                          style={{ backgroundColor: secondaryOrange }}
                           initial={{ scale: 0 }}
                           whileInView={{ scale: 1 }}
                           viewport={{ once: true }}
@@ -600,7 +671,7 @@ export default function AboutFull() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button href="/solutions" variant="primary" size="lg">
+              <Button href="/solutions" variant="ghost" size="lg">
                 VIEW OUR SERVICES
               </Button>
             </motion.div>

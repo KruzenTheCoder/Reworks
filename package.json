@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
@@ -18,9 +19,13 @@
     "mathjs": "^15.0.0",
     "next": "16.0.1",
     "postprocessing": "^6.37.8",
+    "puppeteer": "^24.29.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "19.2.0",
     "react-bits": "^1.0.5",
     "react-dom": "19.2.0",
+    "rss-parser": "^3.13.0",
     "tailwind-merge": "^3.3.1",
     "three": "^0.180.0"
   },
