@@ -8,8 +8,8 @@ import PixelBlast from "@/components/PixelBlast";
 export default function FinalCTA() {
   return (
     <MotionSection className="relative bg-gradient-to-br from-primary-blue via-blue-700 to-indigo-800 text-white py-24 overflow-hidden" variant="fadeUp">
-      {/* PixelBlast Background */}
-      <div className="absolute inset-0">
+      {/* PixelBlast Background (disabled on mobile to prevent black overlay issues) */}
+      <div className="absolute inset-0 hidden md:block">
         <PixelBlast
           variant="circle"
           pixelSize={6}

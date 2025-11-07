@@ -53,7 +53,7 @@ const statsVariants: Variants = {
 
 export default function RolesWeSource() {
   return (
-    <MotionSection className="relative bg-gradient-to-br from-gray-50 via-blue-50/40 to-indigo-50/60 py-24 overflow-hidden" variant="fadeUp">
+    <MotionSection className="relative bg-gradient-to-br from-gray-50 via-blue-50/40 to-indigo-50/60 pt-0 pb-24 overflow-hidden" variant="fadeUp" viewportAmount={0}>
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -157,17 +157,10 @@ export default function RolesWeSource() {
                 viewport={{ once: true }}
               />
               
-              {/* Icon */}
-              <motion.div
-                className="relative z-10 mb-6 text-primary-blue"
-                whileHover={{ 
-                  scale: 1.2,
-                  rotate: [0, -10, 10, 0],
-                  transition: { duration: 0.5 }
-                }}
-              >
+              {/* Icon (no animation on roles page) */}
+              <div className="relative z-10 mb-6 text-primary-blue">
                 <role.icon className="w-10 h-10" />
-              </motion.div>
+              </div>
               
               {/* Content */}
               <div className="relative z-10">

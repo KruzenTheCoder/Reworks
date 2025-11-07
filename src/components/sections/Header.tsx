@@ -302,7 +302,7 @@ export default function Header() {
           })}
           
           <motion.div 
-            className="pt-4 space-y-3"
+            className="pt-4 grid grid-cols-2 gap-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ 
               opacity: isMobileMenuOpen ? 1 : 0,
@@ -310,10 +310,10 @@ export default function Header() {
             }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" target="_blank" rel="noopener noreferrer" variant="luxury" size="md" className="w-full">
+            <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" target="_blank" rel="noopener noreferrer" variant="luxury" size="md" onClick={() => setIsMobileMenuOpen(false)}>
               Start Hiring
             </Button>
-            <Button href="/roles" variant="ghost" size="md" className="w-full">
+            <Button href="/roles" variant="ghost" size="md" onClick={() => setIsMobileMenuOpen(false)}>
               Find a Job
             </Button>
           </motion.div>

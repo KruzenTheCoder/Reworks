@@ -124,7 +124,7 @@ export default async function JobsPage({ searchParams }: any) {
 
   return (
     <div className="min-h-screen">
-      <MotionSection className="section-wrap" variant="fadeUp">
+      <MotionSection className="section-wrap" variant="fade" viewportAmount={0}>
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
             <TypewriterText

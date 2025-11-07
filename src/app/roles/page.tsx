@@ -5,7 +5,7 @@ import MotionSection from '@/components/ui/MotionSection'
 
 export default function Page() {
   return (
-    <main className="pt-20 min-h-screen">
+    <main className="min-h-screen">
       <RolesWeSource />
       <MotionSection className="section-wrap" variant="fadeUp">
         <div className="text-center mb-12">
