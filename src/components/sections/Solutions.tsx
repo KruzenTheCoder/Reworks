@@ -287,14 +287,14 @@ const operations = [
 export default function Solutions() {
   const [active, setActive] = useState(0);
   return (
-    <section id="solutions" className="py-24 bg-white">
-          <MotionSection className="section-wrap" variant="fadeUp">
+    <section id="solutions" className="pt-0 pb-24 bg-white">
+          <MotionSection className="section-wrap" variant="fadeUp" viewportAmount={0}>
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0.1, margin: '0px' }}
+          viewport={{ once: true, amount: 0, margin: '0px' }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             <TypewriterText
@@ -318,7 +318,7 @@ export default function Solutions() {
               key={index}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1, margin: '0px' }}
+              viewport={{ once: true, amount: 0, margin: '0px' }}
               transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.05 }}
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
               className="luxury-card glass-card rounded-xl p-6 group relative overflow-hidden"
@@ -361,7 +361,7 @@ export default function Solutions() {
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0.1, margin: '0px' }}
+          viewport={{ once: true, amount: 0, margin: '0px' }}
         >
           <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" variant="primary" size="lg">
             BUILD MY TEAM
@@ -374,7 +374,7 @@ export default function Solutions() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0.1, margin: '0px' }}
+          viewport={{ once: true, amount: 0, margin: '0px' }}
         >
           <div className="text-center mb-12">
             <h3 className="text-2xl md:text-3xl font-bold text-text-base mb-4 font-display tracking-tight">
