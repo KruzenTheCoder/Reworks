@@ -89,9 +89,11 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
-            {/* Primary CTA - Blue gradient with hover shine sweep (clipped to rounded shape) */}
+            {/* Primary CTA - Orange gradient CTA to external Zoho form */}
             <motion.a
-              href="/contact"
+              href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center justify-center"
@@ -99,12 +101,8 @@ export default function FinalCTA() {
               <div className="absolute inset-0 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
               <div className="relative flex items-center gap-2 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
                 <span className="text-lg">Start Hiring Now</span>
-                <motion.div
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-5 h-5" />
-                </motion.div>
+                {/* Static icon (no animation) */}
+                <ArrowRight className="w-5 h-5" />
               </div>
             </motion.a>
             
@@ -191,14 +189,10 @@ export default function FinalCTA() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30">
-                  <motion.div 
-                    className="mb-3"
-                    style={{ color: '#ff9442' }}
-                    whileHover={{ scale: 1.2, rotate: [0, -10, 10, 0] }}
-                    transition={{ duration: 0.5 }}
-                  >
+                  {/* Static icon (no hover animation) */}
+                  <div className="mb-3" style={{ color: '#ff9442' }}>
                     <item.icon className="w-8 h-8" />
-                  </motion.div>
+                  </div>
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/80 text-sm">{item.desc}</p>
                 </div>

@@ -143,7 +143,7 @@ export default function Hero() {
                   <Rocket className="w-5 h-5" />
                   Schedule Your Free Consultation
                 </Button>
-                <Button href="#solutions" variant="ghost" size="lg" className="flex items-center gap-2">
+                <Button href="solutions" variant="ghost" size="lg" className="flex items-center gap-2">
                   <Sparkles className="w-5 h-5" />
                   Explore Solutions
                 </Button>

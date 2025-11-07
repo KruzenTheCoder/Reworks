@@ -11,7 +11,6 @@ const navItems = [
   { label: "About", href: "/about" },
   { label: "Process", href: "/process" },
   { label: "Solutions", href: "/solutions" },
-  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
   { label: "Hire", href: "/hire" },
   { label: "Jobs", href: "/jobs" },
@@ -199,7 +198,7 @@ export default function Header() {
           <motion.div 
             className="hidden md:flex items-center gap-3"
           >
-            <Button href="/contact" variant="luxury" size="md">
+            <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" target="_blank" rel="noopener noreferrer" variant="luxury" size="md">
               Start Hiring
             </Button>
             <Button href="/roles" variant="ghost" size="md">
@@ -311,7 +310,7 @@ export default function Header() {
             }}
             transition={{ duration: 0.3, delay: 0.2 }}
           >
-            <Button href="/contact" variant="luxury" size="md" className="w-full">
+            <Button href="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU" target="_blank" rel="noopener noreferrer" variant="luxury" size="md" className="w-full">
               Start Hiring
             </Button>
             <Button href="/roles" variant="ghost" size="md" className="w-full">
