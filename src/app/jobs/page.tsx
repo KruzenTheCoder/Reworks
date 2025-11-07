@@ -123,7 +123,7 @@ export default async function JobsPage({ searchParams }: any) {
   const withApplyCount = normalizedJobs.length;
 
   return (
-    <div className="min-h-[70vh] bg-white">
+    <div className="min-h-screen">
       <MotionSection className="section-wrap" variant="fadeUp">
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
