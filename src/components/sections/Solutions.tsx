@@ -370,14 +370,14 @@ export default function Solutions() {
 
         {/* Case Study Section — tabbed operations panel */}
         <motion.div
-          className="mt-24 rounded-2xl p-8 md:p-12 bg-gradient-to-r from-blue-50 to-indigo-50"
+          className="mt-12 md:mt-24 rounded-2xl p-4 sm:p-6 md:p-12 bg-gradient-to-r from-blue-50 to-indigo-50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0, margin: '0px' }}
         >
-          <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-text-base mb-4 font-display tracking-tight">
+          <div className="text-center mb-6 md:mb-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-text-base mb-3 md:mb-4 font-display tracking-tight">
               <TypewriterText 
                 text="Imagine the ways we can transform your operations" 
                 speed={28}
@@ -390,7 +390,7 @@ export default function Solutions() {
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               transition={{ duration: 1.2, delay: 2.2, ease: "easeOut" }}
-              className="h-[3px] bg-gradient-to-r from-primary-blue/40 via-accent-blue/60 to-primary-blue/40 rounded-full max-w-xl mx-auto"
+              className="h-[2px] bg-gradient-to-r from-primary-blue/40 via-accent-blue/60 to-primary-blue/40 rounded-full max-w-sm sm:max-w-md md:max-w-xl mx-auto"
               style={{ transformOrigin: "center" }}
             />
           </div>

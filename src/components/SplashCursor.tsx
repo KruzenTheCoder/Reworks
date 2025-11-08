@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface ColorRGB {
   r: number;
@@ -69,6 +69,20 @@ export default function SplashCursor({
   TRANSPARENT = true
 }: SplashCursorProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [enabled, setEnabled] = useState(true);
+
+  useEffect(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+    const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // Disable entirely on mobile or when user prefers reduced motion
+    if (isMobile || prefersReduced) {
+      setEnabled(false);
+    }
+  }, []);
+
+  if (!enabled) {
+    return null;
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -1188,13 +1202,14 @@ export default function SplashCursor({
       return ((value - min) % range) + min;
     }
 
-    window.addEventListener('mousedown', e => {
+    const onMouseDown = (e: MouseEvent) => {
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
       updatePointerDownData(pointer, -1, posX, posY);
       clickSplat(pointer);
-    });
+    };
+    window.addEventListener('mousedown', onMouseDown);
 
     function handleFirstMouseMove(e: MouseEvent) {
       const pointer = pointers[0];
@@ -1206,14 +1221,14 @@ export default function SplashCursor({
       document.body.removeEventListener('mousemove', handleFirstMouseMove);
     }
     document.body.addEventListener('mousemove', handleFirstMouseMove);
-
-    window.addEventListener('mousemove', e => {
+    const onMouseMove = (e: MouseEvent) => {
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
       const posY = scaleByPixelRatio(e.clientY);
       const color = pointer.color;
       updatePointerMoveData(pointer, posX, posY, color);
-    });
+    };
+    window.addEventListener('mousemove', onMouseMove);
 
     function handleFirstTouchStart(e: TouchEvent) {
       const touches = e.targetTouches;
@@ -1227,10 +1242,7 @@ export default function SplashCursor({
       document.body.removeEventListener('touchstart', handleFirstTouchStart);
     }
     document.body.addEventListener('touchstart', handleFirstTouchStart);
-
-    window.addEventListener(
-      'touchstart',
-      e => {
+    const onTouchStart = (e: TouchEvent) => {
         const touches = e.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
@@ -1238,13 +1250,10 @@ export default function SplashCursor({
           const posY = scaleByPixelRatio(touches[i].clientY);
           updatePointerDownData(pointer, touches[i].identifier, posX, posY);
         }
-      },
-      false
-    );
+    };
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
 
-    window.addEventListener(
-      'touchmove',
-      e => {
+    const onTouchMove = (e: TouchEvent) => {
         const touches = e.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
@@ -1252,17 +1261,25 @@ export default function SplashCursor({
           const posY = scaleByPixelRatio(touches[i].clientY);
           updatePointerMoveData(pointer, posX, posY, pointer.color);
         }
-      },
-      false
-    );
+    };
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
 
-    window.addEventListener('touchend', e => {
+    const onTouchEnd = (e: TouchEvent) => {
       const touches = e.changedTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
         updatePointerUpData(pointer);
       }
-    });
+    };
+    window.addEventListener('touchend', onTouchEnd);
+
+    return () => {
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
   }, [
     SIM_RESOLUTION,
     DYE_RESOLUTION,

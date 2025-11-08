@@ -49,6 +49,7 @@ const TextType = ({
   shimmerOnComplete = false,
   ...props
 }: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const [displayedText, setDisplayedText] = useState('');
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -59,6 +60,16 @@ const TextType = ({
   const containerRef = useRef<HTMLElement>(null);
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
+
+  // If user prefers reduced motion, render static content without animations
+  if (prefersReduced) {
+    const content = textArray[0] ?? '';
+    return createElement(
+      Component,
+      { className: `text-type ${className}`, ...props },
+      <ShinyText text={content} disabled className={className} />
+    );
+  }
 
   const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;

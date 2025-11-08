@@ -21,19 +21,23 @@ export default function MotionSection({
   variant = 'fadeUp',
   delay = 0,
   viewportOnce = true,
-  viewportAmount = 0.15,
+  viewportAmount = 0,
   viewportMargin = '0px'
 }: MotionSectionProps) {
   // Adjust viewport settings for small screens to ensure animations trigger reliably
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   const effectiveViewport = {
     once: viewportOnce,
-    amount: isMobile ? Math.min(viewportAmount, 0.1) : viewportAmount,
+    amount: isMobile ? 0 : viewportAmount,
     margin: isMobile ? '0px' : viewportMargin,
   }
 
   const getInitial = () => {
+    if (prefersReduced) {
+      return { opacity: 0 }
+    }
     switch (variant) {
       case 'fadeUp':
         return { opacity: 0, y: 24 }
@@ -51,6 +55,9 @@ export default function MotionSection({
   }
 
   const getAnimate = () => {
+    if (prefersReduced) {
+      return { opacity: 1 }
+    }
     switch (variant) {
       case 'fadeUp':
         return { opacity: 1, y: 0 }
@@ -71,7 +78,7 @@ export default function MotionSection({
     <motion.section
       initial={getInitial()}
       whileInView={getAnimate()}
-      transition={{ duration: 0.75, ease: 'easeInOut', delay }}
+      transition={{ duration: prefersReduced ? 0.4 : 0.6, ease: 'easeOut', delay }}
       viewport={effectiveViewport}
       className={className}
     >
