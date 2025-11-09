@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode, useEffect, useRef } from "react";
 import { motion, Variants, HTMLMotionProps } from "framer-motion";
+import { animate } from "motion";
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "luxury" | "glow";
 
@@ -64,12 +65,41 @@ export default function Button(props: ButtonProps | LinkProps) {
   const { variant = "primary", size = "md", className = "", children } = props;
   const classes = `${getVariantClasses(variant, size)} ${className}`.trim();
   const variants = variant === "luxury" ? luxuryVariants : buttonVariants;
+  const inkRef = useRef<HTMLSpanElement | null>(null);
+  const prefersReduced = typeof window !== "undefined" && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const ButtonContent = () => (
     <>
+      {/* Luxury ink hover highlight using Motion One */}
+      <span
+        ref={inkRef}
+        className="absolute inset-0 rounded-xl pointer-events-none"
+        style={{
+          opacity: 0,
+          background:
+            variant === "luxury"
+              ? "radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 50%, transparent 100%)"
+              : "radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
+          transform: "scale(0.98)",
+        }}
+      />
       <span className="relative z-10 flex items-center">{children}</span>
     </>
   );
+
+  const handleEnter = () => {
+    if (!inkRef.current || prefersReduced) return;
+    animate(
+      inkRef.current,
+      { opacity: [0, 0.35, 0.22], transform: ["scale(0.98)", "scale(1.05)", "scale(1)"] } as any,
+      { duration: 0.6 } as any
+    );
+  };
+
+  const handleLeave = () => {
+    if (!inkRef.current || prefersReduced) return;
+    animate(inkRef.current, { opacity: 0, transform: "scale(0.98)" } as any, { duration: 0.35 } as any);
+  };
 
   if ("href" in props && props.href) {
     const { href, size: _, variant: _variant, className: _className, children: _children, ...rest } = props as LinkProps;
@@ -81,7 +111,7 @@ export default function Button(props: ButtonProps | LinkProps) {
         whileTap="tap"
         className="inline-block"
       >
-        <Link href={href} {...rest} className={classes}>
+        <Link href={href} {...rest} className={classes} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
           <ButtonContent />
         </Link>
       </motion.div>
@@ -97,6 +127,8 @@ export default function Button(props: ButtonProps | LinkProps) {
       initial="initial"
       whileHover="hover"
       whileTap="tap"
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
       <ButtonContent />
     </motion.button>

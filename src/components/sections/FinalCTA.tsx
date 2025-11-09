@@ -4,12 +4,16 @@ import MotionSection from "../ui/MotionSection";
 import { Zap, Shield, Globe, ArrowRight, PlayCircle } from "lucide-react";
 import Button from "@/components/common/Button";
 import PixelBlast from "@/components/PixelBlast";
+import { useRef } from "react";
+import { useScrollMagicParallax } from "@/hooks/useScrollMagicParallax";
 
 export default function FinalCTA() {
+  const bgRef = useRef<HTMLDivElement | null>(null);
+  useScrollMagicParallax(bgRef, { yRange: 100, triggerHook: 0.9, duration: 600 });
   return (
     <MotionSection className="relative bg-gradient-to-br from-primary-blue via-blue-700 to-indigo-800 text-white py-24 overflow-hidden" variant="fadeUp">
       {/* PixelBlast Background (disabled on mobile to prevent black overlay issues) */}
-      <div className="absolute inset-0 hidden md:block">
+      <div ref={bgRef} className="absolute inset-0 hidden md:block will-change-transform">
         <PixelBlast
           variant="circle"
           pixelSize={6}

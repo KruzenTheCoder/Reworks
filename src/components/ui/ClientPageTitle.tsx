@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import TypewriterText from "./TypewriterText";
+import TypedTitle from "./TypedTitle";
 
 export default function ClientPageTitle({
   text,
@@ -19,7 +19,7 @@ export default function ClientPageTitle({
       transition={{ duration: 0.75, ease: "easeOut" }}
       className={className}
     >
-      <TypewriterText text={text} speed={32} caretHeightClass="h-8" shimmerOnComplete />
+      <TypedTitle text={text} typeSpeed={32} />
     </motion.h1>
   );
 }

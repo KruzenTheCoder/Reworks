@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Phone, User } from "lucide-react";
+import { animate as popAnimate } from "popmotion";
 
 type ChatMessage = {
   id: string;
@@ -21,6 +22,8 @@ export default function ChatWidget() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const [pulse, setPulse] = useState(0);
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Persist messages for the session
   useEffect(() => {
@@ -58,6 +61,22 @@ export default function ChatWidget() {
     }
   }, [open]);
 
+  // Popmotion bounce pulse when toggling the widget
+  useEffect(() => {
+    if (prefersReduced) return;
+    const controls = popAnimate({
+      from: 0,
+      to: 1,
+      type: "spring",
+      stiffness: 400,
+      damping: 12,
+      mass: 0.6,
+      onUpdate: (v) => setPulse(v),
+      onComplete: () => setTimeout(() => setPulse(0), 120)
+    });
+    return () => controls?.stop?.();
+  }, [open, prefersReduced]);
+
   const sendMessage = () => {
     const text = input.trim();
     if (!text) return;
@@ -92,6 +111,10 @@ export default function ChatWidget() {
         animate={{ scale: open ? 0.96 : 1 }}
         transition={{ type: "spring", stiffness: 260, damping: 20 }}
         onClick={() => setOpen((v) => !v)}
+        style={{
+          boxShadow: `0 8px ${12 + 6 * pulse}px rgba(99,102,241,${0.25 + 0.25 * pulse})`,
+          filter: `saturate(${1 + 0.1 * pulse}) brightness(${1 + 0.05 * pulse})`,
+        }}
       >
         {open ? <X className="w-5 h-5" /> : <MessageCircle className="w-5 h-5" />}
       </motion.button>

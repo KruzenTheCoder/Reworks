@@ -79,14 +79,14 @@ export default function Hero() {
         style={{ y: isMobile ? undefined : y, opacity: isMobile ? 1 : opacity }}
         className="relative z-10 flex min-h-[85vh] sm:min-h-screen items-center"
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-24 sm:pt-28 pb-16 sm:pb-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-20 pb-16 sm:pb-20">
           <div className="text-center">
             {/* Animated Badge (Trusted-by pill) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mt-4 mb-8 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-primary-blue shadow-lg border border-white/20"
+              className="mb-16 sm:mb-20 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-primary-blue shadow-lg border border-white/20"
             >
               <span className="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
           Trusted by thousands of Companies Worldwide
