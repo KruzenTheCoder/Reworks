@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useMemo } from 'react'
 import MotionSection from "../ui/MotionSection";
 import { Star } from 'lucide-react';
+import TypewriterText from "../ui/TypewriterText";
 
 type Testimonial = {
   quote: string;
@@ -63,7 +64,12 @@ export default function Testimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
-            What Our <span className="gradient-text">Clients Say</span>
+            <TypewriterText 
+              text="What Our Clients Say"
+              speed={28}
+              caretHeightClass="h-12"
+              className="title-gradient font-display"
+            />
           </h2>
           <p className="text-xl text-text-muted max-w-3xl mx-auto">
             Join thousands of companies that have transformed their hiring with Reworks

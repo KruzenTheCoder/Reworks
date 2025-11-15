@@ -76,7 +76,7 @@ function FinalCTA() {
                   style={{ backgroundColor: '#ff9442' }}
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
-              transition={{ duration: reduce ? 0.6 : 1, delay: 0.8 }}
+                  transition={{ duration: reduce ? 0.6 : 1, delay: 0.8 }}
                   viewport={{ once: true }}
                 />
               </motion.span>

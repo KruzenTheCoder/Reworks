@@ -26,8 +26,8 @@ function getVariantClasses(variant: ButtonVariant = "primary", size: "sm" | "md"
   const base = `relative overflow-hidden inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300 btn-shimmer ${sizeClasses[size]}`;
   
   const map: Record<ButtonVariant, string> = {
-    // Blue-forward palette with pronounced gradient hover across all variants
-    primary: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:from-primary-blue hover:to-accent-blue hover:brightness-110 hover:saturate-125 border-0",
+    // Blue-forward palette unified to match Navbar "Start Hiring" gradient
+    primary: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
     secondary: "border-2 border-primary-blue text-primary-blue bg-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue hover:text-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
     ghost: "text-white bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] shadow-sm hover:shadow-lg hover:brightness-110 hover:saturate-125 border-0",
     luxury: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
@@ -104,7 +104,7 @@ export default function Button(props: ButtonProps | LinkProps) {
         style={{
           opacity: 0,
           background:
-            variant === "luxury"
+            (variant === "luxury" || variant === "primary")
               ? "radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 50%, transparent 100%)"
               : "radial-gradient(120% 120% at 50% 50%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 50%, transparent 100%)",
           transform: "scale(0.98)",

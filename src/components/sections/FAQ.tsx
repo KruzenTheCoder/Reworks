@@ -134,12 +134,13 @@ const TypingIndicator = () => (
 
 function FAQ() {
   const [messages, setMessages] = useState<Message[]>([
-    { id: 0, type: 'bot', text: "Hi! 👋 I'm the ReWorks AI Assistant. I'm here to answer any questions about our services. Pick a question below or type your own!" }
+    { id: 0, type: 'bot', text: "Hi! 👋 I'm the ReWorks AI Assistant. How can I assist you today? Pick a question below or type your own." }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const [customQuestion, setCustomQuestion] = useState('');
   const [showTraditionalFAQ, setShowTraditionalFAQ] = useState(false);
   const [openItems, setOpenItems] = useState<number[]>([]);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef(null);
@@ -165,6 +166,7 @@ function FAQ() {
       text: question
     };
     setMessages(prev => [...prev, userMessage]);
+    setHasInteracted(true);
 
     // Show typing indicator
     setIsTyping(true);
@@ -193,26 +195,15 @@ function FAQ() {
     };
     setMessages(prev => [...prev, userMessage]);
     setCustomQuestion('');
+    setHasInteracted(true);
 
     // Show typing indicator
     setIsTyping(true);
 
-    // Simple keyword matching for demo
     setTimeout(() => {
       setIsTyping(false);
       const lowerQ = customQuestion.toLowerCase();
-      let answer = "That's a great question! For specific details about " + customQuestion.toLowerCase() + ", I'd recommend scheduling a consultation with our team. They can provide tailored answers to your unique situation. Would you like me to help you with anything else?";
-      
-      // Check for keywords
-      if (lowerQ.includes('cost') || lowerQ.includes('price') || lowerQ.includes('payment')) {
-        answer = faqs[0].answer + " " + faqs[6].answer;
-      } else if (lowerQ.includes('hire') || lowerQ.includes('worker') || lowerQ.includes('employee')) {
-        answer = faqs[1].answer;
-      } else if (lowerQ.includes('hipaa') || lowerQ.includes('compliant') || lowerQ.includes('security')) {
-        answer = faqs[4].answer;
-      } else if (lowerQ.includes('training') || lowerQ.includes('onboard')) {
-        answer = faqs[7].answer;
-      }
+      const answer = generateAnswer(lowerQ);
 
       const botMessage: Message = {
         id: Date.now() + 1,
@@ -221,6 +212,35 @@ function FAQ() {
       };
       setMessages(prev => [...prev, botMessage]);
     }, 1500);
+  };
+
+  const generateAnswer = (lowerQ: string) => {
+    const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
+    if (greetings.some(g => lowerQ.includes(g))) {
+      return "Hi! 👋 How can I assist you today? You can ask about costs, hiring, HIPAA compliance, training, or anything else."
+    }
+    const thanks = ['thank', 'thanks', 'thx', 'appreciate'];
+    if (thanks.some(t => lowerQ.includes(t))) {
+      return "You're welcome! 🙌 If you have any other questions, I'm here to help."
+    }
+    const goodbye = ['bye', 'goodbye', 'see you'];
+    if (goodbye.some(b => lowerQ.includes(b))) {
+      return "Goodbye! 👋 If you need anything else, feel free to come back anytime."
+    }
+    const rules = [
+      { i: 0, k: ['cost','price','payment','payroll','reduce','saving'] },
+      { i: 6, k: ['payment','payments','invoice','billing'] },
+      { i: 1, k: ['how many','number','workers','hire','employees','team size'] },
+      { i: 2, k: ['minimum','period','duration','term','contract'] },
+      { i: 3, k: ['fit','replace','not a good fit','performance'] },
+      { i: 4, k: ['hipaa','compliant','security','privacy'] },
+      { i: 7, k: ['training','onboard','sessions'] },
+      { i: 8, k: ['language','accent','communication'] }
+    ];
+    for (const r of rules) {
+      if (r.k.some(kw => lowerQ.includes(kw))) return faqs[r.i].answer;
+    }
+    return "That's a great question! I can help with costs, hiring, HIPAA compliance, training, and more. Ask me anything or choose a quick question below.";
   };
 
   const toggleItem = (index: number) => {
@@ -381,7 +401,7 @@ function FAQ() {
                           : 'bg-gradient-to-r from-gray-700 to-gray-900 rounded-tr-sm text-white'
                       } shadow-lg`}
                     >
-                      {message.type === 'bot' && index === messages.length - 1 && !isTyping ? (
+                      {message.type === 'bot' && index === messages.length - 1 && !isTyping && hasInteracted ? (
                         <TypewriterMessage text={message.text} />
                       ) : (
                         <p className="text-sm leading-relaxed">{message.text}</p>

@@ -10,6 +10,9 @@ interface PreloaderProps {
 export default function Preloader({ onComplete }: PreloaderProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [targetProgress, setTargetProgress] = useState(0);
+  const [startedAt] = useState<number>(() => performance.now());
+  const [minDelayPassed, setMinDelayPassed] = useState(false);
 
   // Memoized particle generation to avoid unnecessary re-renders
   const particles = useMemo(
@@ -24,33 +27,83 @@ export default function Preloader({ onComplete }: PreloaderProps) {
     []
   );
 
-  // Smooth progress bar using requestAnimationFrame
+  // Resource-aware loading progress
   useEffect(() => {
-    let start = performance.now();
-    let animationFrame: number;
-    function animate(now: number) {
-      const elapsed = now - start;
-      const value = Math.min(100, Math.round((elapsed / 3000) * 100));
-      setProgress(value);
-      if (value < 100) {
-        animationFrame = requestAnimationFrame(animate);
+    const imgs = Array.from(document.images);
+    const totalImages = imgs.length;
+    let loadedImages = imgs.filter(img => img.complete).length;
+
+    const minDisplayMs = 1200; // keep loader visible at least this long
+
+    const updateTarget = () => {
+      const base = totalImages > 0 ? Math.round((loadedImages / totalImages) * 90) : 60;
+      // Fonts readiness contributes to remaining percentage
+      const fontsReady = (document as any).fonts?.status === 'loaded';
+      const fontsPct = fontsReady ? 10 : 0;
+      const newTarget = Math.min(99, base + fontsPct);
+      setTargetProgress(prev => (newTarget > prev ? newTarget : prev));
+    };
+
+    const onImgEvent = () => {
+      loadedImages += 1;
+      updateTarget();
+    };
+
+    imgs.forEach(img => {
+      if (!img.complete) {
+        img.addEventListener('load', onImgEvent, { once: true });
+        img.addEventListener('error', onImgEvent, { once: true });
       }
+    });
+
+    // Fonts readiness
+    if ((document as any).fonts?.ready) {
+      (document as any).fonts.ready.then(() => updateTarget());
     }
-    animationFrame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationFrame);
+
+    // Window load ensures 100%
+    const onWindowLoad = () => {
+      setTargetProgress(100);
+    };
+    window.addEventListener('load', onWindowLoad, { once: true });
+
+    // Smooth progress towards target using rAF
+    let rafId: number | null = null;
+    const tick = () => {
+      setProgress(prev => {
+        const delta = Math.max(0.5, (targetProgress - prev) * 0.08);
+        const next = Math.min(100, Math.round(prev + delta));
+        return next;
+      });
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      window.removeEventListener('load', onWindowLoad);
+      imgs.forEach(img => {
+        img.removeEventListener('load', onImgEvent as any);
+        img.removeEventListener('error', onImgEvent as any);
+      });
+    };
+  }, [targetProgress]);
+
+  useEffect(() => {
+    const t = setTimeout(() => setMinDelayPassed(true), 3200);
+    return () => clearTimeout(t);
   }, []);
 
-  // Complete logic - timer for preloader visibility, triggers onComplete after smooth exit
+  // Complete logic: hide only when progress hits 100 and minimum display time passed
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (progress >= 100 && minDelayPassed) {
       setIsVisible(false);
-      setTimeout(() => {
+      const t = setTimeout(() => {
         onComplete?.();
-      }, 800); // Exit animation duration
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, [onComplete]);
+      }, 800);
+      return () => clearTimeout(t);
+    }
+  }, [progress, minDelayPassed, onComplete]);
 
   return (
     <AnimatePresence>

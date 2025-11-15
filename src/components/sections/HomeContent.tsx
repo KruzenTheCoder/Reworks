@@ -111,7 +111,14 @@ function HomeContent() {
           {/* Card 1: Offshore Staffing, Reimagined. */}
           <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
-            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Offshore Staffing, Reimagined.</h3>
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+              <TypewriterText 
+                text="Offshore Staffing, Reimagined."
+                speed={28}
+                caretHeightClass="h-10"
+                className="title-gradient font-display"
+              />
+            </h3>
             <p className="text-text-muted mb-6">When you think offshore staffing, concerns rise about risking your brand or disrupting operations:</p>
             <ul className="space-y-2 text-text-muted text-left max-w-2xl mx-auto">
               <li>• Poor communication and heavy accents that frustrate clients and teams</li>
@@ -126,7 +133,14 @@ function HomeContent() {
           {/* Card 2: Elite Talent. Real Results. */}
           <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
-            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Elite Talent. Real Results.</h3>
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+              <TypewriterText 
+                text="Elite Talent. Real Results."
+                speed={28}
+                caretHeightClass="h-10"
+                className="title-gradient font-display"
+              />
+            </h3>
             <div className="space-y-4 text-text-muted max-w-3xl mx-auto">
               <p>ReWorks delivers only the top 1% of South African talent, carefully chosen for skill, professionalism, and communication. We hire native English speakers with neutral accents to ensure seamless client-facing interactions.</p>
               <p>Hiring great people is only the start. Our commitment extends beyond recruitment. Through meticulous background checks, continuous performance monitoring, and dedicated coaching, we proactively manage your remote team to maximize engagement and productivity, with significant cost savings to your company.</p>
@@ -145,7 +159,14 @@ function HomeContent() {
         className="relative"
       >
         <div className="text-center max-w-4xl mx-auto">
-          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">ReWorks Delivers More Than Staffing</h3>
+          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+            <TypewriterText 
+              text="ReWorks Delivers More Than Staffing"
+              speed={28}
+              caretHeightClass="h-10"
+              className="title-gradient font-display"
+            />
+          </h3>
           <p className="text-text-muted mb-6">Offshore staffing doesn’t have to mean compromise. We combine handpicked talent selection with hands-on management and employee care to deliver an elevated, cost-effective solution tailored to your needs.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
@@ -170,7 +191,14 @@ function HomeContent() {
         transition={{ duration: 0.8 }}
         className="relative"
       >
-        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Built to Elevate Your Remote Workforce</h3>
+        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+          <TypewriterText 
+            text="Built to Elevate Your Remote Workforce"
+            speed={28}
+            caretHeightClass="h-10"
+            className="title-gradient font-display"
+          />
+        </h3>
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { title: "Rigorous Talent Vetting", desc: "Only the top 1% of candidates make the cut, ensuring elite professionals with native English and neutral accents." },
@@ -198,7 +226,14 @@ function HomeContent() {
         transition={{ duration: 0.8 }}
         className="relative"
       >
-        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Trusted by Healthcare Leaders and Teams Across the US</h3>
+        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+          <TypewriterText 
+            text="Trusted by Healthcare Leaders and Teams Across the US"
+            speed={28}
+            caretHeightClass="h-10"
+            className="title-gradient font-display"
+          />
+        </h3>
         <p className="text-text-muted mb-6">ReWorks currently specializes in healthcare, serving nursing homes, small practices, and home care agencies with HIPAA-compliant, client-facing, and backend remote staffing that saves millions on payroll without compromising quality. Our flexible model adapts to a wide range of industries and roles, delivering the same elite talent and personalized service wherever you operate.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
@@ -211,7 +246,14 @@ function HomeContent() {
             </ul>
           </div>
           <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
-            <h4 className="font-semibold title-gradient font-display mb-4 text-center">ReWorks By the Numbers</h4>
+            <h4 className="font-semibold title-gradient font-display mb-4 text-center">
+              <TypewriterText 
+                text="ReWorks By the Numbers"
+                speed={30}
+                caretHeightClass="h-8"
+                className="title-gradient font-display"
+              />
+            </h4>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-3 rounded-xl">
                 <div className="text-3xl font-bold gradient-text">80%</div>
@@ -245,7 +287,12 @@ function HomeContent() {
         <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
           <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-6">
-            HOME CARE SUPPORT OPERATIONS
+            <TypewriterText 
+              text="HOME CARE SUPPORT OPERATIONS"
+              speed={28}
+              caretHeightClass="h-10"
+              className="title-gradient font-display"
+            />
           </h3>
           <div className="grid sm:grid-cols-3 gap-6 text-left">
             <div>
