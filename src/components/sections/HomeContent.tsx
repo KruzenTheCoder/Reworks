@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, memo } from "react";
 import TypewriterText from "../ui/TypewriterText";
 
 // Using shared TypewriterText to ensure text always renders
@@ -42,7 +42,7 @@ const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: stri
   );
 };
 
-export default function HomeContent() {
+function HomeContent() {
   const { scrollYProgress } = useScroll();
   const heroRef = useRef(null);
   const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
@@ -579,3 +579,5 @@ export default function HomeContent() {
     </MotionSection>
   );
 }
+
+export default memo(HomeContent)

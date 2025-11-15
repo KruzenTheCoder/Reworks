@@ -1,7 +1,7 @@
 "use client";
-import { motion, Variants, useInView } from "framer-motion";
+import { motion, Variants, useInView, useReducedMotion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import TypewriterText from "../ui/TypewriterText";
 
 // Using shared TypewriterText to ensure text always renders
@@ -36,46 +36,50 @@ const steps = [
   },
 ];
 
-export default function Process() {
+function Process() {
   const headerRef = useRef(null);
   const headerInView = useInView(headerRef, { once: true, margin: "0px" });
+  const reduce = useReducedMotion();
 
   return (
     <MotionSection className="relative bg-transparent py-24 overflow-hidden" variant="fadeUp">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-3xl"
-          animate={{
+          className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-r from-purple-400/10 to-pink-600/10 rounded-full blur-3xl will-change-transform"
+          whileInView={{
             x: [0, 50, 0],
             y: [0, -30, 0],
             scale: [1, 1.1, 1],
           }}
           transition={{
-            duration: 15,
-            repeat: Infinity,
+            duration: 18,
+            repeat: reduce ? 0 : Infinity,
             ease: "easeInOut"
           }}
+          viewport={{ amount: 0.3 }}
         />
         <motion.div
-          className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-400/15 to-indigo-600/15 rounded-full blur-2xl"
-          animate={{
+          className="absolute bottom-20 right-20 w-64 h-64 bg-gradient-to-r from-blue-400/15 to-indigo-600/15 rounded-full blur-2xl will-change-transform"
+          whileInView={{
             x: [0, -40, 0],
             y: [0, 20, 0],
           }}
           transition={{
-            duration: 12,
-            repeat: Infinity,
+            duration: 16,
+            repeat: reduce ? 0 : Infinity,
             ease: "easeInOut"
           }}
+          viewport={{ amount: 0.3 }}
         />
         
         {/* Animated dots pattern */}
         <motion.div 
           className="absolute inset-0 opacity-[0.02]"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.02 }}
+          whileInView={{ opacity: 0.02 }}
           transition={{ duration: 2 }}
+          viewport={{ amount: 0.3 }}
         >
           <div className="absolute inset-0" style={{
             backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
@@ -375,3 +379,5 @@ export default function Process() {
     </MotionSection>
   );
 }
+
+export default memo(Process)

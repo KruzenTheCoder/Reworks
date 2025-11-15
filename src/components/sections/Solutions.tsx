@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import Button from '@/components/common/Button'
 import MotionSection from "../ui/MotionSection";
 import { motion } from 'framer-motion'
@@ -284,7 +284,7 @@ const operations = [
   },
 ]
 
-export default function Solutions() {
+function Solutions() {
   const [active, setActive] = useState(0);
   return (
     <section id="solutions" className="pt-0 pb-24 bg-white">
@@ -408,3 +408,5 @@ export default function Solutions() {
     </section>
   )
 }
+
+export default memo(Solutions)

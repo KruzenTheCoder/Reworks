@@ -59,6 +59,16 @@ const TextType = ({
   const cursorRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
+  // Smooth typing refs
+  const rafIdRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number | null>(null);
+  const accumulatorRef = useRef<number>(0);
+  const charIntervalRef = useRef<number>(typingSpeed);
+  const currentCharIndexRef = useRef<number>(0);
+  const displayedTextRef = useRef<string>('');
+  const isDeletingRef = useRef<boolean>(false);
+  const currentTextIndexRef = useRef<number>(0);
+
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
   // If user prefers reduced motion, render static content without animations
@@ -116,63 +126,122 @@ const TextType = ({
   useEffect(() => {
     if (!isVisible) return;
 
-    let timeout: ReturnType<typeof setTimeout>;
+    // Sync refs with current state
+    currentCharIndexRef.current = currentCharIndex;
+    displayedTextRef.current = displayedText;
+    isDeletingRef.current = isDeleting;
+    currentTextIndexRef.current = currentTextIndex;
+    charIntervalRef.current = typingSpeed;
 
-    const currentText = textArray[currentTextIndex];
-    const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
+    const startLoop = () => {
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      lastTimeRef.current = null;
+      accumulatorRef.current = 0;
 
-    const executeTypingAnimation = () => {
-      if (isDeleting) {
-        if (displayedText === '') {
-          setIsDeleting(false);
-          if (currentTextIndex === textArray.length - 1 && !loop) {
-            return;
-          }
-
-          if (onSentenceComplete) {
-            onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
-          }
-
-          setCurrentTextIndex(prev => (prev + 1) % textArray.length);
-          setCurrentCharIndex(0);
-          timeout = setTimeout(() => {}, pauseDuration);
-        } else {
-          timeout = setTimeout(() => {
-            setDisplayedText(prev => prev.slice(0, -1));
-          }, deletingSpeed);
+      const loopFn = (now: number) => {
+        if (lastTimeRef.current == null) {
+          lastTimeRef.current = now;
+          rafIdRef.current = requestAnimationFrame(loopFn);
+          return;
         }
-      } else {
-        if (currentCharIndex < processedText.length) {
-          timeout = setTimeout(
-            () => {
-              setDisplayedText(prev => prev + processedText[currentCharIndex]);
-              setCurrentCharIndex(prev => prev + 1);
-            },
-            variableSpeed ? getRandomSpeed() : typingSpeed
-          );
-        } else {
-          // Finished typing current text
-          setIsFinished(true);
-          if (textArray.length > 1) {
-          timeout = setTimeout(() => {
-            setIsDeleting(true);
-          }, pauseDuration);
+
+        const dt = now - lastTimeRef.current;
+        lastTimeRef.current = now;
+        accumulatorRef.current += dt;
+
+        const currentText = textArray[currentTextIndexRef.current];
+        const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
+
+        // Determine interval; keep constant for smoothness, optionally vary slightly
+        const interval = variableSpeed ? getRandomSpeed() : charIntervalRef.current;
+
+        while (accumulatorRef.current >= interval) {
+          accumulatorRef.current -= interval;
+
+          if (!isDeletingRef.current) {
+            if (currentCharIndexRef.current < processedText.length) {
+              const nextChar = processedText[currentCharIndexRef.current];
+              setDisplayedText(prev => {
+                displayedTextRef.current = prev + nextChar;
+                return displayedTextRef.current;
+              });
+              currentCharIndexRef.current += 1;
+              setCurrentCharIndex(currentCharIndexRef.current);
+            } else {
+              // Finished typing current text
+              setIsFinished(true);
+              if (onSentenceComplete) {
+                onSentenceComplete(textArray[currentTextIndexRef.current], currentTextIndexRef.current);
+              }
+
+              if (textArray.length > 1 && loop) {
+                // Begin deletion after pause
+                const pauseUntil = now + pauseDuration;
+                const waitPause = () => {
+                  if (performance.now() >= pauseUntil) {
+                    isDeletingRef.current = true;
+                    setIsDeleting(true);
+                  } else {
+                    requestAnimationFrame(waitPause);
+                  }
+                };
+                requestAnimationFrame(waitPause);
+              } else {
+                // Stop loop
+                if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                rafIdRef.current = null;
+                return;
+              }
+            }
+          } else {
+            // Deleting path (for looping text arrays)
+            if (displayedTextRef.current.length > 0) {
+              setDisplayedText(prev => {
+                displayedTextRef.current = prev.slice(0, -1);
+                return displayedTextRef.current;
+              });
+            } else {
+              isDeletingRef.current = false;
+              setIsDeleting(false);
+              // Advance to next text
+              if (currentTextIndexRef.current === textArray.length - 1 && !loop) {
+                if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                rafIdRef.current = null;
+                return;
+              }
+              setCurrentTextIndex(prev => {
+                const nextIndex = (prev + 1) % textArray.length;
+                currentTextIndexRef.current = nextIndex;
+                return nextIndex;
+              });
+              setCurrentCharIndex(0);
+              currentCharIndexRef.current = 0;
+            }
           }
         }
-      }
+
+        rafIdRef.current = requestAnimationFrame(loopFn);
+      };
+
+      rafIdRef.current = requestAnimationFrame(loopFn);
     };
 
+    let startDelayTimeout: ReturnType<typeof setTimeout> | null = null;
     if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
-      timeout = setTimeout(executeTypingAnimation, initialDelay);
+      startDelayTimeout = setTimeout(startLoop, initialDelay);
     } else {
-      executeTypingAnimation();
+      startLoop();
     }
 
-    return () => clearTimeout(timeout);
+    return () => {
+      if (startDelayTimeout) clearTimeout(startDelayTimeout);
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+      lastTimeRef.current = null;
+      accumulatorRef.current = 0;
+    };
   }, [
-    currentCharIndex,
-    displayedText,
-    isDeleting,
+    isVisible,
     typingSpeed,
     deletingSpeed,
     pauseDuration,
@@ -180,7 +249,6 @@ const TextType = ({
     currentTextIndex,
     loop,
     initialDelay,
-    isVisible,
     reverseMode,
     variableSpeed,
     onSentenceComplete

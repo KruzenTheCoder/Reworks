@@ -1,11 +1,11 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
 import { Zap, Shield, Globe } from "lucide-react";
 import Button from "@/components/common/Button";
 // IMPROVED: Lazy-load heavy visual component to reduce initial bundle size
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Suspense, memo } from "react";
 const PixelBlast = dynamic(() => import("@/components/PixelBlast"), {
   ssr: false,
   loading: () => null,
@@ -13,7 +13,8 @@ const PixelBlast = dynamic(() => import("@/components/PixelBlast"), {
 import { useRef } from "react";
 import { useScrollMagicParallax } from "@/hooks/useScrollMagicParallax";
 
-export default function FinalCTA() {
+function FinalCTA() {
+  const reduce = useReducedMotion();
   const bgRef = useRef<HTMLDivElement | null>(null);
   useScrollMagicParallax(bgRef, { yRange: 100, triggerHook: 0.9, duration: 600 });
   return (
@@ -51,7 +52,7 @@ export default function FinalCTA() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: reduce ? 0.6 : 0.8 }}
             viewport={{ once: true }}
             className="mb-12"
           >
@@ -59,7 +60,7 @@ export default function FinalCTA() {
               className="text-4xl lg:text-6xl font-bold mb-6 font-display"
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: reduce ? 0.6 : 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
               Ready to hire{" "}
@@ -75,7 +76,7 @@ export default function FinalCTA() {
                   style={{ backgroundColor: '#ff9442' }}
                   initial={{ width: 0 }}
                   whileInView={{ width: "100%" }}
-                  transition={{ duration: 1, delay: 0.8 }}
+              transition={{ duration: reduce ? 0.6 : 1, delay: 0.8 }}
                   viewport={{ once: true }}
                 />
               </motion.span>
@@ -85,7 +86,7 @@ export default function FinalCTA() {
               className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: reduce ? 0.6 : 0.8, delay: 0.4 }}
               viewport={{ once: true }}
             >
               Book a call today. It's fast, flexible, and fully supported.
@@ -98,7 +99,7 @@ export default function FinalCTA() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: reduce ? 0.6 : 0.8, delay: 0.6 }}
             viewport={{ once: true }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
           >
@@ -192,7 +193,7 @@ export default function FinalCTA() {
                 key={item.title}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
+                transition={{ duration: reduce ? 0.5 : 0.6, delay: 0.9 + index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
                 className="relative group"
@@ -227,3 +228,5 @@ export default function FinalCTA() {
     </MotionSection>
   );
 }
+
+export default memo(FinalCTA)

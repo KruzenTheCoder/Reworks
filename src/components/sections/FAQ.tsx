@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, memo } from 'react'
 import { ChevronDown, Send, Sparkles, Bot, User } from 'lucide-react'
 import Button from '@/components/common/Button'
 import MotionSection from "../ui/MotionSection"
@@ -53,21 +53,48 @@ interface Message {
   isTyping?: boolean
 }
 
-// Typewriter effect for bot messages
+// Typewriter effect for bot messages — smoothed with requestAnimationFrame
 const TypewriterMessage = ({ text, onComplete }: { text: string, onComplete?: () => void }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const rafIdRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number | null>(null);
+  const accumulatorRef = useRef<number>(0);
+  const intervalRef = useRef<number>(24); // ms per character
 
   useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, 24);
-      return () => clearTimeout(timeout);
-    } else if (onComplete) {
-      onComplete();
-    }
+    const loop = (now: number) => {
+      if (lastTimeRef.current == null) {
+        lastTimeRef.current = now;
+        rafIdRef.current = requestAnimationFrame(loop);
+        return;
+      }
+      const dt = now - lastTimeRef.current;
+      lastTimeRef.current = now;
+      accumulatorRef.current += dt;
+
+      while (accumulatorRef.current >= intervalRef.current) {
+        accumulatorRef.current -= intervalRef.current;
+        if (currentIndex < text.length) {
+          setDisplayedText(prev => prev + text[currentIndex]);
+          setCurrentIndex(prev => prev + 1);
+        } else {
+          if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+          rafIdRef.current = null;
+          if (onComplete) onComplete();
+          return;
+        }
+      }
+      rafIdRef.current = requestAnimationFrame(loop);
+    };
+
+    rafIdRef.current = requestAnimationFrame(loop);
+    return () => {
+      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      rafIdRef.current = null;
+      lastTimeRef.current = null;
+      accumulatorRef.current = 0;
+    };
   }, [currentIndex, text, onComplete]);
 
   return (
@@ -105,7 +132,7 @@ const TypingIndicator = () => (
   </div>
 );
 
-export default function FAQ() {
+function FAQ() {
   const [messages, setMessages] = useState<Message[]>([
     { id: 0, type: 'bot', text: "Hi! 👋 I'm the ReWorks AI Assistant. I'm here to answer any questions about our services. Pick a question below or type your own!" }
   ]);
@@ -532,3 +559,5 @@ export default function FAQ() {
     </section>
   )
 }
+
+export default memo(FAQ)

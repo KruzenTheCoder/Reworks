@@ -1,7 +1,7 @@
 "use client";
 import Button from '@/components/common/Button'
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { useRef, memo } from 'react'
 import Image from 'next/image'
 import { User, Target, Users, Settings } from 'lucide-react'
 import TypewriterText from "../ui/TypewriterText"
@@ -58,9 +58,10 @@ const getInitials = (name: string): string => {
   return name.substring(0, 2).toUpperCase();
 };
 
-export default function AboutFull() {
+function AboutFull() {
   const introRef = useRef(null);
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
+  const reduce = useReducedMotion();
   const placeholderSrc = "/images/team/placeholder.svg";
   const missionIcons = [Target, Users, Settings];
   const secondaryOrange = '#ff9442';
@@ -72,17 +73,18 @@ export default function AboutFull() {
         {/* Animated Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-100" />
         <motion.div
-          className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-indigo-600/10 rounded-full blur-3xl"
-          animate={{
+          className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-indigo-600/10 rounded-full blur-3xl will-change-transform"
+          whileInView={{
             scale: [1, 1.2, 1],
             x: [0, 50, 0],
             y: [0, -30, 0],
           }}
           transition={{
-            duration: 20,
-            repeat: Infinity,
+            duration: 24,
+            repeat: reduce ? 0 : Infinity,
             ease: "easeInOut"
           }}
+          viewport={{ amount: 0.3 }}
         />
         
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-20">
@@ -118,16 +120,17 @@ export default function AboutFull() {
       <section className="py-20 bg-white relative overflow-hidden">
         {/* Subtle background animation */}
         <motion.div
-          className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-400/5 to-pink-600/5 rounded-full blur-3xl"
-          animate={{
+          className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-400/5 to-pink-600/5 rounded-full blur-3xl will-change-transform"
+          whileInView={{
             scale: [1, 1.1, 1],
             x: [0, -40, 0],
           }}
           transition={{
-            duration: 15,
-            repeat: Infinity,
+            duration: 18,
+            repeat: reduce ? 0 : Infinity,
             ease: "easeInOut"
           }}
+          viewport={{ amount: 0.3 }}
         />
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
@@ -675,22 +678,30 @@ export default function AboutFull() {
               ))}
             </div>
 
-            <motion.div 
-              className="mt-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 100 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button href="/solutions" variant="ghost" size="lg">
-                VIEW OUR SERVICES
-              </Button>
-            </motion.div>
+            <div className="mt-12 text-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 100 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-block"
+              >
+                <Button href="/solutions" variant="ghost" size="lg">
+                  VIEW OUR SERVICES
+                </Button>
+              </motion.div>
+            </div>
+
+  
+        
+        
           </motion.div>
         </div>
       </section>
     </main>
   )
 }
+
+export default memo(AboutFull)
