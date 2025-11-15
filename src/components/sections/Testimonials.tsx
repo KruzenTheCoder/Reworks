@@ -15,43 +15,19 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
   {
-    quote: "Reworks transformed our hiring velocity. We onboarded an exceptional EA in 10 days and saved 75% on costs. The quality of talent is simply unmatched.",
-    author: "Alex Rivera",
-    title: "COO",
-    company: "FinTechCo",
-    avatar: "AR",
+    quote: "ReWorks transformed our remote workforce. The quality and communication are unmatched. They truly feel like part of our team.",
+    author: "Name",
+    title: "Title",
+    company: "Company",
+    avatar: "NC",
     rating: 5,
   },
   {
-    quote: "The talent quality is outstanding and support is truly ongoing—huge savings too. Our productivity increased by 200% after hiring through Reworks.",
-    author: "Sofia Ahmed",
-    title: "VP People",
-    company: "GrowthLabs",
-    avatar: "SA",
-    rating: 5,
-  },
-  {
-    quote: "We scaled our SDR team affordably without compromising performance. Best hiring decision we've made in years. ROI was immediate.",
-    author: "Marcus Lee",
-    title: "Head of Sales",
-    company: "CloudWorks",
-    avatar: "ML",
-    rating: 5,
-  },
-  {
-    quote: "Incredible experience from start to finish. The vetting process is thorough and the talent pool is world-class. Highly recommend!",
-    author: "Emma Chen",
-    title: "CTO",
-    company: "TechFlow",
-    avatar: "EC",
-    rating: 5,
-  },
-  {
-    quote: "Game-changer for our startup. We hired 3 developers in 2 weeks and they're all performing exceptionally. The cost savings are remarkable.",
-    author: "David Park",
-    title: "Founder",
-    company: "InnovateLab",
-    avatar: "DP",
+    quote: "The continuous management and support make all the difference. We’ve saved millions without sacrificing service.",
+    author: "Name",
+    title: "Title",
+    company: "Company",
+    avatar: "NC",
     rating: 5,
   },
 ];
@@ -158,7 +134,7 @@ export default function Testimonials() {
         </div>
       </div>
 
-        {/* Stats */}
+        {/* ReWorks By the Numbers */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -166,21 +142,19 @@ export default function Testimonials() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex items-center gap-8 bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-white/20">
-            <div className="text-center">
-              <div className="text-2xl font-bold gradient-text">4.9/5</div>
-              <div className="text-sm text-text-muted">Average Rating</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold gradient-text">1000+</div>
-              <div className="text-sm text-text-muted">Happy Clients</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300"></div>
-            <div className="text-center">
-              <div className="text-2xl font-bold gradient-text">99%</div>
-              <div className="text-sm text-text-muted">Success Rate</div>
-            </div>
+          <div className="inline-flex flex-wrap items-center justify-center gap-6 bg-white/60 backdrop-blur-sm rounded-2xl px-8 py-4 shadow-lg border border-white/20">
+            {[
+              { number: "98%", label: "Client Retention Rate" },
+              { number: "Up to 70%", label: "Payroll Savings" },
+              { number: "30–40%", label: "Increased Productivity" },
+              { number: "1%", label: "Candidate Acceptance Rate" },
+              { number: "HIPAA", label: "Compliant Staffing Solutions" },
+            ].map((item) => (
+              <div key={item.label} className="text-center min-w-[140px]">
+                <div className="text-2xl font-bold gradient-text">{item.number}</div>
+                <div className="text-sm text-text-muted">{item.label}</div>
+              </div>
+            ))}
           </div>
         </motion.div>
     </MotionSection>

@@ -205,7 +205,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-br from-gray-50 via-blue-50/30 to-indigo-50/30 relative overflow-hidden">
+    <section id="faq" className="py-24 bg-transparent relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0">
         <motion.div
@@ -425,7 +425,7 @@ export default function FAQ() {
           </div>
         </motion.div>
 
-        {/* Toggle for Traditional FAQ */}
+        {/* Toggle for Traditional FAQ — exact Solutions-style small blue text */}
         <motion.div 
           className="text-center mb-8"
           initial={{ opacity: 0 }}
@@ -437,9 +437,9 @@ export default function FAQ() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowTraditionalFAQ(!showTraditionalFAQ)}
-            className="text-blue-600 font-semibold hover:text-blue-700 transition-colors duration-200 flex items-center gap-2 mx-auto"
+            className="text-sm text-blue-600 font-medium hover:text-blue-700 transition-colors duration-200 flex items-center gap-2 mx-auto"
           >
-            {showTraditionalFAQ ? 'Hide' : 'Show'} all FAQs
+            {showTraditionalFAQ ? 'Hide FAQs' : 'Show all FAQs'}
             <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${showTraditionalFAQ ? 'rotate-180' : ''}`} />
           </motion.button>
         </motion.div>
@@ -500,42 +500,33 @@ export default function FAQ() {
           )}
         </AnimatePresence>
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA — exact Solutions header/CTA styling */}
         <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0, margin: '0px' }}
         >
-          <motion.div 
-            className="text-xl text-gray-700 mb-8"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <TypewriterText 
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <TypewriterText
               text="You can envision your dream team."
-              speed={32}
-              caretHeightClass="h-8"
+              speed={40}
               shimmerOnComplete
+              caretHeightClass="h-10"
             />
-            <br />
-            <span className="mt-2 block">Or you can make it happen with ReWorks Solutions.</span>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6, delay: 0.4, type: "spring", stiffness: 100 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button variant="primary" size="lg">
+          </h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Or you can make it happen with ReWorks Solutions.
+          </p>
+          <p className="text-sm text-blue-600 font-medium mb-6">
+            Show all FAQs
+          </p>
+          <div className="text-center">
+            <Button href="contact" variant="primary" size="lg">
               OUTSOURCE WITH THE EXPERTS!
             </Button>
-          </motion.div>
+          </div>
         </motion.div>
       </MotionSection>
     </section>

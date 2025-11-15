@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/common/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -19,6 +19,8 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const { scrollY } = useScroll();
   const pathname = usePathname();
   
@@ -62,6 +64,47 @@ export default function Header() {
     window.addEventListener("scroll", updateScrolled, { passive: true });
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
+
+  // IMPROVED: Lock body scroll and add Escape close when mobile menu is open
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsMobileMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleEsc);
+
+    // Focus trap within mobile menu
+    const container = menuRef.current;
+    const focusables = container
+      ? (Array.from(container.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )) as HTMLElement[])
+      : [];
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    first?.focus();
+    const trap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || focusables.length === 0) return;
+      const active = document.activeElement as HTMLElement | null;
+      if (!active) return;
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first?.focus();
+      }
+    };
+    document.addEventListener("keydown", trap);
+
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", handleEsc);
+      document.removeEventListener("keydown", trap);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <motion.header 
@@ -127,6 +170,8 @@ export default function Header() {
           {/* Desktop Navigation with dynamic spacing */}
           <motion.nav 
             className="hidden md:flex items-center"
+            role="navigation"
+            aria-label="Primary"
             style={{
               gap: navGap, // Dynamic gap between nav items
             }}
@@ -208,9 +253,13 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden relative w-8 h-8 flex flex-col justify-center items-center"
+            ref={menuButtonRef}
+            className="md:hidden relative w-11 h-11 flex flex-col justify-center items-center rounded-md focus-visible:ring-2 focus-visible:ring-blue-500"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.95 }}
+            aria-label="Open navigation menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <motion.span
               className="w-6 h-0.5 bg-text-base block absolute"
@@ -242,6 +291,8 @@ export default function Header() {
 
       {/* Mobile Menu with glassmorphism */}
       <motion.div
+        id="mobile-menu"
+        ref={menuRef}
         className="md:hidden overflow-hidden"
         style={{
           backgroundColor: 'rgba(255, 255, 255, 0.95)',
@@ -255,6 +306,9 @@ export default function Header() {
           opacity: isMobileMenuOpen ? 1 : 0
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
       >
         <div className="px-6 py-4 space-y-3">
           {navItems.map((item, index) => {

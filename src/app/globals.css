@@ -85,6 +85,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  /* Revert to original neutral site background */
+  background-color: #ffffff;
 }
 
 /* Apply Nohemi (fallbacks to Jakarta Sans) for headings and title utilities */
@@ -148,7 +150,8 @@ h4,
 
 /* Glassmorphism card utility */
 .glass-card {
-  background: rgba(255, 255, 255, 0.08);
+  /* IMPROVED: Slightly higher translucency on new blue background */
+  background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.22);

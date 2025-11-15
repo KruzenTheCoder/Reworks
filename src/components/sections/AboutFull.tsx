@@ -12,11 +12,15 @@ import TypewriterText from "../ui/TypewriterText"
 const portraits: Record<string, string> = {
   "Moshe Sender": "https://i.ibb.co/MzbKKL1/Moshe-Sender.png",
   "Faigy Weinstock": "https://i.ibb.co/WmznrD1/Faigy-Welnstock.webp",
+  // Leadership additions
+  "Eli Schleifer": "https://i.ibb.co/60MQWNwH/Eli-Schleifer.webp",
+  "Mindy Schiff": "https://i.ibb.co/S7KDWxNK/Mindy-Schiff.webp",
   // Sales Team
   "Meir Kaufman": "https://i.ibb.co/8Ddy1jxM/Meir-Kaufman.webp",
   "Isaac Conick": "https://i.ibb.co/p6zQZjqF/Isaac-Conick.png",
   "Shmuel Rabinowitz": "https://i.ibb.co/1Y5y3Hjn/Shmuel-Rabinowitz.png",
   "Daniel Rabson": "https://i.ibb.co/NdKYT3zR/Daniel-Rabson-1.png",
+  "Sammy Piller": "https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png",
   // Management Team
   "Travis Marshall": "https://i.ibb.co/Qjv7jXHc/Travis-Marshall.png",
   "Xandria Erasmus": "https://i.ibb.co/k6Vgv7hV/Xandria-Erasmus.png",
@@ -231,19 +235,28 @@ export default function AboutFull() {
                     transition={{ delay: index * 0.2 + 0.6 }}
                   >
                     {getPortraitUrl(leader.name) ? (
-                      <img
+                      <Image
+                        // IMPROVED: Use next/image for external portraits for optimization and accessibility
                         src={getPortraitUrl(leader.name)!}
                         alt={`${leader.name} portrait`}
                         width={800}
                         height={1200}
+                        sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxNSc+PHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzE1JyBmaWxsPScjZjNmNGY2Jy8+PC9zdmc+"
                         className="w-full aspect-[2/3] max-h-[50vh] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
                       />
                     ) : (
                       <Image
-                        src="/images/team/portrait-placeholder.svg"
+                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
                         alt={`${leader.name} portrait placeholder`}
                         width={800}
                         height={1200}
+                        sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
+                        loading="lazy"
+                        placeholder="blur"
+                        blurDataURL="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMCcgaGVpZ2h0PScxNSc+PHJlY3Qgd2lkdGg9JzEwJyBoZWlnaHQ9JzE1JyBmaWxsPScjZjNmNGY2Jy8+PC9zdmc+"
                         className="w-full aspect-[2/3] max-h-[50vh] object-contain bg-white rounded-xl border border-gray-200 shadow-md"
                       />
                     )}
@@ -340,7 +353,7 @@ export default function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="/images/team/portrait-placeholder.svg"
+                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
                         alt={`${person.name} portrait placeholder`}
                         width={600}
                         height={800}
@@ -427,7 +440,7 @@ export default function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="/images/team/portrait-placeholder.svg"
+                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
                         alt={`${person.name} portrait placeholder`}
                         width={600}
                         height={800}

@@ -1,9 +1,8 @@
 "use client";
 import Button from "@/components/common/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Sparkles } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
-import { Rocket } from "lucide-react";
+import LiquidChrome from "@/components/visuals/LiquidChrome";
 import TypewriterText from "../ui/TypewriterText";
 
 export default function Hero() {
@@ -29,8 +28,12 @@ export default function Hero() {
     <section 
       id="home"
       ref={ref}
-      className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100"
+      className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-transparent"
     >
+      {/* Liquid Chrome background layer filling the hero */}
+      <div className="absolute inset-0 -z-10">
+        <LiquidChrome baseColor={[0.1, 0.1, 0.1]} speed={1} amplitude={0.6} interactive={true} />
+      </div>
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         {/* Floating Orbs */}
@@ -139,12 +142,10 @@ export default function Hero() {
               transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6"
             >
-                <Button href="contact" variant="luxury" size="lg" className="flex items-center gap-2">
-                  <Rocket className="w-5 h-5" />
+                <Button href="contact" variant="luxury" size="lg">
                   Schedule Your Free Consultation
                 </Button>
-                <Button href="solutions" variant="ghost" size="lg" className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5" />
+                <Button href="solutions" variant="ghost" size="lg">
                   Explore Solutions
                 </Button>
               </motion.div>

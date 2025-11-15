@@ -2,6 +2,7 @@ import MotionSection from "@/components/ui/MotionSection";
 import TypewriterText from "@/components/ui/TypewriterText";
 import Button from "@/components/common/Button";
 import Link from "next/link";
+import Image from "next/image";
 import { readJobsCache } from "@/lib/jobsCache";
 
 type RecruitCrmJob = {
@@ -179,7 +180,16 @@ export default async function JobsPage({ searchParams }: any) {
                     <h3 className="text-2xl font-semibold title-gradient font-display leading-tight">{job.title}</h3>
                     {job.location && (
                       <p className="text-sm text-text-muted mt-1 flex items-center gap-2">
-                        <img src="/pin.svg" alt="Location" width="16" height="16" className="inline-block opacity-80" />
+                        {/* IMPROVED: Use next/image for optimized icon rendering */}
+                        {/* Using sizes to ensure responsive loading; icon remains small */}
+                        <Image
+                          src="/pin.svg"
+                          alt="Job location"
+                          width={16}
+                          height={16}
+                          sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
+                          className="inline-block opacity-80"
+                        />
                         {job.location}
                       </p>
                     )}
@@ -204,3 +214,20 @@ export default async function JobsPage({ searchParams }: any) {
     </div>
   );
 }
+import type { Metadata } from "next";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://reworkssolutions.com";
+
+// IMPROVED: Add SEO-friendly metadata with canonical and Open Graph
+export const metadata: Metadata = {
+  title: "Jobs — Remote Openings | ReWorks Solutions",
+  description:
+    "Browse remote job openings and apply directly through our Recruit CRM. Find roles across operations, billing, logistics, and more.",
+  alternates: { canonical: `${SITE_URL}/jobs` },
+  openGraph: {
+    type: "website",
+    title: "Jobs — Remote Openings | ReWorks Solutions",
+    description:
+      "Browse remote job openings and apply directly through our Recruit CRM.",
+    url: `${SITE_URL}/jobs`,
+  },
+};

@@ -1,9 +1,15 @@
 "use client";
 import { motion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
-import { Zap, Shield, Globe, ArrowRight, PlayCircle } from "lucide-react";
+import { Zap, Shield, Globe } from "lucide-react";
 import Button from "@/components/common/Button";
-import PixelBlast from "@/components/PixelBlast";
+// IMPROVED: Lazy-load heavy visual component to reduce initial bundle size
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+const PixelBlast = dynamic(() => import("@/components/PixelBlast"), {
+  ssr: false,
+  loading: () => null,
+});
 import { useRef } from "react";
 import { useScrollMagicParallax } from "@/hooks/useScrollMagicParallax";
 
@@ -14,6 +20,8 @@ export default function FinalCTA() {
     <MotionSection className="relative bg-gradient-to-br from-primary-blue via-blue-700 to-indigo-800 text-white py-24 overflow-hidden" variant="fadeUp">
       {/* PixelBlast Background (disabled on mobile to prevent black overlay issues) */}
       <div ref={bgRef} className="absolute inset-0 hidden md:block will-change-transform">
+        {/* IMPROVED: Suspense boundary for lazy-loaded background effect */}
+        <Suspense fallback={null}>
         <PixelBlast
           variant="circle"
           pixelSize={6}
@@ -34,6 +42,7 @@ export default function FinalCTA() {
           transparent
           style={{ width: '100%', height: '100%', position: 'relative' }}
         />
+        </Suspense>
       </div>
 
       <div className="relative z-10 section-wrap">
@@ -103,10 +112,8 @@ export default function FinalCTA() {
               className="group relative inline-flex items-center justify-center"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center gap-2 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
+              <div className="relative flex items-center bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
                 <span className="text-lg">Start Hiring Now</span>
-                {/* Static icon (no animation) */}
-                <ArrowRight className="w-5 h-5" />
               </div>
             </motion.a>
             
@@ -118,8 +125,7 @@ export default function FinalCTA() {
               className="group relative inline-flex items-center justify-center"
             >
               <div className="absolute inset-0 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center gap-2 px-8 py-4 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white font-semibold shadow-xl transition-all duration-300 group-hover:bg-white/20 group-hover:border-white/50 group-hover:shadow-white/20">
-                <PlayCircle className="w-5 h-5" />
+              <div className="relative flex items-center px-8 py-4 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white font-semibold shadow-xl transition-all duration-300 group-hover:bg-white/20 group-hover:border-white/50 group-hover:shadow-white/20">
                 <span className="text-lg">Watch Demo</span>
               </div>
               {/* Glass shine effect */}
@@ -180,7 +186,7 @@ export default function FinalCTA() {
             {[
               { icon: Zap, title: "48-Hour Setup", desc: "Get started in less than 2 days" },
               { icon: Shield, title: "Zero Risk", desc: "30-day money-back guarantee" },
-              { icon: Globe, title: "Global Talent", desc: "Access to 50+ countries" }
+              { icon: Globe, title: "Coverage", desc: "South Africa only" }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -192,10 +198,10 @@ export default function FinalCTA() {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30">
+                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30 text-center">
                   {/* Static icon (no hover animation) */}
-                  <div className="mb-3" style={{ color: '#ff9442' }}>
-                    <item.icon className="w-8 h-8" />
+                  <div className="mb-3 mx-auto" style={{ color: '#ff9442' }}>
+                    <item.icon className="w-8 h-8 mx-auto" />
                   </div>
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/80 text-sm">{item.desc}</p>

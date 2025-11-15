@@ -7,7 +7,8 @@ import ClientWrapper from "@/components/ui/ClientWrapper";
 import ChatWidget from "@/components/ui/ChatWidget";
 import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
-import SplashCursor from "@/components/SplashCursor";
+import { Suspense } from "react";
+import ClientSplashCursor from "@/components/ui/ClientSplashCursor";
 //import ScrollStack from "@/components/visuals/ScrollStack";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -77,7 +78,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${jakarta.variable} antialiased font-sans overflow-x-hidden`}
+        className={`${jakarta.variable} antialiased font-sans overflow-x-hidden min-w-[320px]`}
       >
         {/* Mount global scroll control immediately */}
         <ClientScrollTop />
@@ -103,7 +104,12 @@ export default function RootLayout({
         <ChatWidget />
 
         {/* Global splash cursor effect across the site (feature-flagged) */}
-        {enableSplashCursor && <SplashCursor />}
+        {/* IMPROVED: Wrap lazy component in Suspense to avoid blocking UI */}
+        {enableSplashCursor && (
+          <Suspense fallback={null}>
+            <ClientSplashCursor />
+          </Suspense>
+        )}
 
         {/* Site-wide bottom blur overlay that hides when footer is visible */}
         <GlobalBlur

@@ -99,6 +99,171 @@ export default function HomeContent() {
         </motion.div>
       </motion.div>
 
+      {/* Two feature cards side by side */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          {/* Card 1: Offshore Staffing, Reimagined. */}
+          <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Offshore Staffing, Reimagined.</h3>
+            <p className="text-text-muted mb-6">When you think offshore staffing, concerns rise about risking your brand or disrupting operations:</p>
+            <ul className="space-y-2 text-text-muted text-left max-w-2xl mx-auto">
+              <li>• Poor communication and heavy accents that frustrate clients and teams</li>
+              <li>• Low-quality hires who lack commitment or professionalism</li>
+              <li>• Lack of transparency and oversight, causing missed deadlines and errors</li>
+              <li>• Minimal support or employee coaching</li>
+              <li>• Risk of HIPAA non-compliance and data security issues</li>
+            </ul>
+            <p className="mt-6 text-text-muted">But what if offshore talent could be your company’s secret weapon, without the headaches?</p>
+          </div>
+
+          {/* Card 2: Elite Talent. Real Results. */}
+          <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Elite Talent. Real Results.</h3>
+            <div className="space-y-4 text-text-muted max-w-3xl mx-auto">
+              <p>ReWorks delivers only the top 1% of South African talent, carefully chosen for skill, professionalism, and communication. We hire native English speakers with neutral accents to ensure seamless client-facing interactions.</p>
+              <p>Hiring great people is only the start. Our commitment extends beyond recruitment. Through meticulous background checks, continuous performance monitoring, and dedicated coaching, we proactively manage your remote team to maximize engagement and productivity, with significant cost savings to your company.</p>
+              <p>We’re not just a staffing agency. We’re your trusted partner. From onboarding to ongoing support, our impeccable service keeps your team aligned, motivated, and ready to scale.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Why ReWorks */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <div className="text-center max-w-4xl mx-auto">
+          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">ReWorks Delivers More Than Staffing</h3>
+          <p className="text-text-muted mb-6">Offshore staffing doesn’t have to mean compromise. We combine handpicked talent selection with hands-on management and employee care to deliver an elevated, cost-effective solution tailored to your needs.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { title: "Carefully Selected Talent Pool", text: "We hire fewer than 1% of applicants, focusing on native English speakers with neutral accents and the highest professionalism." },
+            { title: "Proactive Team Management", text: "Live productivity tracking, continuous communication, and dedicated business coaches help us resolve issues before they impact your business." },
+            { title: "Ongoing Client Support", text: "From onboarding through scaling, our account managers ensure seamless integration, personalized service, and a genuine partnership." }
+          ].map((item) => (
+            <div key={item.title} className="luxury-card glass-card rounded-3xl p-8 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl">
+              <h4 className="font-semibold title-gradient font-display mb-2">{item.title}</h4>
+              <p className="text-text-muted text-sm">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Key features */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Built to Elevate Your Remote Workforce</h3>
+        <div className="grid md:grid-cols-3 gap-6">
+          {[
+            { title: "Rigorous Talent Vetting", desc: "Only the top 1% of candidates make the cut, ensuring elite professionals with native English and neutral accents." },
+            { title: "Live Productivity Monitoring", desc: "Advanced tracking tools measure activity and productivity in real time so you never worry about oversight." },
+            { title: "Comprehensive Employee Support", desc: "Personalized coaching, mental health resources, and perks keep your employees motivated and performing their best." },
+          ].map((item) => (
+            <div key={item.title} className="rounded-2xl border border-gray-200 shadow-sm p-6">
+              <div className="flex items-start gap-3">
+                <Check className="w-5 h-5 text-primary-blue flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold title-gradient font-display">{item.title}</h4>
+                  <p className="text-text-muted text-sm mt-1">{item.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Client types */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">Trusted by Healthcare Leaders and Teams Across the US</h3>
+        <p className="text-text-muted mb-6">ReWorks currently specializes in healthcare, serving nursing homes, small practices, and home care agencies with HIPAA-compliant, client-facing, and backend remote staffing that saves millions on payroll without compromising quality. Our flexible model adapts to a wide range of industries and roles, delivering the same elite talent and personalized service wherever you operate.</p>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
+            <h4 className="font-semibold text-slate-900 mb-3">Key Use Cases</h4>
+            <ul className="space-y-2 text-slate-700 text-sm">
+              <li>• Healthcare administration and customer service</li>
+              <li>• Medical billing, data migration, and analytics</li>
+              <li>• Nursing homes, home care agencies, and ABA therapy providers</li>
+              <li>• Small businesses reducing overhead with handpicked remote workers</li>
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
+            <h4 className="font-semibold title-gradient font-display mb-4 text-center">ReWorks By the Numbers</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-3 rounded-xl">
+                <div className="text-3xl font-bold gradient-text">80%</div>
+                <div className="text-text-muted text-sm">Cost Reduction</div>
+              </div>
+              <div className="text-center p-3 rounded-xl">
+                <div className="text-3xl font-bold gradient-text">95%</div>
+                <div className="text-text-muted text-sm">Client Satisfaction</div>
+              </div>
+              <div className="text-center p-3 rounded-xl">
+                <div className="text-3xl font-bold gradient-text">24/7</div>
+                <div className="text-text-muted text-sm">Support Available</div>
+              </div>
+              <div className="text-center p-3 rounded-xl">
+                <div className="text-3xl font-bold gradient-text">100+</div>
+                <div className="text-text-muted text-sm">Happy Clients</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Home Care Support Operations Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative">
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
+          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-6">
+            HOME CARE SUPPORT OPERATIONS
+          </h3>
+          <div className="grid sm:grid-cols-3 gap-6 text-left">
+            <div>
+              <h4 className="font-semibold title-gradient font-display mb-2">The problem</h4>
+              <p className="text-text-muted text-sm">Your home care agency is buried in scheduling conflicts, missed authorizations, and billing backlogs while your clinical staff struggles to keep up.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold title-gradient font-display mb-2">The solution</h4>
+              <p className="text-text-muted text-sm">ReWorks provides your dedicated support team for scheduling, authorization reviews, documentation, and comprehensive billing operations.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold title-gradient font-display mb-2">The outcome</h4>
+              <p className="text-text-muted text-sm">Run your agency smoothly, increase patient visits, and grow your service area.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
       {/* ReWorks Solutions – Your Outsourcing HR Partner */}
       <div className="grid md:grid-cols-2 gap-10 items-start">
         <motion.div
@@ -370,62 +535,7 @@ export default function HomeContent() {
         </div>
       </div>
 
-      {/* Home Care Support Operations */}
-      <div className="grid md:grid-cols-2 gap-10 items-start">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, type: "spring", stiffness: 60, damping: 12 }}
-          className="mb-8"
-        >
-          <h3 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
-            <TypewriterText 
-              text="HOME CARE SUPPORT OPERATIONS" 
-              speed={25}
-              caretHeightClass="h-8"
-              onComplete={() => console.log("Home care heading complete")}
-            />
-          </h3>
-          <div className="mt-6 space-y-6">
-            {[
-              { title: "The problem", text: "Your home care agency is buried in scheduling conflicts, missed authorizations, and billing backlogs while your clinical staff struggles to keep up." },
-              { title: "The solution", text: "ReWorks provides your dedicated support team for scheduling, authorization reviews, documentation, and comprehensive billing operations." },
-              { title: "The outcome", text: "Run your agency smoothly, increase patient visits, and grow your service area." }
-            ].map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.15 }}
-              >
-                <h4 className="font-semibold text-slate-900">{item.title}</h4>
-                <p className="text-slate-700">{item.text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, x: 50, scale: 0.95 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, type: "spring", stiffness: 50 }}
-          whileHover={{ scale: 1.02 }}
-          className="rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 border border-slate-200 p-8 relative overflow-hidden"
-        >
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-primary-blue/10 to-accent-blue/10"
-            initial={{ x: "-100%" }}
-            whileInView={{ x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          />
-          <p className="text-slate-700 relative z-10 text-lg">
-            Imagine the ways we can transform your operations
-          </p>
-        </motion.div>
-      </div>
+      {/* Home Care Support Operations — duplicate block removed to prevent repetition */}
 
       {/* Bottom CTA */}
       <motion.div
@@ -435,21 +545,20 @@ export default function HomeContent() {
         transition={{ duration: 0.8, type: "spring", stiffness: 70 }}
         className="text-center"
       >
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4">
-          <TypewriterText text="You can envision your dream team." speed={50} />
-        </h3>
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <TypewriterText 
+            text="You can envision your dream team." 
+            speed={40}
+          />
+        </h2>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-slate-700 mb-6"
+          className="text-xl text-gray-600 mb-8"
         >
-          <TypewriterText 
-            text="Or you can make it happen with ReWorks Solutions." 
-            speed={35}
-            caretHeightClass="h-6"
-          />
+          Or you can make it happen with ReWorks Solutions.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -464,7 +573,7 @@ export default function HomeContent() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Button href="/contact" variant="luxury">OUTSOURCE WITH THE EXPERTS!</Button>
+          <Button href="/contact" variant="primary" size="lg">OUTSOURCE WITH THE EXPERTS!</Button>
         </motion.div>
       </motion.div>
     </MotionSection>

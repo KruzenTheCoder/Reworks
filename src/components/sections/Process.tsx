@@ -41,7 +41,7 @@ export default function Process() {
   const headerInView = useInView(headerRef, { once: true, margin: "0px" });
 
   return (
-    <MotionSection className="relative bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 py-24 overflow-hidden" variant="fadeUp">
+    <MotionSection className="relative bg-transparent py-24 overflow-hidden" variant="fadeUp">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <motion.div

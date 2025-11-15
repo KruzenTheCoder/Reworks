@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { ComponentProps, ReactNode, useEffect, useRef } from "react";
+import { ComponentProps, ReactNode, useRef, isValidElement, cloneElement, Children } from "react";
 import { motion, Variants, HTMLMotionProps } from "framer-motion";
 import { animate } from "motion";
 
@@ -68,6 +68,33 @@ export default function Button(props: ButtonProps | LinkProps) {
   const inkRef = useRef<HTMLSpanElement | null>(null);
   const prefersReduced = typeof window !== "undefined" && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Strip emojis from button text but preserve all normal characters
+  // Uses Unicode Extended_Pictographic property (broad emoji coverage) and common modifiers
+  const removeEmojisKeepText = (text: string) =>
+    text
+      .replace(/[\p{Extended_Pictographic}\uFE0F\u200D]/gu, "")
+      .replace(/\s{2,}/g, " ")
+      .trim();
+
+  // Deeply sanitize any nested children to remove emojis from text nodes only
+  const sanitizeChildrenDeep = (node: ReactNode): ReactNode => {
+    if (typeof node === "string") return removeEmojisKeepText(node);
+    if (typeof node === "number") return node;
+    if (Array.isArray(node)) {
+      // Normalize to a keyed array to avoid React key warnings
+      const keyed = Children.toArray(node);
+      return keyed.map(sanitizeChildrenDeep) as any;
+    }
+    if (isValidElement(node)) {
+      const child = (node.props as any)?.children;
+      const sanitized = child !== undefined ? sanitizeChildrenDeep(child) : child;
+      // cloneElement preserves the original element key if not overridden
+      return cloneElement(node, { ...(node.props as any), children: sanitized });
+    }
+    return node;
+  };
+  const cleanChildren = sanitizeChildrenDeep(children);
+
   const ButtonContent = () => (
     <>
       {/* Luxury ink hover highlight using Motion One */}
@@ -83,7 +110,7 @@ export default function Button(props: ButtonProps | LinkProps) {
           transform: "scale(0.98)",
         }}
       />
-      <span className="relative z-10 flex items-center">{children}</span>
+      <span className="relative z-10 flex items-center">{cleanChildren}</span>
     </>
   );
 

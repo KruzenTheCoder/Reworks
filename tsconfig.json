@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "Backgrounds": ["./src/components/visuals"],
+      "Backgrounds/*": ["./src/components/visuals/*"]
     }
   },
   "include": [

@@ -4,6 +4,8 @@ import MotionSection from '@/components/ui/MotionSection'
 import Button from '@/components/common/Button'
 import TypewriterText from '@/components/ui/TypewriterText'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+// FIX: Remove client-side metadata export (only allowed in server files)
 
 export default function Page() {
   return (
@@ -43,21 +45,29 @@ export default function Page() {
                   </div>
                   <div className="rounded-xl p-5 bg-gradient-to-br from-slate-700 to-slate-900 text-white">
                     <h3 className="font-semibold">Phone</h3>
-                    <p className="mt-1 opacity-90">(212) 555-1234</p>
+                    <p className="mt-1 opacity-90">845-210-6070</p>
                   </div>
                   <div className="rounded-xl p-5 bg-gradient-to-br from-blue-600 to-accent-blue text-white">
                     <h3 className="font-semibold">Hours</h3>
                     <p className="mt-1 opacity-90">Mon–Fri, 9am–6pm EST</p>
                   </div>
                   <div className="rounded-xl p-5 bg-gradient-to-br from-slate-700 to-slate-900 text-white">
-                    <h3 className="font-semibold">Global Coverage</h3>
-                    <p className="mt-1 opacity-90">US, EU, LATAM, APAC</p>
+                    <h3 className="font-semibold">Coverage</h3>
+                    <p className="mt-1 opacity-90">South Africa only</p>
                   </div>
                 </div>
                 <div className="mt-6 flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <img src="/vercel.svg" className="w-8 h-8" alt="Badge"/>
-                    <span className="text-sm text-slate-700">SOC 2 readiness • 99.99% uptime • 10K+ hours tracked</span>
+                    {/* IMPROVED: Use next/image for optimized badge rendering */}
+                    <Image
+                      src="/vercel.svg"
+                      alt="Uptime and hours tracked badge"
+                      width={32}
+                      height={32}
+                      sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
+                      className="w-8 h-8"
+                    />
+                    <span className="text-sm text-slate-700">99.99% uptime • 10K+ hours tracked</span>
                   </div>
                   <Button href="#contact-form" variant="primary" size="md">Book a Call</Button>
                 </div>
