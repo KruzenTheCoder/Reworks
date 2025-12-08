@@ -2,7 +2,6 @@
 import Button from "@/components/common/Button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import LiquidChrome from "@/components/visuals/LiquidChrome";
 import TypewriterText from "../ui/TypewriterText";
 
 export default function Hero() {
@@ -30,51 +29,66 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-transparent"
     >
-      {/* Liquid Chrome background layer filling the hero */}
+      {/* Sleek animated gradient background */}
       <div className="absolute inset-0 -z-10">
-        <LiquidChrome baseColor={[0.1, 0.1, 0.1]} speed={1} amplitude={0.6} interactive={true} />
-      </div>
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        {/* Floating Orbs */}
         <motion.div
-          className="absolute top-20 left-10 w-44 h-44 sm:w-72 sm:h-72 bg-gradient-to-r from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"
+          className="absolute inset-0"
           animate={{
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-            scale: [1, 1.2, 1],
+            background: [
+              "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))",
+              "linear-gradient(120deg, rgba(99,102,241,0.08), rgba(59,130,246,0.06))",
+              "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))",
+            ],
           }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+          style={{ willChange: "background" }}
         />
         <motion.div
-          className="absolute top-40 right-20 w-56 h-56 sm:w-96 sm:h-96 bg-gradient-to-r from-purple-400/15 to-pink-600/15 rounded-full blur-3xl"
-          animate={{
-            x: [0, -80, 0],
-            y: [0, 60, 0],
-            scale: [1, 0.8, 1],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] rounded-full blur-[120px]"
+          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.6), transparent 70%)" }}
+          animate={{ opacity: [0.9, 0.95, 0.9] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
         <motion.div
-          className="absolute bottom-20 left-1/3 w-40 h-40 sm:w-64 sm:h-64 bg-gradient-to-r from-indigo-400/25 to-blue-600/25 rounded-full blur-2xl"
-          animate={{
-            x: [0, 120, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
+          className="absolute -top-32 -left-24 w-[60vw] h-[60vw] rounded-full blur-[100px]"
+          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.28), transparent 55%)" }}
+          animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.8, 0.6] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
+        <motion.div
+          className="absolute bottom-[-20vh] right-[-20vw] w-[55vw] h-[55vw] rounded-full blur-[110px]"
+          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.26), transparent 55%)" }}
+          animate={{ scale: [1, 1.02, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        {/* Smaller blurred orbs */}
+        {[
+          { w: 180, h: 180, top: '20%', left: '15%', bg: 'radial-gradient(circle, rgba(255,255,255,0.9), transparent 65%)', dur: 12 },
+          { w: 140, h: 140, top: '60%', left: '80%', bg: 'radial-gradient(circle, rgba(147,197,253,0.85), transparent 65%)', dur: 14 },
+          { w: 160, h: 160, top: '75%', left: '60%', bg: 'radial-gradient(circle, rgba(196,181,253,0.8), transparent 65%)', dur: 16 },
+          { w: 120, h: 120, top: '10%', left: '70%', bg: 'radial-gradient(circle, rgba(255,255,255,0.85), transparent 65%)', dur: 10 },
+          { w: 130, h: 130, top: '70%', left: '8%', bg: 'radial-gradient(circle, rgba(165,180,252,0.85), transparent 65%)', dur: 13 }
+        ].map((o, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full blur-[60px]"
+            style={{ width: o.w, height: o.h, top: o.top as any, left: o.left as any, background: o.bg }}
+            animate={{ y: [0, -20, 0], scale: [1, 1.08, 1], opacity: [0.6, 0.9, 0.6] }}
+            transition={{ duration: o.dur, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
+          />
+        ))}
+
+        {/* Light rays */}
+        {[10, 25, 45, 60, 75, 90].map((left, i) => (
+          <motion.div
+            key={i}
+            className="absolute"
+            style={{ left: `${left}%`, width: 2, height: '150%', background: 'linear-gradient(to bottom, transparent 0%, rgba(147,197,253,0.3) 20%, rgba(196,181,253,0.5) 50%, rgba(147,197,253,0.3) 80%, transparent 100%)', opacity: 0.2 }}
+            animate={{ y: ['-100%', '100%'] }}
+            transition={{ duration: 12 + i * 2, repeat: Infinity, ease: 'linear' }}
+          />
+        ))}
       </div>
 
       {/* Parallax Content */}
@@ -84,16 +98,7 @@ export default function Hero() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-20 pb-16 sm:pb-20">
           <div className="text-center">
-            {/* Animated Badge (Trusted-by pill) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-16 sm:mb-20 inline-flex items-center rounded-full bg-white/80 backdrop-blur-sm px-4 sm:px-6 py-2 text-xs sm:text-sm font-medium text-primary-blue shadow-lg border border-white/20"
-            >
-              <span className="mr-2 h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-          Trusted by thousands of Companies Worldwide
-            </motion.div>
+            {/* Top badge removed per request to raise hero content */}
 
             {/* Main Heading with Enhanced Typewriter Animation */}
             <motion.div 

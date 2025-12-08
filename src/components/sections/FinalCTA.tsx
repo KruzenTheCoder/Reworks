@@ -91,7 +91,7 @@ function FinalCTA() {
             >
               Book a call today. It's fast, flexible, and fully supported.
               <br />
-        <span className="font-semibold" style={{ color: '#ff9442' }}>Trusted by thousands of Companies Worldwide</span>
+        <span className="font-semibold" style={{ color: '#ff9442' }}>Trusted by hundreds of Companies Worldwide</span>
             </motion.p>
           </motion.div>
 
@@ -211,18 +211,7 @@ function FinalCTA() {
             ))}
           </motion.div>
 
-          {/* Bottom tagline */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.2 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <p className="text-white/60 text-sm">
-              Trusted by startups to Fortune 500 companies worldwide
-            </p>
-          </motion.div>
+          {/* Bottom tagline removed per request */}
         </div>
       </div>
     </MotionSection>

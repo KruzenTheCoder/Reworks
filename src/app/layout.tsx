@@ -9,6 +9,7 @@ import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
 import { Suspense } from "react";
 import ClientSplashCursor from "@/components/ui/ClientSplashCursor";
+import ColorBloom from "@/components/visuals/ColorBloom";
 //import ScrollStack from "@/components/visuals/ScrollStack";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -82,6 +83,7 @@ export default function RootLayout({
       >
         {/* Mount global scroll control immediately */}
         <ClientScrollTop />
+        <ColorBloom />
         
         <ClientWrapper>
           {/* Fixed header */}

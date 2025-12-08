@@ -17,13 +17,13 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   // Memoized particle generation to avoid unnecessary re-renders
   const particles = useMemo(
     () =>
-      Array.from({ length: 16 }, (_, i) => ({
-        id: i,
-        delay: Math.random() * 2,
-        duration: 2 + Math.random() * 2,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-      })),
+      Array.from({ length: 16 }, (_, i) => {
+        const x = (i * 61) % 100;
+        const y = (i * 37) % 100;
+        const delay = ((i % 8) * 0.25) + (((i * 7) % 10) / 50);
+        const duration = 2 + (((i * 13) % 50) / 25);
+        return { id: i, x, y, delay, duration };
+      }),
     []
   );
 
