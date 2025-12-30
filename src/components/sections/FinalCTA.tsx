@@ -185,9 +185,9 @@ function FinalCTA() {
             className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto"
           >
             {[
-              { icon: Zap, title: "48-Hour Setup", desc: "Get started in less than 2 days" },
-              { icon: Shield, title: "Zero Risk", desc: "30-day money-back guarantee" },
-              { icon: Globe, title: "Coverage", desc: "South Africa only" }
+              { icon: Zap, title: "Setup Time", desc: "Within seven business days" },
+              { icon: Shield, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
+              { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" }
             ].map((item, index) => (
               <motion.div
                 key={item.title}

@@ -10,7 +10,7 @@ import TypewriterText from "../ui/TypewriterText"
 const faqs = [
   {
     question: "How does ReWorks help reduce my costs?",
-    answer: "ReWorks helps reduce costs by providing top talent at affordable rates, cutting payroll costs by up to 80%. You get advanced-level skills without the overhead of full-time employees, including benefits, office space, and equipment costs."
+    answer: "ReWorks helps reduce costs by providing top talent at affordable rates, cutting payroll costs by up to 70%. You get advanced-level skills without the overhead of full-time employees, including benefits, office space, and equipment costs."
   },
   {
     question: "How many workers can I hire?",

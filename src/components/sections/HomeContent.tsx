@@ -240,16 +240,12 @@ function HomeContent() {
             </h4>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-3 rounded-xl">
-                <div className="text-3xl font-bold gradient-text">80%</div>
+                <div className="text-3xl font-bold gradient-text">70%</div>
                 <div className="text-text-muted text-sm">Cost Reduction</div>
               </div>
               <div className="text-center p-3 rounded-xl">
                 <div className="text-3xl font-bold gradient-text">95%</div>
                 <div className="text-text-muted text-sm">Client Satisfaction</div>
-              </div>
-              <div className="text-center p-3 rounded-xl">
-                <div className="text-3xl font-bold gradient-text">24/7</div>
-                <div className="text-text-muted text-sm">Support Available</div>
               </div>
               <div className="text-center p-3 rounded-xl">
                 <div className="text-3xl font-bold gradient-text">100+</div>
@@ -305,7 +301,7 @@ function HomeContent() {
         transition={{ duration: 0.8 }}
         className="bg-gradient-to-r from-primary-blue/5 to-accent-blue/5 rounded-3xl p-8 md:p-12"
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
           <div>
             <AnimatedCounter value={80} />
             <p className="mt-2 text-slate-700">Cost Reduction</p>
@@ -315,7 +311,7 @@ function HomeContent() {
             <p className="mt-2 text-slate-700">Client Satisfaction</p>
           </div>
           <div>
-            <AnimatedCounter value={24} suffix="/7" />
+            <AnimatedCounter value={12} suffix="hrs" />
             <p className="mt-2 text-slate-700">Support Available</p>
           </div>
           <div>

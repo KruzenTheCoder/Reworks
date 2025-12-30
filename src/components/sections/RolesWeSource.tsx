@@ -189,9 +189,8 @@ export default function RolesWeSource() {
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { number: "48hrs", label: "Average Time to Hire" },
-              { number: "98%", label: "Client Retention Rate" },
-              { number: "24/7", label: "Ongoing Support" }
+              { number: "7 days", label: "Average Time to Hire" },
+              { number: "98%", label: "Client Retention Rate" }
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

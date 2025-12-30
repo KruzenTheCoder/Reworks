@@ -13,7 +13,7 @@ export default function PricingPage() {
       <MotionSection className="section-wrap" variant="fadeUp">
         <ClientPageTitle text="Pricing" />
         <p className="mt-3 max-w-2xl text-text-base/80">
-          Save up to <span className="font-extrabold text-primary-blue">80%</span> on payroll by hiring
+          Save up to <span className="font-extrabold text-primary-blue">70%</span> on payroll by hiring
           elite global talent. Flexible engagement models to fit your needs.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">

@@ -4,7 +4,6 @@ import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
 import ClientWrapper from "@/components/ui/ClientWrapper";
-import ChatWidget from "@/components/ui/ChatWidget";
 import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
 import { Suspense } from "react";
@@ -103,7 +102,7 @@ export default function RootLayout({
           <Footer />
         </ClientWrapper>
         
-        <ChatWidget />
+        {/* Live chat removed; use email contact in footer and contact page */}
 
         {/* Global splash cursor effect across the site (feature-flagged) */}
         {/* IMPROVED: Wrap lazy component in Suspense to avoid blocking UI */}

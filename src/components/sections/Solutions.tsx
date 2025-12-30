@@ -64,8 +64,7 @@ const industries = [
       "Recruiting and staffing",
       "Prior authorization",
       "Insurance verification",
-      "Client billing & payroll",
-      "24/7 customer support"
+      "Client billing & payroll"
     ]
   },
   {
@@ -289,30 +288,9 @@ function Solutions() {
   return (
     <section id="solutions" className="pt-0 pb-24 bg-white">
           <MotionSection className="section-wrap" variant="fadeUp" viewportAmount={0}>
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 0, margin: '0px' }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            <TypewriterText
-              text="So many ways, so much potential"
-              speed={40}
-              shimmerOnComplete
-              caretHeightClass="h-10"
-            />
-          </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Operational solutions across industries and specialties*
-          </p>
-          <p className="text-sm text-blue-600 font-medium">
-            ReWorks Solutions is compliant with HIPAA Privacy Standards
-          </p>
-        </motion.div>
+        {/* Removed introductory section per requirements */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {industries.map((industry, index) => (
             <motion.div
               key={index}

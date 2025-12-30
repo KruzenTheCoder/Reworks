@@ -58,7 +58,7 @@ const values = [
     description: "Get top talent at low cost.",
     details: [
       "Get advanced-level skills at affordable rates.",
-      "Cut payroll costs by up to 80%.",
+      "Cut payroll costs by up to 70%.",
       "Smart staffing means higher quality at lower cost."
     ]
   }

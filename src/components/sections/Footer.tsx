@@ -160,15 +160,7 @@ export default function Footer() {
                   </div>
                   <span className="group-hover:translate-x-0.5 transition-transform">+1 845-210-6070</span>
                 </a>
-                <div className="flex items-start gap-3 text-sm font-medium text-gray-300">
-                  <div className="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-4 h-4 text-blue-400" />
-                  </div>
-                  <span className="leading-relaxed pt-1.5">
-                    11C Monsey Blvd<br />
-                    Monsey, NY 10952
-                  </span>
-                </div>
+                {/* Physical address removed per requirements */}
               </div>
             </motion.div>
           </div>
@@ -199,8 +191,15 @@ export default function Footer() {
               <Link href="/terms" className="hover:text-white transition-colors">
                 Terms of Service
               </Link>
-              <span className="relative px-3 py-1.5 bg-gray-800/50 border border-gray-700/50 rounded-full text-[10px] font-semibold uppercase tracking-wider text-gray-300 overflow-hidden group">
+              <span className="relative inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-800/50 border border-gray-700/50 rounded-full text-[10px] font-semibold uppercase tracking-wider text-gray-300 overflow-hidden group">
                 <span className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-blue-600/10 to-blue-600/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <img
+                  src="https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png"
+                  alt="HIPAA Compliant"
+                  className="relative h-4 w-auto object-contain brightness-125 contrast-110 saturate-150 drop-shadow"
+                  loading="lazy"
+                  referrerPolicy="no-referrer"
+                />
                 <span className="relative">HIPAA Compliant</span>
               </span>
             </motion.div>

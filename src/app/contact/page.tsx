@@ -45,15 +45,12 @@ export default function Page() {
                   </div>
                   <div className="rounded-xl p-5 bg-gradient-to-br from-slate-700 to-slate-900 text-white">
                     <h3 className="font-semibold">Phone</h3>
-                    <p className="mt-1 opacity-90">845-210-6070</p>
+                    <p className="mt-1 opacity-90">+1 845-210-6070</p>
                   </div>
-                  <div className="rounded-xl p-5 bg-gradient-to-br from-blue-600 to-accent-blue text-white">
-                    <h3 className="font-semibold">Hours</h3>
-                    <p className="mt-1 opacity-90">Mon–Fri, 9am–6pm EST</p>
-                  </div>
+                  {/* Hours removed per requirements */}
                   <div className="rounded-xl p-5 bg-gradient-to-br from-slate-700 to-slate-900 text-white">
                     <h3 className="font-semibold">Coverage</h3>
-                    <p className="mt-1 opacity-90">South Africa only</p>
+                    <p className="mt-1 opacity-90">South Africa</p>
                   </div>
                 </div>
                 <div className="mt-6 flex items-center justify-between">
@@ -67,7 +64,7 @@ export default function Page() {
                       sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
                       className="w-8 h-8"
                     />
-                    <span className="text-sm text-slate-700">99.99% uptime • 10K+ hours tracked</span>
+                    <span className="text-sm text-slate-700">99.99% uptime</span>
                   </div>
                   <Button href="#contact-form" variant="primary" size="md">Book a Call</Button>
                 </div>
@@ -101,15 +98,15 @@ export default function Page() {
                 <h3 className="font-bold text-blue-900">What happens next?</h3>
                 <ul className="mt-4 space-y-2 text-blue-900/80 text-sm">
                   <li>• A specialist reaches out within 1 business day</li>
-                  <li>• We align on roles, countries, salaries, and timelines</li>
+                  {/* Removed salaries and timelines bullet per requirements */}
                   <li>• You meet vetted candidates and interview quickly</li>
                 </ul>
               </div>
-              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-6">
-                <h3 className="font-bold text-slate-900">Prefer to schedule?</h3>
-                <p className="mt-2 text-slate-700">Pick a time that works for you and we’ll take care of the rest.</p>
-                <Button href="#" variant="ghost" size="md" className="mt-4">Open Scheduler</Button>
-              </div>
+                  <div className="rounded-2xl bg-slate-50 border border-slate-200 p-6">
+                    <h3 className="font-bold text-slate-900">Prefer to schedule?</h3>
+                    <p className="mt-2 text-slate-700">Pick a time that works for you and we’ll take care of the rest.</p>
+                    <Button href="#" variant="ghost" size="md" className="mt-4">Open Scheduler</Button>
+                  </div>
             </div>
           </div>
         </div>
