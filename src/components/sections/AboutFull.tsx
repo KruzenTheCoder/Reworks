@@ -20,17 +20,23 @@ const portraits: Record<string, string> = {
   "Isaac Conick": "https://i.ibb.co/p6zQZjqF/Isaac-Conick.png",
   "Shmuel Rabinowitz": "https://i.ibb.co/1Y5y3Hjn/Shmuel-Rabinowitz.png",
   "Daniel Rabson": "https://i.ibb.co/NdKYT3zR/Daniel-Rabson-1.png",
-  "Sammy Piller": "https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png",
+  "Sammy Piller": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
   // Management Team
   "Travis Marshall": "https://i.ibb.co/Qjv7jXHc/Travis-Marshall.png",
   "Xandria Erasmus": "https://i.ibb.co/k6Vgv7hV/Xandria-Erasmus.png",
   "Ken Aquitan": "https://i.ibb.co/1fZxGVHT/Ken-Aquitan.png",
+  "Sarah Tauber": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Chane du Toit": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Subhaana Malek": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
   // Recruiters
   "Janique Bruyns": "https://i.ibb.co/9mDdb4b7/Janique-Bruyns.png",
   "Kaylin Lavelot": "https://i.ibb.co/spG0whnk/Kaylin-Lavelot.png",
   "Kayleigh Pontinhas": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Kayleigh Pontin": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
+  "Alexandra May": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Rachelle Visser": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Nicole Erasmus": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
 };
 
 const getPortraitUrl = (name: string): string | undefined => portraits[name];
@@ -62,7 +68,7 @@ function AboutFull() {
   const introRef = useRef(null);
   const introInView = useInView(introRef, { once: true, margin: "-100px" });
   const reduce = useReducedMotion();
-  const placeholderSrc = "/images/team/placeholder.svg";
+  const placeholderSrc = "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png";
   const missionIcons = [Target, Users, Settings];
   const secondaryOrange = '#ff9442';
 
@@ -252,7 +258,7 @@ function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
+                        src={placeholderSrc}
                         alt={`${leader.name} portrait placeholder`}
                         width={800}
                         height={1200}
@@ -356,7 +362,7 @@ function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
+                        src={placeholderSrc}
                         alt={`${person.name} portrait placeholder`}
                         width={600}
                         height={800}
@@ -400,12 +406,14 @@ function AboutFull() {
             </motion.h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { name: 'Travis Marshall', role: 'Employee relations supervisor' },
-                { name: 'Xandria Erasmus', role: 'Office Manager & Bookkeeper' },
+                { name: 'Travis Marshall', role: 'SA Team Lead' },
                 { name: 'Sarah Tauber', role: 'Account Manager' },
                 { name: 'Ken Aquitan', role: 'IT Operations Manager' },
                 { name: 'Eli Schleifer', role: 'Director of Innovations' },
                 { name: 'Mindy Schiff', role: 'Director – Medical Billing' },
+                { name: 'Alicia Nadasen', role: 'HR Manager' },
+                { name: 'Subhaana Malek', role: 'Contract Relations Supervisor' },
+                { name: 'Chane du Toit', role: 'Bookkeeper' },
               ].map((person, i) => (
                 <motion.div
                   key={person.name}
@@ -443,7 +451,7 @@ function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="https://i.ibb.co/rRPNbwFD/Sammy-Piller-1.png"
+                        src={placeholderSrc}
                         alt={`${person.name} portrait placeholder`}
                         width={600}
                         height={800}
@@ -487,10 +495,11 @@ function AboutFull() {
             </motion.h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { name: 'Alicia Nadasen', role: 'Head of Recruitment & HR' },
                 { name: 'Kayleigh Pontinhas', role: 'HR Assistant' },
-                { name: 'Kaylin Lavelot', role: 'Strategic Talent Development Manager' },
-                { name: 'Janique Bruyns', role: 'Talent Acquisition Specialist' },
+                { name: 'Kaylin Lavelot', role: 'Strategic Talent Dev Manager' },
+                { name: 'Alexandra May', role: 'Talent Acquisition Specialist' },
+                { name: 'Rachelle Visser', role: 'Recruitment Administrator' },
+                { name: 'Nicole Erasmus', role: 'Recruitment Administrator' },
               ].map((person, i) => (
                 <motion.div
                   key={person.name}
@@ -528,7 +537,7 @@ function AboutFull() {
                       />
                     ) : (
                       <Image
-                        src="/images/team/portrait-placeholder.svg"
+                        src={placeholderSrc}
                         alt={`${person.name} portrait placeholder`}
                         width={600}
                         height={800}
@@ -580,7 +589,7 @@ function AboutFull() {
               We believe that outsourcing + robust strategy create a potent tool, and we're here to give it to you.
             </motion.p>
 
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
               {[
                 {
                   bg: "bg-blue-50",
@@ -648,32 +657,15 @@ function AboutFull() {
                   <h4 className={`relative z-20 text-lg font-bold ${value.titleColor} mb-3`}>
                     {value.title}
                   </h4>
-                  <ul className={`relative z-20 space-y-2 ${value.textColor} text-sm text-center`}>
-                    {value.items.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.15 + i * 0.1 + 0.3 }}
-                        className="flex items-center justify-center"
-                      >
-                        <motion.span
-                          className="inline-block w-1.5 h-1.5 rounded-full mr-3 mt-1.5 flex-shrink-0"
-                          style={{ backgroundColor: secondaryOrange }}
-                          initial={{ scale: 0 }}
-                          whileInView={{ scale: 1 }}
-                          viewport={{ once: true }}
-                          transition={{ 
-                            delay: index * 0.15 + i * 0.1 + 0.4,
-                            type: "spring",
-                            stiffness: 200
-                          }}
-                        />
-                        {item}
-                      </motion.li>
-                    ))}
-                  </ul>
+                  <motion.p
+                    className={`relative z-20 ${value.textColor} text-sm text-center`}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 + 0.3 }}
+                  >
+                    {value.items.join(" • ")}
+                  </motion.p>
                 </motion.div>
               ))}
             </div>
