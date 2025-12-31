@@ -102,6 +102,7 @@ export default function Testimonials() {
             className="flex gap-6 px-6"
             animate={{ x: ['0%', '-50%'] }}
             transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+            style={{ willChange: 'transform', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
           >
             {businessesLoop.map((b, idx) => (
               <a

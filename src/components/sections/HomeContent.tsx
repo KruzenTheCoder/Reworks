@@ -231,23 +231,23 @@ function HomeContent() {
                 className="title-gradient font-display"
               />
             </h4>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="p-3 rounded-xl">
-                <div className="flex items-center justify-center gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <span className="text-3xl font-bold gradient-text">70%</span>
-                  <span className="text-text-muted text-sm">Cost Reduction</span>
+                  <span className="text-text-muted text-xs sm:text-sm">Cost Reduction</span>
                 </div>
               </div>
-              <div className="p-3 rounded-xl">
-                <div className="flex items-center justify-center gap-2">
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <span className="text-3xl font-bold gradient-text">95%</span>
-                  <span className="text-text-muted text-sm">Client Satisfaction</span>
+                  <span className="text-text-muted text-xs sm:text-sm">Client Satisfaction</span>
                 </div>
               </div>
-              <div className="p-3 rounded-xl">
-                <div className="flex items-center justify-center gap-2">
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
                   <span className="text-3xl font-bold gradient-text">200+</span>
-                  <span className="text-text-muted text-sm">Happy Clients</span>
+                  <span className="text-text-muted text-xs sm:text-sm">Happy Clients</span>
                 </div>
               </div>
             </div>

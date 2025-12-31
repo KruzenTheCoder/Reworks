@@ -77,11 +77,11 @@ export default function Header() {
 
     // Focus trap within mobile menu
     const container = menuRef.current;
-    const focusables = container
-      ? (Array.from(container.querySelectorAll<HTMLElement>(
+    if (!container) return; // Guard clause if ref is null
+    
+    const focusables = Array.from(container.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )) as HTMLElement[])
-      : [];
+        )) as HTMLElement[];
     const first = focusables[0];
     const last = focusables[focusables.length - 1];
     first?.focus();
