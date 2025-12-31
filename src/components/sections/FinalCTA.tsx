@@ -1,7 +1,7 @@
 "use client";
 import { motion, useReducedMotion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
-import { Zap, Shield, Globe } from "lucide-react";
+import { Zap, Shield, Globe, ShieldCheck } from "lucide-react";
 import Button from "@/components/common/Button";
 // IMPROVED: Lazy-load heavy visual component to reduce initial bundle size
 import dynamic from "next/dynamic";
@@ -170,7 +170,7 @@ function FinalCTA() {
               { icon: Zap, title: "Setup Time", desc: "Within seven business days" },
               { icon: Shield, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
               { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" },
-              { icon: Shield, title: "Compliance", desc: "HIPAA Compliant", image: "https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png" }
+              { icon: ShieldCheck, title: "Compliance", desc: "HIPAA Compliant" }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -184,13 +184,9 @@ function FinalCTA() {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30 text-center">
                   {/* Static icon (no hover animation) */}
-                  {item.image ? (
-                    <img src={item.image} alt="HIPAA" className="w-10 h-10 mx-auto mb-3 object-contain" />
-                  ) : (
-                    <div className="mb-3 mx-auto text-white">
-                      <item.icon className="w-8 h-8 mx-auto" />
-                    </div>
-                  )}
+                  <div className="mb-3 mx-auto text-[#ff9442]">
+                    <item.icon className="w-8 h-8 mx-auto" />
+                  </div>
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/80 text-sm">{item.desc}</p>
                 </div>

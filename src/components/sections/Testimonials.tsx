@@ -93,7 +93,7 @@ export default function Testimonials() {
           className="text-center mb-10"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
-            <TypewriterText text="Businesses We Support" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
+            <TypewriterText text="Trusted By" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
           </h2>
         </motion.div>
 
