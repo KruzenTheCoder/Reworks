@@ -255,40 +255,7 @@ function HomeContent() {
         </div>
       </motion.div>
 
-      {/* Home Care Support Operations Card */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative"
-      >
-        <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 max-w-4xl mx-auto text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative">
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
-          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-6">
-            <TypewriterText 
-              text="HOME CARE SUPPORT OPERATIONS"
-              speed={28}
-              caretHeightClass="h-10"
-              className="title-gradient font-display"
-            />
-          </h3>
-          <div className="grid sm:grid-cols-3 gap-6 text-left">
-            <div>
-              <h4 className="font-semibold title-gradient font-display mb-2">The problem</h4>
-              <p className="text-text-muted text-sm">Your home care agency is buried in scheduling conflicts, missed authorizations, and billing backlogs while your clinical staff struggles to keep up.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold title-gradient font-display mb-2">The solution</h4>
-              <p className="text-text-muted text-sm">ReWorks provides your dedicated support team for scheduling, authorization reviews, documentation, and comprehensive billing operations.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold title-gradient font-display mb-2">The outcome</h4>
-              <p className="text-text-muted text-sm">Run your agency smoothly, increase patient visits, and grow your service area.</p>
-            </div>
-          </div>
-        </div>
-      </motion.div>
+
 
       {/* ReWorks Solutions – Your Outsourcing HR Partner (removed) */}
 
