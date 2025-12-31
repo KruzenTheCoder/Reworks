@@ -71,12 +71,12 @@ export default function OperationTabs({ operations }: { operations: Operation[] 
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
-                  transition={{ duration: 0.35, delay: i * 0.08, ease: "easeOut" }}
+                  transition={{ duration: 0.35, delay: i * 0.15, ease: "easeOut" }}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.98 }}
-                  className="group"
+                  className="group h-full"
                 >
-                  <Card className="p-3 sm:p-4 md:p-6 text-center relative overflow-hidden" hover>
+                  <Card className="p-3 sm:p-4 md:p-6 text-center relative overflow-hidden h-full" hover>
                     <div className="absolute inset-0 pointer-events-none">
                       <div className="absolute top-0 left-0 h-[3px] w-full bg-gradient-to-r from-primary-blue to-accent-blue" />
                     </div>

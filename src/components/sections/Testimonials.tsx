@@ -71,6 +71,16 @@ export default function Testimonials() {
   const [clientForm, setClientForm] = useState({ author: "", title: "", company: "", quote: "", rating: 5 });
   const [clientModalOpen, setClientModalOpen] = useState(false);
   const clientsLoop = useMemo(() => [...clientReviews, ...clientReviews], [clientReviews]);
+  const businesses = useMemo(() => ([
+    { name: 'StaffLion', href: 'https://stafflion.com/' },
+    { name: 'Apex ABA', href: 'https://www.apexaba.com/' },
+    { name: 'United Supply Corp', href: 'https://www.unitedsupplycorp.com/' },
+    { name: 'FAFHC', href: 'https://fafhc.com/' },
+    { name: 'Autumn Lake Healthcare', href: 'https://autumnlakehealthcare.com/' },
+    { name: 'Ruby ABA', href: 'https://www.rubyaba.com/' },
+    { name: '4MD Medical', href: 'https://4mdmedical.com/' },
+  ]), []);
+  const businessesLoop = useMemo(() => [...businesses, ...businesses], [businesses]);
 
   return (
     <MotionSection className="relative bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50 py-24 overflow-hidden" variant="fadeUp">
@@ -83,7 +93,7 @@ export default function Testimonials() {
           className="text-center mb-10"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
-            <TypewriterText text="Client Reviews" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
+            <TypewriterText text="Businesses We Support" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
           </h2>
         </motion.div>
 
@@ -91,39 +101,27 @@ export default function Testimonials() {
           <motion.div
             className="flex gap-6 px-6"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
           >
-            {clientsLoop.map((t, idx) => (
-              <div key={`client-marquee-${idx}-${t.author}`} className="min-w-[260px] sm:min-w-[320px] glass-card rounded-2xl p-5">
-                <div className="flex mb-3">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-text-muted text-sm mb-4">“{t.quote}”</p>
-                <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-primary-blue to-accent-blue flex items-center justify-center text-white font-bold mr-3">
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-text-base">{t.author}</div>
-                    <div className="text-text-muted text-sm">{t.title} · {t.company}</div>
-                  </div>
-                </div>
-              </div>
+            {businessesLoop.map((b, idx) => (
+              <a
+                key={`biz-marquee-${idx}-${b.name}`}
+                href={b.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-w-[240px] sm:min-w-[300px] glass-card rounded-2xl p-5 flex items-center gap-3 hover:-translate-y-1 transition-all duration-300"
+              >
+                <img
+                  src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=64`}
+                  alt={`${b.name} logo`}
+                  className="w-8 h-8 rounded"
+                />
+                <span className="font-semibold text-text-base">{b.name}</span>
+              </a>
             ))}
           </motion.div>
         </div>
-        <div className="text-center mb-16">
-          <motion.button
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setClientModalOpen(true)}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-primary-blue to-accent-blue text-white font-semibold shadow"
-          >
-            Leave a Client Review
-          </motion.button>
-        </div>
+        {/* Reviews action removed; replaced with business grid */}
 
         
 

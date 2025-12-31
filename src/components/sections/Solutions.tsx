@@ -87,16 +87,7 @@ const industries = [
       "Customer service"
     ]
   },
-  {
-    title: "Telecommunications",
-    services: [
-      "Billing updates",
-      "Order tracking",
-      "Price updates",
-      "Customer data",
-      "Service documentation"
-    ]
-  },
+  // Telecommunications removed per request
   {
     title: "Hospitality",
     services: [
@@ -288,7 +279,19 @@ function Solutions() {
   return (
     <section id="solutions" className="pt-0 pb-24 bg-white">
           <MotionSection className="section-wrap" variant="fadeUp" viewportAmount={0}>
-        {/* Removed introductory section per requirements */}
+        <div className="text-center mb-10 md:mb-16">
+          <h2 className="text-2xl md:text-3xl font-bold text-text-base mb-3 font-display tracking-tight">
+            <TypewriterText 
+              text="ReWorks Solutions – Your Outsourcing HR Partner"
+              speed={28}
+              caretHeightClass="h-8"
+              className="title-gradient font-display"
+            />
+          </h2>
+          <p className="text-text-muted max-w-3xl mx-auto">
+            Every business thrives with the right team structure. At ReWorks Solutions, we collaborate with you to determine the most efficient way to optimize your operations. Whether you need a hybrid team or strategic outsourcing support, we streamline workflows and create a seamless, high‑performing system tailored to your needs.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {industries.map((industry, index) => (

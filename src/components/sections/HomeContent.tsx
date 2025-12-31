@@ -48,7 +48,7 @@ function HomeContent() {
   const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
 
   return (
-    <MotionSection className="section-wrap space-y-24" variant="fadeUp">
+    <MotionSection className="section-wrap space-y-16" variant="fadeUp">
       {/* Strategic outsourcing hero copy */}
       <motion.div
         ref={heroRef}
@@ -167,40 +167,33 @@ function HomeContent() {
               className="title-gradient font-display"
             />
           </h3>
-          <p className="text-text-muted mb-6">Offshore staffing doesn’t have to mean compromise. We combine handpicked talent selection with hands-on management and employee care to deliver an elevated, cost-effective solution tailored to your needs.</p>
+          <p className="text-text-muted mb-6">Premium offshore talent, managed end‑to‑end. No compromise.</p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {[
-            { title: "Carefully Selected Talent Pool", text: "We hire fewer than 1% of applicants, focusing on native English speakers with neutral accents and the highest professionalism." },
-            { title: "Proactive Team Management", text: "Live productivity tracking, continuous communication, and dedicated business coaches help us resolve issues before they impact your business." },
-            { title: "Ongoing Client Support", text: "From onboarding through scaling, our account managers ensure seamless integration, personalized service, and a genuine partnership." }
+            { title: "Carefully Selected Talent Pool", text: "Top 1% hires. Native English. Neutral accents." },
+            { title: "Proactive Team Management", text: "Live tracking. Constant communication. Dedicated coaching." },
+            { title: "Ongoing Client Support", text: "Seamless onboarding. Scale-ready. Partnership‑driven." }
           ].map((item) => (
-            <div key={item.title} className="luxury-card glass-card rounded-3xl p-8 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl">
-              <h4 className="font-semibold title-gradient font-display mb-2">{item.title}</h4>
+            <div key={item.title} className="luxury-card glass-card rounded-3xl p-9 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl">
+              <h4 className="font-semibold title-gradient font-display mb-3">{item.title}</h4>
               <p className="text-text-muted text-sm">{item.text}</p>
             </div>
           ))}
         </div>
+        <div className="text-center mt-8">
+          <h3 className="text-2xl md:text-3xl font-bold title-gradient font-display tracking-tight">
+            <TypewriterText 
+              text="Built to Elevate Your Remote Workforce"
+              speed={28}
+              caretHeightClass="h-8"
+              className="title-gradient font-display"
+            />
+          </h3>
+        </div>
       </motion.div>
 
-      {/* Key features */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative text-center"
-      >
-        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
-          <TypewriterText 
-            text="Built to Elevate Your Remote Workforce"
-            speed={28}
-            caretHeightClass="h-10"
-            className="title-gradient font-display"
-          />
-        </h3>
-        <div className="max-w-3xl mx-auto"></div>
-      </motion.div>
+      {/* Key features merged into previous section to fit one viewport */}
 
       {/* Client types */}
       <motion.div
@@ -218,7 +211,7 @@ function HomeContent() {
             className="title-gradient font-display"
           />
         </h3>
-        <p className="text-text-muted mb-6">ReWorks currently specializes in healthcare, serving nursing homes, small practices, and home care agencies with HIPAA-compliant, client-facing, and backend remote staffing that saves millions on payroll without compromising quality. Our flexible model adapts to a wide range of industries and roles, delivering the same elite talent and personalized service wherever you operate.</p>
+        <p className="text-text-muted mb-8">HIPAA‑compliant remote teams for healthcare—client‑facing and backend—built for quality and savings.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
             <h4 className="font-semibold text-slate-900 mb-3">Key Use Cases</h4>
@@ -238,10 +231,10 @@ function HomeContent() {
                 className="title-gradient font-display"
               />
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
               <div className="p-3 rounded-xl">
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-3xl font-bold gradient-text">60%</span>
+                  <span className="text-3xl font-bold gradient-text">70%</span>
                   <span className="text-text-muted text-sm">Cost Reduction</span>
                 </div>
               </div>
@@ -251,7 +244,12 @@ function HomeContent() {
                   <span className="text-text-muted text-sm">Client Satisfaction</span>
                 </div>
               </div>
-              {/* Happy Clients removed per request */}
+              <div className="p-3 rounded-xl">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-3xl font-bold gradient-text">200+</span>
+                  <span className="text-text-muted text-sm">Happy Clients</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -295,28 +293,7 @@ function HomeContent() {
       {/* ReWorks Solutions – Your Outsourcing HR Partner (removed) */}
 
       {/* Stats Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8 }}
-        className="bg-gradient-to-r from-primary-blue/5 to-accent-blue/5 rounded-3xl p-8 md:p-12"
-      >
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
-          <div className="flex items-center justify-center gap-2">
-            <AnimatedCounter value={95} />
-            <span className="text-slate-700">Client Satisfaction</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <AnimatedCounter value={12} suffix="hrs" />
-            <span className="text-slate-700">Support Available</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <AnimatedCounter value={100} suffix="+" />
-            <span className="text-slate-700">Happy Clients</span>
-          </div>
-        </div>
-      </motion.div>
+      {/* Bottom stats section removed per request */}
 
       {/* Operational solutions across industries (removed) */}
 

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Linkedin, Instagram, Youtube, Facebook, Music2, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 
 const navigationLinks = [
   { label: "About", href: "/about" },
@@ -14,8 +14,11 @@ const navigationLinks = [
 ];
 
 const socialLinks = [
-  { name: "LinkedIn", href: "#", icon: Linkedin },
-  { name: "Twitter", href: "#", icon: Twitter },
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/reworks-solutions/posts/?feedView=all", icon: Linkedin },
+  { name: "Instagram", href: "https://www.instagram.com/moshe_sender/", icon: Instagram },
+  { name: "YouTube", href: "https://youtube.com/shorts/svVgPdOrnHo?feature=share", icon: Youtube },
+  { name: "TikTok", href: "https://www.tiktok.com/@reworkssolutions", icon: Music2 },
+  { name: "Facebook", href: "https://www.facebook.com/61571562601988/", icon: Facebook },
 ];
 
 export default function Footer() {

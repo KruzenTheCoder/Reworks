@@ -50,22 +50,19 @@ export default function Page() {
                   {/* Hours removed per requirements */}
                   <div className="rounded-xl p-5 bg-gradient-to-br from-slate-700 to-slate-900 text-white">
                     <h3 className="font-semibold">Coverage</h3>
-                    <p className="mt-1 opacity-90">South Africa</p>
+                    <p className="mt-1 opacity-90">South Africa & Philippines</p>
                   </div>
+                  <a
+                    href="https://wa.me/19299229429"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl p-5 bg-gradient-to-br from-green-600 to-green-700 text-white"
+                  >
+                    <h3 className="font-semibold">WhatsApp</h3>
+                    <p className="mt-1 opacity-90">+1 929-922-9429</p>
+                  </a>
                 </div>
-                <div className="mt-6 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    {/* IMPROVED: Use next/image for optimized badge rendering */}
-                    <Image
-                      src="/vercel.svg"
-                      alt="Uptime and hours tracked badge"
-                      width={32}
-                      height={32}
-                      sizes="(max-width:768px)100vw,(max-width:1200px)50vw,33vw"
-                      className="w-8 h-8"
-                    />
-                    <span className="text-sm text-slate-700">99.99% uptime</span>
-                  </div>
+                <div className="mt-6 flex items-center justify-end">
                   <Button href="#contact-form" variant="primary" size="md">Book a Call</Button>
                 </div>
               </div>

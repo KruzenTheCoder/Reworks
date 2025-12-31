@@ -28,6 +28,7 @@ export function Tabs({
         <button
           key={label}
           onClick={() => onTabChange(idx)}
+          onMouseEnter={() => onTabChange(idx)}
           className={clsx(
             "transition-all duration-200 border rounded-md",
             "px-4 py-3 text-sm font-medium",

@@ -101,7 +101,7 @@ function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: reduce ? 0.6 : 0.8, delay: 0.6 }}
             viewport={{ once: true }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-8 mb-20"
           >
             {/* Primary CTA - Orange gradient CTA to external Zoho form */}
             <motion.a
@@ -113,30 +113,12 @@ function FinalCTA() {
               className="group relative inline-flex items-center justify-center"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-8 py-4 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
+              <div className="relative flex items-center bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] text-white font-bold px-10 py-5 rounded-full shadow-2xl transition-all duration-300 group-hover:shadow-orange-400/40 overflow-hidden btn-shimmer">
                 <span className="text-lg">Start Hiring Now</span>
               </div>
             </motion.a>
             
-            {/* Secondary CTA - Glass effect */}
-            <motion.a
-              href="#demo"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative inline-flex items-center justify-center"
-            >
-              <div className="absolute inset-0 bg-white/20 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative flex items-center px-8 py-4 rounded-full border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white font-semibold shadow-xl transition-all duration-300 group-hover:bg-white/20 group-hover:border-white/50 group-hover:shadow-white/20">
-                <span className="text-lg">Watch Demo</span>
-              </div>
-              {/* Glass shine effect */}
-              <motion.div
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none"
-                style={{
-                  background: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.5), transparent 70%)',
-                }}
-              />
-            </motion.a>
+            {/* Secondary CTA removed per request */}
           </motion.div>
 
           {/* Alternative styled buttons if you prefer using the Button component */}
@@ -182,12 +164,13 @@ function FinalCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 max-w-6xl mx-auto"
           >
             {[
               { icon: Zap, title: "Setup Time", desc: "Within seven business days" },
               { icon: Shield, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
-              { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" }
+              { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" },
+              { icon: Shield, title: "Compliance", desc: "HIPAA Compliant", image: "https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png" }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -201,9 +184,13 @@ function FinalCTA() {
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30 text-center">
                   {/* Static icon (no hover animation) */}
-                  <div className="mb-3 mx-auto" style={{ color: '#ff9442' }}>
-                    <item.icon className="w-8 h-8 mx-auto" />
-                  </div>
+                  {item.image ? (
+                    <img src={item.image} alt="HIPAA" className="w-10 h-10 mx-auto mb-3 object-contain" />
+                  ) : (
+                    <div className="mb-3 mx-auto" style={{ color: '#ff9442' }}>
+                      <item.icon className="w-8 h-8 mx-auto" />
+                    </div>
+                  )}
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/80 text-sm">{item.desc}</p>
                 </div>
