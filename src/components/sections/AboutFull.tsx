@@ -10,7 +10,7 @@ import TypewriterText from "../ui/TypewriterText"
 
 // External portrait images mapped by display name
 const portraits: Record<string, string> = {
-  "Moshe Sender": "https://i.ibb.co/MzbKKL1/Moshe-Sender.png",
+  "Moshe Sender": "https://i.ibb.co/WWYbTDBf/Moshe-Sender-Dark-Background.png",
   "Faigy Weinstock": "https://i.ibb.co/WmznrD1/Faigy-Welnstock.webp",
   // Leadership additions
   "Eli Schleifer": "https://i.ibb.co/60MQWNwH/Eli-Schleifer.webp",
@@ -26,16 +26,16 @@ const portraits: Record<string, string> = {
   "Xandria Erasmus": "https://i.ibb.co/k6Vgv7hV/Xandria-Erasmus.png",
   "Ken Aquitan": "https://i.ibb.co/1fZxGVHT/Ken-Aquitan.png",
   "Sarah Tauber": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
-  "Chane du Toit": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
-  "Subhaana Malek": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Chane du Toit": "https://i.ibb.co/NnZ1PSn3/Chane-1.png",
+  "Subhaana Malek": "https://i.ibb.co/QFHCJrqK/Subhanna.png",
   // Recruiters
   "Janique Bruyns": "https://i.ibb.co/9mDdb4b7/Janique-Bruyns.png",
   "Kaylin Lavelot": "https://i.ibb.co/spG0whnk/Kaylin-Lavelot.png",
   "Kayleigh Pontinhas": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Kayleigh Pontin": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
-  "Alexandra May": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
-  "Rachelle Visser": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Alexandra May": "https://i.ibb.co/rG822sH0/Alexandra.png",
+  "Rachelle Visser": "https://i.ibb.co/5hV3HHB4/Rachelle.png",
   "Nicole Erasmus": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
 };
 
