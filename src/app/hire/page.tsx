@@ -40,12 +40,13 @@ export default function HirePage() {
 
         <div className="mt-10">
           <div className="luxury-card glass-card rounded-2xl p-4 md:p-6 overflow-hidden">
-            <div className="aspect-video w-full rounded-xl overflow-hidden bg-white">
+            <div className="w-full rounded-xl overflow-hidden bg-white/50 backdrop-blur-sm">
               <iframe
                 title="ReWorks Hiring Form"
-                src="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU"
-                className="w-full h-[70vh] border-0"
+                src="https://forms.zohopublic.com/reworksolutionsllc1/form/ReworksSolutionsHiringRequestForm/formperma/nNDuzrzZFylKkBDPU0a5ZcWN9HBqeAL_cClLs35VrxU?zf_rszfm=1"
+                className="w-full h-[85vh] md:h-[75vh] border-0 mix-blend-multiply opacity-95"
                 loading="lazy"
+                style={{ filter: 'contrast(105%) saturate(95%)' }}
               />
             </div>
           </div>

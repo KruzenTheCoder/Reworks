@@ -187,7 +187,7 @@ function FinalCTA() {
                   {item.image ? (
                     <img src={item.image} alt="HIPAA" className="w-10 h-10 mx-auto mb-3 object-contain" />
                   ) : (
-                    <div className="mb-3 mx-auto" style={{ color: '#ff9442' }}>
+                    <div className="mb-3 mx-auto text-white">
                       <item.icon className="w-8 h-8 mx-auto" />
                     </div>
                   )}
