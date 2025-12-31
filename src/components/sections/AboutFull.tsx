@@ -11,7 +11,7 @@ import TypewriterText from "../ui/TypewriterText"
 // External portrait images mapped by display name
 const portraits: Record<string, string> = {
   "Moshe Sender": "https://i.ibb.co/hxrkbZcm/Moshe-Sender-Dark-2.png",
-  "Faigy Weinstock": "https://i.ibb.co/7dmkS1tW/Faigy-dark.png",
+  "Faigy Weinstock": "https://i.ibb.co/6JY7hCMg/Faigy-Dark-2.png",
   // Leadership additions
   "Eli Schleifer": "https://i.ibb.co/60MQWNwH/Eli-Schleifer.webp",
   "Mindy Schiff": "https://i.ibb.co/S7KDWxNK/Mindy-Schiff.webp",
