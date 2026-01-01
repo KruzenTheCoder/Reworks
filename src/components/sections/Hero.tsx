@@ -147,10 +147,10 @@ export default function Hero() {
               transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6"
             >
-                <Button href="contact" variant="luxury" size="lg">
+                <Button href="contact" variant="luxury" size="lg" className="min-w-[340px]">
                   Schedule Your Free Consultation
                 </Button>
-                <Button href="solutions" variant="ghost" size="lg">
+                <Button href="solutions" variant="ghost" size="lg" className="min-w-[340px]">
                   Explore Solutions
                 </Button>
               </motion.div>

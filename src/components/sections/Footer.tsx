@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Linkedin, Instagram, Youtube, Facebook, Music2, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { Linkedin, Instagram, Youtube, Facebook, Music2, Mail, Phone, MapPin, ArrowUpRight, MessageCircle } from 'lucide-react';
 
 const navigationLinks = [
   { label: "About", href: "/about" },
@@ -162,6 +162,18 @@ export default function Footer() {
                     <Phone className="relative w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
                   </div>
                   <span className="group-hover:translate-x-0.5 transition-transform">+1 845-210-6070</span>
+                </a>
+                <a 
+                  href="https://wa.me/19299229429" 
+                  className="flex items-center gap-3 text-sm font-medium text-gray-300 hover:text-white transition-all duration-300 group"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="relative w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition-colors overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <MessageCircle className="relative w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" />
+                  </div>
+                  <span className="group-hover:translate-x-0.5 transition-transform">+1 929-922-9429</span>
                 </a>
                 {/* Physical address removed per requirements */}
               </div>

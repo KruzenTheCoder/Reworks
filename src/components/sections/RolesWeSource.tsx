@@ -1,7 +1,7 @@
 "use client";
 import { motion, Variants } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
-import { User, TrendingUp, Target, Handshake, Rocket, BarChart3 } from "lucide-react";
+import { User, TrendingUp, Target, Handshake, Rocket, BarChart3, FileCheck, Calculator, Users, Monitor, Activity, Hammer, Briefcase, Video, Smartphone, PieChart, FileText, Headphones } from "lucide-react";
 import TypewriterText from "../ui/TypewriterText";
 
 const roles = [
@@ -11,6 +11,18 @@ const roles = [
   { title: "Customer Success", desc: "Retention-focused support champions.", icon: Handshake },
   { title: "Marketing Ops", desc: "Automation and campaign execution.", icon: Rocket },
   { title: "Data Analyst", desc: "Insights from data to decisions.", icon: BarChart3 },
+  { title: "Medical Biller", desc: "Accurate coding and claims processing.", icon: FileCheck },
+  { title: "Bookkeeper", desc: "Financial record keeping and reconciliation.", icon: Calculator },
+  { title: "Recruiter", desc: "Talent acquisition and candidate screening.", icon: Users },
+  { title: "IT Support", desc: "Technical assistance and system maintenance.", icon: Monitor },
+  { title: "Healthcare Intake", desc: "Patient coordination and insurance verification.", icon: Activity },
+  { title: "Construction Estimator", desc: "Project cost analysis and bidding.", icon: Hammer },
+  { title: "HR Coordinator", desc: "Employee relations and policy management.", icon: Briefcase },
+  { title: "Video Editor / Animator", desc: "Creative visual content production.", icon: Video },
+  { title: "Social Media Manager", desc: "Brand presence and community engagement.", icon: Smartphone },
+  { title: "Finance Manager", desc: "Strategic financial planning and analysis.", icon: PieChart },
+  { title: "Technical Writer", desc: "Documentation and process mapping.", icon: FileText },
+  { title: "Call Center Agent", desc: "Inbound/outbound customer support.", icon: Headphones },
 ];
 
 const containerVariants: Variants = {
@@ -53,7 +65,7 @@ const statsVariants: Variants = {
 
 export default function RolesWeSource() {
   return (
-    <MotionSection className="relative bg-gradient-to-br from-gray-50 via-blue-50/40 to-indigo-50/60 pt-0 pb-24 overflow-hidden" variant="fadeUp" viewportAmount={0}>
+    <MotionSection className="relative bg-transparent pt-0 pb-24 overflow-hidden" variant="fadeUp" viewportAmount={0}>
       {/* Background Elements */}
       <div className="absolute inset-0">
         <motion.div
@@ -91,24 +103,7 @@ export default function RolesWeSource() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <motion.div
-            variants={statsVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="inline-flex items-center mb-6 px-8 py-4 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/20"
-          >
-            <motion.span 
-              className="text-4xl lg:text-5xl font-bold gradient-text font-display"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ duration: 0.8, type: "spring", stiffness: 150 }}
-              viewport={{ once: true }}
-            >
-              86%
-            </motion.span>
-            <span className="ml-3 text-xl text-text-muted font-medium">average savings</span>
-          </motion.div>
+
           
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
             <TypewriterText
@@ -179,6 +174,16 @@ export default function RolesWeSource() {
           ))}
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <p className="text-xl text-text-muted font-medium">and many more roles available</p>
+        </motion.div>
+
         {/* Bottom Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -187,7 +192,7 @@ export default function RolesWeSource() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
             {[
               { number: "7 days", label: "Average Time to Hire" },
               { number: "98%", label: "Client Retention Rate" }

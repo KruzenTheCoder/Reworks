@@ -156,7 +156,7 @@ function HomeContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="relative"
+        className="relative pt-24"
       >
         <div className="text-center max-w-4xl mx-auto">
           <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
@@ -181,7 +181,7 @@ function HomeContent() {
             </div>
           ))}
         </div>
-        <div className="text-center mt-8">
+        <div className="text-center mt-48">
           <h3 className="text-2xl md:text-3xl font-bold title-gradient font-display tracking-tight">
             <TypewriterText 
               text="Built to Elevate Your Remote Workforce"
@@ -234,7 +234,7 @@ function HomeContent() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-3 rounded-xl text-center">
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <span className="text-3xl font-bold gradient-text">60%</span>
+                  <span className="text-3xl font-bold gradient-text">70%</span>
                   <span className="text-text-muted text-xs sm:text-sm">Cost Reduction</span>
                 </div>
               </div>

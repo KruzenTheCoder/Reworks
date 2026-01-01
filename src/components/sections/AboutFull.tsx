@@ -3,7 +3,7 @@ import Button from '@/components/common/Button'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef, memo } from 'react'
 import Image from 'next/image'
-import { User, Target, Users, Settings } from 'lucide-react'
+import { User, Target, Users, Settings, Linkedin } from 'lucide-react'
 import TypewriterText from "../ui/TypewriterText"
 
 // Using shared TypewriterText to ensure text always renders
@@ -77,7 +77,6 @@ function AboutFull() {
       {/* Intro */}
       <section className="relative overflow-hidden">
         {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-100" />
         <motion.div
           className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-indigo-600/10 rounded-full blur-3xl will-change-transform"
           whileInView={{
@@ -96,7 +95,7 @@ function AboutFull() {
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-20">
           <motion.div 
             ref={introRef}
-            className="max-w-3xl"
+            className="max-w-4xl mx-auto text-center"
           >
             <motion.h1 
               className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight"
@@ -123,7 +122,7 @@ function AboutFull() {
       </section>
 
       {/* The people behind your success */}
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section className="py-20 bg-transparent relative overflow-hidden">
         {/* Subtle background animation */}
         <motion.div
           className="absolute bottom-20 left-20 w-80 h-80 bg-gradient-to-r from-purple-400/5 to-pink-600/5 rounded-full blur-3xl will-change-transform"
@@ -141,7 +140,7 @@ function AboutFull() {
 
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-10">
           <motion.div 
-            className="max-w-3xl"
+            className="max-w-4xl mx-auto text-center"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -171,15 +170,16 @@ function AboutFull() {
                 name: "Moshe Sender",
                 role: "CEO",
                 bio: "Moshe connects businesses with growth opportunities, leveraging strategic relationships and keen insight. He goes beyond hiring, recognizing how the right talent and ambitious goals drive transformation.",
-                quote: "ReWorks is not just about providing employees – it's about building your crew, understanding where your company is going, and helping you grow bigger, faster. That's our mission."
-                
+                quote: "ReWorks is not just about providing employees – it's about building your crew, understanding where your company is going, and helping you grow bigger, faster. That's our mission.",
+                linkedin: "https://www.linkedin.com/in/moshe-sender-70b11b267?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
               },
               {
                 name: "Faigy Weinstock",
                 role: "COO",
                 bio: "Faigy brings hands-on experience in managing remote teams, with deep insight into seamless workflows. She perfects operations through strategic team building and process optimization.",
-                quote: "I have hands-on experience leading remote operations. I know what drives and motivates people. This isn't about matching resumes – I invest deeply in every business I work with."
-  }
+                quote: "I have hands-on experience leading remote operations. I know what drives and motivates people. This isn't about matching resumes – I invest deeply in every business I work with.",
+                linkedin: "https://www.linkedin.com/in/faigy-weinstock-739a87318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+              }
             ].map((leader, index) => (
               <motion.div
                 key={leader.name}
@@ -218,12 +218,15 @@ function AboutFull() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 + 0.3 }}
                 >
-                  <div
-                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${getGradientForName(leader.name)} flex items-center justify-center ring-1 ring-gray-200 shadow-lg text-white font-bold text-base`}
-                    aria-label={`${leader.name} avatar`}
+                  <a
+                    href={leader.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-12 h-12 rounded-full bg-[#0077b5] flex items-center justify-center ring-1 ring-gray-200 shadow-lg text-white hover:scale-110 transition-transform"
+                    aria-label={`${leader.name} LinkedIn`}
                   >
-                    {getInitials(leader.name)}
-                  </div>
+                    <Linkedin className="w-6 h-6" />
+                  </a>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900">
                       {leader.name}
@@ -299,7 +302,7 @@ function AboutFull() {
 
           {/* Sales Team */}
           <motion.div 
-            className="mt-16"
+            className="mt-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -385,7 +388,7 @@ function AboutFull() {
 
           {/* Management Team */}
           <motion.div 
-            className="mt-16"
+            className="mt-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -474,7 +477,7 @@ function AboutFull() {
 
           {/* Recruiters */}
           <motion.div 
-            className="mt-16"
+            className="mt-16 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -560,7 +563,7 @@ function AboutFull() {
 
           {/* Mission & Values */}
           <motion.div 
-            className="mt-20"
+            className="mt-20 text-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -580,7 +583,7 @@ function AboutFull() {
               />
             </motion.h3>
             <motion.p 
-              className="mt-3 text-gray-700 max-w-3xl leading-relaxed"
+              className="mt-3 text-gray-700 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

@@ -1,6 +1,7 @@
 "use client";
 import { motion, Variants, useInView, useReducedMotion } from "framer-motion";
 import MotionSection from "../ui/MotionSection";
+import Button from "../common/Button";
 import { useRef, memo } from "react";
 import TypewriterText from "../ui/TypewriterText";
 
@@ -367,12 +368,9 @@ function Process() {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <button className="relative group px-8 py-4 bg-gradient-to-r from-primary-blue to-accent-blue text-white rounded-full font-bold shadow-xl hover:shadow-2xl transition-all duration-300">
-              <span className="relative z-10">SCHEDULE A CONSULT</span>
-              <motion.div
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-accent-blue to-primary-blue opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-            </button>
+            <Button href="/contact" variant="primary" size="lg" className="rounded-full shadow-xl hover:shadow-2xl">
+              SCHEDULE A CONSULT
+            </Button>
           </motion.div>
         </motion.div>
       </div>

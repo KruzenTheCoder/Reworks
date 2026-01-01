@@ -5,6 +5,7 @@ import Button from '@/components/common/Button'
 import TypewriterText from '@/components/ui/TypewriterText'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { MessageCircle } from 'lucide-react'
 // FIX: Remove client-side metadata export (only allowed in server files)
 
 export default function Page() {
@@ -12,7 +13,6 @@ export default function Page() {
     <main>
       {/* Hero */}
       <MotionSection className="relative overflow-hidden" variant="fadeUp">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-slate-100" />
         <div className="relative max-w-7xl mx-auto px-6 md:px-8 lg:px-10 py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
@@ -56,10 +56,13 @@ export default function Page() {
                     href="https://wa.me/19299229429"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-xl p-5 bg-gradient-to-br from-green-600 to-green-700 text-white"
+                    className="rounded-xl p-5 bg-gradient-to-br from-blue-600 to-accent-blue text-white"
                   >
-                    <h3 className="font-semibold">WhatsApp</h3>
-                    <p className="mt-1 opacity-90">+1 929-922-9429</p>
+                    <div className="flex items-center gap-2 mb-1">
+                      <MessageCircle className="w-5 h-5" />
+                      <h3 className="font-semibold">WhatsApp</h3>
+                    </div>
+                    <p className="opacity-90">+1 929-922-9429</p>
                   </a>
                 </div>
                 <div className="mt-6 flex items-center justify-end">
@@ -72,7 +75,7 @@ export default function Page() {
       </MotionSection>
 
       {/* Contact Form */}
-      <section id="contact-form" className="py-24 bg-white">
+      <section id="contact-form" className="py-24 bg-transparent">
         <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">

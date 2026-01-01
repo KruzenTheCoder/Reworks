@@ -83,7 +83,7 @@ export default function Testimonials() {
   const businessesLoop = useMemo(() => [...businesses, ...businesses], [businesses]);
 
   return (
-    <MotionSection className="relative bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50 py-24 overflow-hidden" variant="fadeUp">
+    <MotionSection className="relative bg-transparent py-24 overflow-hidden" variant="fadeUp">
       <div className="relative z-10 section-wrap">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -95,6 +95,7 @@ export default function Testimonials() {
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
             <TypewriterText text="Trusted By" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
           </h2>
+          <p className="text-xl text-text-muted">Partners that trust in us.</p>
         </motion.div>
 
         <div className="relative z-10 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden mb-10">
@@ -110,14 +111,14 @@ export default function Testimonials() {
                 href={b.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-w-[240px] sm:min-w-[300px] glass-card rounded-2xl p-5 flex items-center gap-3 hover:-translate-y-1 transition-all duration-300"
+                className="min-w-[250px] aspect-square glass-card rounded-3xl p-8 flex flex-col items-center justify-center gap-6 hover:-translate-y-2 transition-all duration-300"
               >
                 <img
-                  src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=64`}
+                  src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
                   alt={`${b.name} logo`}
-                  className="w-8 h-8 rounded"
+                  className="w-20 h-20 rounded-xl shadow-sm"
                 />
-                <span className="font-semibold text-text-base">{b.name}</span>
+                <span className="font-bold text-xl text-text-base text-center">{b.name}</span>
               </a>
             ))}
           </motion.div>
