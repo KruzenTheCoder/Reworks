@@ -211,7 +211,7 @@ export default function Footer() {
                 <img
                   src="https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png"
                   alt="HIPAA Compliant"
-                  className="relative h-4 w-auto object-contain brightness-125 contrast-110 saturate-150 drop-shadow"
+                  className="relative h-10 w-auto object-contain brightness-125 contrast-110 saturate-150 drop-shadow"
                   loading="lazy"
                   referrerPolicy="no-referrer"
                 />

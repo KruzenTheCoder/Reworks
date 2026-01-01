@@ -369,66 +369,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
             ))}
           </div>
 
-          {/* Progress Bar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
-            className="absolute bottom-1/4 w-64 text-center"
-            style={{ willChange: "transform, opacity" }}
-            layout={false}
-          >
-            <motion.p
-              className="text-primary-blue font-semibold text-base mb-3 tracking-wide"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              style={{ willChange: "opacity" }}
-              layout={false}
-            >
-              Loading Excellence...
-            </motion.p>
 
-            {/* Progress Bar Container */}
-            <div className="relative h-1.5 bg-gray-200/50 rounded-full overflow-hidden backdrop-blur-sm">
-              <motion.div
-                className="absolute inset-y-0 left-0 bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue rounded-full"
-                initial={{ width: "0%" }}
-                animate={{
-                  width: `${progress}%`,
-                }}
-                transition={{ duration: 0.3 }}
-                style={{ willChange: "width, opacity" }}
-                layout={false}
-              >
-                {/* Shimmer on progress bar */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
-                  animate={{
-                    x: ["-100%", "200%"],
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{ willChange: "transform, opacity" }}
-                  layout={false}
-                />
-              </motion.div>
-            </div>
-
-            {/* Percentage */}
-            <motion.p
-              className="text-xs text-primary-blue/60 font-medium mt-2"
-              key={progress}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              style={{ willChange: "opacity" }}
-              layout={false}
-            >
-              {progress}%
-            </motion.p>
-          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -168,9 +168,14 @@ function FinalCTA() {
           >
             {[
               { icon: Zap, title: "Setup Time", desc: "Within seven business days" },
-              { icon: Shield, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
+              { icon: ShieldCheck, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
               { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" },
-              { icon: ShieldCheck, title: "Compliance", desc: "HIPAA Compliant" }
+              { 
+                imgSrc: "https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png", 
+                title: "Compliance", 
+                desc: "HIPAA Compliant",
+                isImage: true 
+              }
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -182,10 +187,19 @@ function FinalCTA() {
                 className="relative group"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-white/5 rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30 text-center">
-                  {/* Static icon (no hover animation) */}
-                  <div className="mb-3 mx-auto text-[#ff9442]">
-                    <item.icon className="w-8 h-8 mx-auto" />
+                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl p-6 transition-all duration-300 group-hover:bg-white/15 group-hover:border-white/30 text-center h-full flex flex-col justify-center">
+                  {/* Icon or Image */}
+                  <div className="mb-3 mx-auto flex items-center justify-center h-10 w-10">
+                    {item.isImage ? (
+                      <img 
+                        src={item.imgSrc} 
+                        alt={item.title} 
+                        className="h-full w-full object-contain brightness-0 invert" 
+                      />
+                    ) : (
+                      // @ts-ignore
+                      <item.icon className="w-8 h-8 text-[#ff9442]" />
+                    )}
                   </div>
                   <h3 className="font-bold text-lg mb-2">{item.title}</h3>
                   <p className="text-white/80 text-sm">{item.desc}</p>

@@ -111,14 +111,17 @@ export default function Testimonials() {
                 href={b.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-w-[250px] aspect-square glass-card rounded-3xl p-8 flex flex-col items-center justify-center gap-6 hover:-translate-y-2 transition-all duration-300"
+                className="min-w-[200px] aspect-square glass-card rounded-3xl p-6 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
               >
+                {/* Animated shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                
                 <img
                   src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
                   alt={`${b.name} logo`}
-                  className="w-20 h-20 rounded-xl shadow-sm"
+                  className="w-16 h-16 object-contain rounded-xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
                 />
-                <span className="font-bold text-xl text-text-base text-center">{b.name}</span>
+                <span className="font-bold text-lg text-text-base text-center leading-tight">{b.name}</span>
               </a>
             ))}
           </motion.div>

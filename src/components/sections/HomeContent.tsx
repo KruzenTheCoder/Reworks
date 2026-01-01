@@ -13,7 +13,7 @@ import TypewriterText from "../ui/TypewriterText";
 const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: string }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
     if (isInView) {
@@ -24,7 +24,11 @@ const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: stri
         if (!startTime) startTime = currentTime;
         const progress = Math.min((currentTime - startTime) / duration, 1);
         
-        setCount(Math.floor(progress * value));
+        // Easing function for smooth animation
+        const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
+        const easedProgress = easeOutQuart(progress);
+        
+        setCount(Math.floor(easedProgress * value));
         
         if (progress < 1) {
           requestAnimationFrame(animate);
@@ -36,7 +40,7 @@ const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: stri
   }, [isInView, value]);
 
   return (
-    <span ref={ref} className="font-bold text-4xl gradient-text">
+    <span ref={ref} className="font-bold text-4xl gradient-text inline-block min-w-[3ch]">
       {count}{suffix}
     </span>
   );
@@ -158,7 +162,10 @@ function HomeContent() {
         transition={{ duration: 0.8 }}
         className="relative pt-24"
       >
-        <div className="text-center max-w-4xl mx-auto">
+        {/* Subtle orange glow for this section only */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[60vh] bg-orange-400/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+        
+        <div className="text-center max-w-4xl mx-auto relative z-10">
           <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
             <TypewriterText 
               text="ReWorks Delivers More Than Staffing"
@@ -169,15 +176,19 @@ function HomeContent() {
           </h3>
           <p className="text-text-muted mb-6">Premium offshore talent, managed end‑to‑end. No compromise.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 relative z-10">
           {[
             { title: "Carefully Selected Talent Pool", text: "Top 1% hires. Native English. Neutral accents." },
             { title: "Proactive Team Management", text: "Live tracking. Constant communication. Dedicated coaching." },
             { title: "Ongoing Client Support", text: "Seamless onboarding. Scale-ready. Partnership‑driven." }
           ].map((item) => (
-            <div key={item.title} className="luxury-card glass-card rounded-3xl p-9 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl">
-              <h4 className="font-semibold title-gradient font-display mb-3">{item.title}</h4>
-              <p className="text-text-muted text-sm">{item.text}</p>
+            <div key={item.title} className="luxury-card glass-card rounded-3xl p-9 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative overflow-hidden group hover:border-[#ff881e] hover:shadow-[0_10px_40px_-10px_rgba(255,136,30,0.2)] transition-all duration-300">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#ff881e]" />
+              {/* Add orange shimmer effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ff881e]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <h4 className="font-semibold title-gradient font-display mb-3 relative z-10">{item.title}</h4>
+              <p className="text-text-muted text-sm relative z-10">{item.text}</p>
             </div>
           ))}
         </div>
@@ -234,19 +245,19 @@ function HomeContent() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="p-3 rounded-xl text-center">
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <span className="text-3xl font-bold gradient-text">60%</span>
+                  <AnimatedCounter value={60} suffix="%" />
                   <span className="text-text-muted text-xs sm:text-sm">Cost Reduction</span>
                 </div>
               </div>
               <div className="p-3 rounded-xl text-center">
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <span className="text-3xl font-bold gradient-text">98%</span>
+                  <AnimatedCounter value={98} suffix="%" />
                   <span className="text-text-muted text-xs sm:text-sm">Client Satisfaction</span>
                 </div>
               </div>
               <div className="p-3 rounded-xl text-center">
                 <div className="flex flex-col items-center justify-center gap-1">
-                  <span className="text-3xl font-bold gradient-text">200+</span>
+                  <AnimatedCounter value={200} suffix="+" />
                   <span className="text-text-muted text-xs sm:text-sm">Happy Clients</span>
                 </div>
               </div>
