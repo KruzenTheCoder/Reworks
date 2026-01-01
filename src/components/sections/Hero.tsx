@@ -165,7 +165,7 @@ export default function Hero() {
           >
               {[
                 { number: "30% – 40%", label: "Increased Productivity" },
-                { number: "Up to 70%", label: "Saving on Payroll" },
+                { number: "Up to 60%", label: "Saving on Payroll" },
                 { number: "98%", label: "Retention Rate" }
               ].map((stat, index) => (
                 <motion.div
