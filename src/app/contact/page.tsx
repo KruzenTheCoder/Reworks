@@ -99,7 +99,7 @@ export default function Page() {
                 <ul className="mt-4 space-y-2 text-blue-900/80 text-sm">
                   <li>• A specialist reaches out within 1 business day</li>
                   {/* Removed salaries and timelines bullet per requirements */}
-                  <li>• You meet vetted candidates and interview quickly</li>
+                  <li>• You meet vetted candidates and interview</li>
                 </ul>
               </div>
                   <div className="rounded-2xl bg-slate-50 border border-slate-200 p-6">

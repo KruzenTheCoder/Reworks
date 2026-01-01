@@ -3,7 +3,6 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/sections/Header";
 import Footer from "@/components/sections/Footer";
-import ClientWrapper from "@/components/ui/ClientWrapper";
 import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
 import { Suspense } from "react";
@@ -84,23 +83,21 @@ export default function RootLayout({
         <ClientScrollTop />
         <ColorBloom />
         
-        <ClientWrapper>
-          {/* Fixed header */}
-          <Header />
+        {/* Fixed header */}
+        <Header />
+        
+        {/* Main content wrapper */}
+        <div className="relative">
+          {/* Invisible spacer for fixed header - prevents content from hiding behind it */}
+          <div className="h-[72px] pointer-events-none" aria-hidden="true" />
           
-          {/* Main content wrapper */}
-          <div className="relative">
-            {/* Invisible spacer for fixed header - prevents content from hiding behind it */}
-            <div className="h-[72px] pointer-events-none" aria-hidden="true" />
-            
-            {/* Main content */}
-            <main className="relative z-0">
-              {children}
-            </main>
-          </div>
-          
-          <Footer />
-        </ClientWrapper>
+          {/* Main content */}
+          <main className="relative z-0">
+            {children}
+          </main>
+        </div>
+        
+        <Footer />
         
         {/* Live chat removed; use email contact in footer and contact page */}
 

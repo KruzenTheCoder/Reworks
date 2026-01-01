@@ -193,8 +193,8 @@ function FinalCTA() {
                     {item.isImage ? (
                       <img 
                         src={item.imgSrc} 
-                        alt={item.title} 
-                        className="h-full w-full object-contain brightness-0 invert" 
+                        alt="Hipaa-Logo" 
+                        className="h-full w-full object-contain" 
                       />
                     ) : (
                       // @ts-ignore
