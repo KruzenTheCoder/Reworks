@@ -36,7 +36,7 @@ const portraits: Record<string, string> = {
   "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
   "Alexandra May": "https://i.ibb.co/rG822sH0/Alexandra.png",
   "Rachelle Visser": "https://i.ibb.co/5hV3HHB4/Rachelle.png",
-  "Nicole Erasmus": "https://i.ibb.co/dJfzvKjk/Sarah-Tauber-1.png",
+  "Nicole Erasmus": "https://i.ibb.co/8DRMxLfn/Nicole.png",
 };
 
 const getPortraitUrl = (name: string): string | undefined => portraits[name];

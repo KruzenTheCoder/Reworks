@@ -171,7 +171,7 @@ function FinalCTA() {
               { icon: ShieldCheck, title: "Flexible Contracts", desc: "No lock-in, terminate anytime" },
               { icon: Globe, title: "Coverage", desc: "South Africa & Philippines" },
               { 
-                imgSrc: "https://i.ibb.co/jkpyJ3FB/hipaa-compliant-logo-png-seeklogo-488323-1.png", 
+                imgSrc: "https://i.ibb.co/RpPXGC87/Hipaa-Logo.png", 
                 title: "Compliance", 
                 desc: "HIPAA Compliant",
                 isImage: true 
