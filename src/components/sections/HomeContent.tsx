@@ -222,7 +222,7 @@ function HomeContent() {
             className="title-gradient font-display"
           />
         </h3>
-        <p className="text-text-muted mb-8">HIPAA‑compliant remote teams for healthcare—client‑facing and backend—built for quality and savings.</p>
+        <p className="text-text-muted mb-8 text-center max-w-3xl mx-auto">HIPAA‑compliant remote teams for healthcare—client‑facing and backend—built for quality and savings.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
             <h4 className="font-semibold text-slate-900 mb-3">Key Use Cases</h4>

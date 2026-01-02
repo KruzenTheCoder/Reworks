@@ -79,7 +79,7 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-6 md:px-8 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div className="lg:col-span-2">
-              <div className="rounded-2xl border border-gray-200 shadow-sm p-8">
+              <div className="rounded-2xl border border-gray-200 shadow-sm p-8 bg-white">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Tell us about your hiring needs</h2>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <input className="w-full border border-gray-200 rounded-lg px-4 py-3" placeholder="Full name" />

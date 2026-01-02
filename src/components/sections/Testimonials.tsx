@@ -74,11 +74,19 @@ export default function Testimonials() {
   const businesses = useMemo(() => ([
     { name: 'StaffLion', href: 'https://stafflion.com/' },
     { name: 'Apex ABA', href: 'https://www.apexaba.com/' },
-    { name: 'United Supply Corp', href: 'https://www.unitedsupplycorp.com/' },
+    { name: 'United Supply Corp', href: 'https://www.unitedsupplycorp.com/?srsltid=AfmBOopzqNnhFl4XWb5Xn57wvRiddrvW9nqzn-CKFMVN-Q_RpydpJBjh' },
     { name: 'FAFHC', href: 'https://fafhc.com/' },
     { name: 'Autumn Lake Healthcare', href: 'https://autumnlakehealthcare.com/' },
     { name: 'Ruby ABA', href: 'https://www.rubyaba.com/' },
     { name: '4MD Medical', href: 'https://4mdmedical.com/' },
+    { name: 'Woodmere Financial', href: 'https://woodmerefinancial.com/' },
+    { name: 'Quick Fund Partner', href: 'https://quickfundpartnerny.com/' },
+    { name: 'American Physiatry', href: 'https://americanphysiatry.com/' },
+    { name: 'Intellistars ABA', href: 'https://www.intellistarsaba.com/' },
+    { name: 'The Rite Care', href: 'https://theritecare.com/' },
+    { name: 'Kennedy ABA', href: 'https://www.kennedyaba.com/' },
+    { name: 'Fame on Central', href: 'https://fameoncentral.com/' },
+    { name: 'RXD Co', href: 'https://rxdco.com/' },
   ]), []);
   const businessesLoop = useMemo(() => [...businesses, ...businesses], [businesses]);
 
@@ -102,7 +110,7 @@ export default function Testimonials() {
           <motion.div
             className="flex gap-6 px-6"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 50, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
             style={{ willChange: 'transform', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
           >
             {businessesLoop.map((b, idx) => (

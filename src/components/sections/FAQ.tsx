@@ -98,16 +98,16 @@ const TypewriterMessage = ({ text, onComplete }: { text: string, onComplete?: ()
   }, [currentIndex, text, onComplete]);
 
   return (
-    <span>
+    <p className="text-sm leading-relaxed">
       {displayedText}
       {currentIndex < text.length && (
         <motion.span
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.5, repeat: Infinity }}
-          className="inline-block w-0.5 h-4 bg-blue-600 ml-0.5"
+          className="inline-block w-0.5 h-4 bg-blue-600 ml-0.5 align-middle"
         />
       )}
-    </span>
+    </p>
   );
 };
 
@@ -565,9 +565,6 @@ function FAQ() {
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Or you can make it happen with ReWorks Solutions.
-          </p>
-          <p className="text-sm text-blue-600 font-medium mb-6">
-            Show all FAQs
           </p>
           <div className="text-center">
             <Button href="contact" variant="primary" size="lg">
