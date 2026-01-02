@@ -119,10 +119,10 @@ export default function Testimonials() {
                 href={b.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-w-[200px] aspect-square glass-card rounded-3xl p-6 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
+                className="min-w-[200px] aspect-square rounded-3xl p-6 flex flex-col items-center justify-center gap-4 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group bg-gradient-to-br from-white/80 via-white/40 to-white/20 backdrop-blur-xl border border-white/60 shadow-lg hover:shadow-2xl hover:from-white/90 hover:to-white/40"
               >
                 {/* Animated shine effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 <img
                   src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
