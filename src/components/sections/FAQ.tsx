@@ -56,51 +56,51 @@ interface Message {
 // Typewriter effect for bot messages — smoothed with requestAnimationFrame
 const TypewriterMessage = ({ text, onComplete }: { text: string, onComplete?: () => void }) => {
   const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const rafIdRef = useRef<number | null>(null);
-  const lastTimeRef = useRef<number | null>(null);
-  const accumulatorRef = useRef<number>(0);
-  const intervalRef = useRef<number>(24); // ms per character
-
+  
   useEffect(() => {
-    const loop = (now: number) => {
-      if (lastTimeRef.current == null) {
-        lastTimeRef.current = now;
-        rafIdRef.current = requestAnimationFrame(loop);
-        return;
-      }
-      const dt = now - lastTimeRef.current;
-      lastTimeRef.current = now;
-      accumulatorRef.current += dt;
+    let index = 0;
+    let rafId: number;
+    let lastTime = Date.now();
+    const interval = 20; // ms per character - slightly faster
 
-      while (accumulatorRef.current >= intervalRef.current) {
-        accumulatorRef.current -= intervalRef.current;
-        if (currentIndex < text.length) {
-          setDisplayedText(prev => prev + text[currentIndex]);
-          setCurrentIndex(prev => prev + 1);
-        } else {
-          if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-          rafIdRef.current = null;
-          if (onComplete) onComplete();
-          return;
+    const loop = () => {
+      const now = Date.now();
+      const dt = now - lastTime;
+
+      if (dt >= interval) {
+        // Process as many characters as needed if we lagged behind (though usually just 1)
+        const charsToAdd = Math.floor(dt / interval);
+        
+        if (charsToAdd > 0) {
+          // Don't overshoot
+          const nextIndex = Math.min(index + charsToAdd, text.length);
+          
+          if (nextIndex > index) {
+            setDisplayedText(text.substring(0, nextIndex));
+            index = nextIndex;
+            lastTime = now;
+          }
         }
       }
-      rafIdRef.current = requestAnimationFrame(loop);
+
+      if (index < text.length) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        if (onComplete) onComplete();
+      }
     };
 
-    rafIdRef.current = requestAnimationFrame(loop);
+    rafId = requestAnimationFrame(loop);
+
     return () => {
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-      rafIdRef.current = null;
-      lastTimeRef.current = null;
-      accumulatorRef.current = 0;
+      cancelAnimationFrame(rafId);
     };
-  }, [currentIndex, text, onComplete]);
+  }, [text, onComplete]);
 
   return (
     <p className="text-sm leading-relaxed">
       {displayedText}
-      {currentIndex < text.length && (
+      {displayedText.length < text.length && (
         <motion.span
           animate={{ opacity: [1, 0] }}
           transition={{ duration: 0.5, repeat: Infinity }}
