@@ -277,45 +277,7 @@ function HomeContent() {
 
       {/* Home Care Support Operations — duplicate block removed to prevent repetition */}
 
-      {/* Bottom CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.15 }}
-        transition={{ duration: 0.8, type: "spring", stiffness: 70 }}
-        className="text-center"
-      >
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          <TypewriterText 
-            text="You can envision your dream team." 
-            speed={40}
-          />
-        </h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-xl text-gray-600 mb-8"
-        >
-          Or you can make it happen with ReWorks Solutions.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ 
-            duration: 0.6, 
-            delay: 0.6,
-            type: "spring",
-            stiffness: 100
-          }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Button href="/contact" variant="primary" size="lg">OUTSOURCE WITH THE EXPERTS!</Button>
-        </motion.div>
-      </motion.div>
+      {/* Bottom CTA removed per request */}
     </MotionSection>
   );
 }

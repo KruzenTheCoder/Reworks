@@ -72,6 +72,9 @@ export default function Testimonials() {
   const [clientModalOpen, setClientModalOpen] = useState(false);
   const clientsLoop = useMemo(() => [...clientReviews, ...clientReviews], [clientReviews]);
   const businesses = useMemo(() => ([
+    { name: 'American Physiatry', href: 'https://americanphysiatry.com/' },
+    { name: 'Intellistars ABA', href: 'https://www.intellistarsaba.com/' },
+    { name: 'The Rite Care', href: 'https://theritecare.com/' },
     { name: 'StaffLion', href: 'https://stafflion.com/' },
     { name: 'Apex ABA', href: 'https://www.apexaba.com/' },
     { name: 'United Supply Corp', href: 'https://www.unitedsupplycorp.com/?srsltid=AfmBOopzqNnhFl4XWb5Xn57wvRiddrvW9nqzn-CKFMVN-Q_RpydpJBjh' },
@@ -81,9 +84,6 @@ export default function Testimonials() {
     { name: '4MD Medical', href: 'https://4mdmedical.com/' },
     { name: 'Woodmere Financial', href: 'https://woodmerefinancial.com/' },
     { name: 'Quick Fund Partner', href: 'https://quickfundpartnerny.com/' },
-    { name: 'American Physiatry', href: 'https://americanphysiatry.com/' },
-    { name: 'Intellistars ABA', href: 'https://www.intellistarsaba.com/' },
-    { name: 'The Rite Care', href: 'https://theritecare.com/' },
     { name: 'Kennedy ABA', href: 'https://www.kennedyaba.com/' },
     { name: 'Fame on Central', href: 'https://fameoncentral.com/' },
     { name: 'RXD Co', href: 'https://rxdco.com/' },

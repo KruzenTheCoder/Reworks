@@ -183,7 +183,7 @@ function FAQ() {
     }, 1000 + Math.random() * 1000);
   };
 
-  const handleCustomQuestion = (e: React.FormEvent) => {
+  const handleCustomQuestion = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!customQuestion.trim()) return;
 
@@ -200,47 +200,34 @@ function FAQ() {
     // Show typing indicator
     setIsTyping(true);
 
-    setTimeout(() => {
-      setIsTyping(false);
-      const lowerQ = customQuestion.toLowerCase();
-      const answer = generateAnswer(lowerQ);
+    try {
+      // Call the AI chat API
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: customQuestion }),
+      });
+      
+      const data = await res.json();
+      const answer = data.response || "I'm having trouble connecting right now. Please try again later.";
 
+      setIsTyping(false);
       const botMessage: Message = {
         id: Date.now() + 1,
         type: 'bot',
         text: answer
       };
       setMessages(prev => [...prev, botMessage]);
-    }, 1500);
-  };
-
-  const generateAnswer = (lowerQ: string) => {
-    const greetings = ['hi', 'hello', 'hey', 'good morning', 'good afternoon', 'good evening'];
-    if (greetings.some(g => lowerQ.includes(g))) {
-      return "Hi! 👋 How can I assist you today? You can ask about costs, hiring, HIPAA compliance, training, or anything else."
+    } catch (error) {
+      console.error('Chat error:', error);
+      setIsTyping(false);
+      const botMessage: Message = {
+        id: Date.now() + 1,
+        type: 'bot',
+        text: "Sorry, I'm having trouble reaching the server. Please check your connection."
+      };
+      setMessages(prev => [...prev, botMessage]);
     }
-    const thanks = ['thank', 'thanks', 'thx', 'appreciate'];
-    if (thanks.some(t => lowerQ.includes(t))) {
-      return "You're welcome! 🙌 If you have any other questions, I'm here to help."
-    }
-    const goodbye = ['bye', 'goodbye', 'see you'];
-    if (goodbye.some(b => lowerQ.includes(b))) {
-      return "Goodbye! 👋 If you need anything else, feel free to come back anytime."
-    }
-    const rules = [
-      { i: 0, k: ['cost','price','payment','payroll','reduce','saving'] },
-      { i: 6, k: ['payment','payments','invoice','billing'] },
-      { i: 1, k: ['how many','number','workers','hire','employees','team size'] },
-      { i: 2, k: ['minimum','period','duration','term','contract'] },
-      { i: 3, k: ['fit','replace','not a good fit','performance'] },
-      { i: 4, k: ['hipaa','compliant','security','privacy'] },
-      { i: 7, k: ['training','onboard','sessions'] },
-      { i: 8, k: ['language','accent','communication'] }
-    ];
-    for (const r of rules) {
-      if (r.k.some(kw => lowerQ.includes(kw))) return faqs[r.i].answer;
-    }
-    return "That's a great question! I can help with costs, hiring, HIPAA compliance, training, and more. Ask me anything or choose a quick question below.";
   };
 
   const toggleItem = (index: number) => {
