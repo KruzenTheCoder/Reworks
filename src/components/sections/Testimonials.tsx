@@ -125,7 +125,9 @@ export default function Testimonials() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 <img
-                  src={`https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
+                  src={b.name === 'United Supply Corp' 
+                    ? 'https://i.ibb.co/tTKppSR5/Whats-App-Image-2026-01-01-at-18-07-23.jpg' 
+                    : `https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
                   alt={`${b.name} logo`}
                   className="w-16 h-16 object-contain rounded-xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
                 />
