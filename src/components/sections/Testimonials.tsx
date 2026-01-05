@@ -106,12 +106,12 @@ export default function Testimonials() {
           <p className="text-xl text-text-muted">Partners that trust in us.</p>
         </motion.div>
 
-        <div className="relative z-10 w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden mb-10">
+        <div className="relative z-10 w-full overflow-hidden mb-10">
           <motion.div
             className="flex gap-6 px-6"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
-            style={{ willChange: 'transform', backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            style={{ width: "max-content" }}
           >
             {businessesLoop.map((b, idx) => (
               <a
