@@ -19,7 +19,7 @@ export default function Home() {
         position="bottom"
         height="10rem"
         strength={3}
-        divCount={8}
+        divCount={3} // Optimized from 8
         curve="bezier"
         exponential
         opacity={1}

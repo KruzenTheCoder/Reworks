@@ -22,7 +22,7 @@ export default function GlobalBlur({
   position = 'bottom',
   strength = 2,
   height = '6rem',
-  divCount = 5,
+  divCount = 3, // Reduced from 5 for performance
   exponential = true,
   duration = '0.3s',
   easing = 'ease-out',

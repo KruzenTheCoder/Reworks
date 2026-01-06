@@ -13,6 +13,7 @@ import ColorBloom from "@/components/visuals/ColorBloom";
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {

@@ -11,12 +11,12 @@ import TypewriterText from "../ui/TypewriterText";
 
 // Animated Counter Component
 const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: string }) => {
-  const [count, setCount] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && ref.current) {
+      const element = ref.current;
       let startTime: number | null = null;
       const duration = 2000;
       
@@ -28,7 +28,8 @@ const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: stri
         const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
         const easedProgress = easeOutQuart(progress);
         
-        setCount(Math.floor(easedProgress * value));
+        // Direct DOM update for better performance (avoids React re-renders)
+        element.textContent = `${Math.floor(easedProgress * value)}${suffix}`;
         
         if (progress < 1) {
           requestAnimationFrame(animate);
@@ -37,11 +38,11 @@ const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: stri
       
       requestAnimationFrame(animate);
     }
-  }, [isInView, value]);
+  }, [isInView, value, suffix]);
 
   return (
     <span ref={ref} className="font-bold text-4xl gradient-text inline-block min-w-[3ch]">
-      {count}{suffix}
+      0{suffix}
     </span>
   );
 };

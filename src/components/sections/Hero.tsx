@@ -29,64 +29,56 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-transparent"
     >
-      {/* Sleek animated gradient background */}
+      {/* Sleek animated gradient background - CSS optimized */}
       <div className="absolute inset-0 -z-10">
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))",
-              "linear-gradient(120deg, rgba(99,102,241,0.08), rgba(59,130,246,0.06))",
-              "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.06))",
-            ],
+        <div
+          className="absolute inset-0 animate-bg-shift"
+          style={{
+            background: "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.08), rgba(59,130,246,0.08))",
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          style={{ willChange: "background" }}
         />
-        <motion.div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] rounded-full blur-[120px]"
-          style={{ background: "radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.6), transparent 70%)" }}
-          animate={{ opacity: [0.9, 0.95, 0.9] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        
+        {/* CSS Animated Orbs */}
+        <div
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] rounded-full blur-[120px] animate-breathe"
+          style={{ 
+            background: "radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.6), transparent 70%)",
+            animationDelay: "0s"
+          }}
         />
-        <motion.div
-          className="absolute -top-32 -left-24 w-[60vw] h-[60vw] rounded-full blur-[100px]"
-          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.28), transparent 55%)" }}
-          animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.8, 0.6] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute -top-32 -left-24 w-[60vw] h-[60vw] rounded-full blur-[100px] animate-breathe"
+          style={{ 
+            background: "radial-gradient(circle, rgba(99,102,241,0.28), transparent 55%)",
+            animationDelay: "2s"
+          }}
         />
-        <motion.div
-          className="absolute bottom-[-20vh] right-[-20vw] w-[55vw] h-[55vw] rounded-full blur-[110px]"
-          style={{ background: "radial-gradient(circle, rgba(59,130,246,0.26), transparent 55%)" }}
-          animate={{ scale: [1, 1.02, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+        <div
+          className="absolute bottom-[-20vh] right-[-20vw] w-[55vw] h-[55vw] rounded-full blur-[110px] animate-breathe"
+          style={{ 
+            background: "radial-gradient(circle, rgba(59,130,246,0.26), transparent 55%)",
+            animationDelay: "4s"
+          }}
         />
 
-        {/* Smaller blurred orbs */}
+        {/* Smaller blurred orbs - Reduced count and switched to CSS animation */}
         {[
-          { w: 180, h: 180, top: '20%', left: '15%', bg: 'radial-gradient(circle, rgba(255,255,255,0.9), transparent 65%)', dur: 12 },
-          { w: 140, h: 140, top: '60%', left: '80%', bg: 'radial-gradient(circle, rgba(147,197,253,0.85), transparent 65%)', dur: 14 },
-          { w: 160, h: 160, top: '75%', left: '60%', bg: 'radial-gradient(circle, rgba(196,181,253,0.8), transparent 65%)', dur: 16 },
-          { w: 120, h: 120, top: '10%', left: '70%', bg: 'radial-gradient(circle, rgba(255,255,255,0.85), transparent 65%)', dur: 10 },
-          { w: 130, h: 130, top: '70%', left: '8%', bg: 'radial-gradient(circle, rgba(165,180,252,0.85), transparent 65%)', dur: 13 }
+          { w: 180, h: 180, top: '20%', left: '15%', bg: 'radial-gradient(circle, rgba(255,255,255,0.9), transparent 65%)', delay: 1 },
+          { w: 140, h: 140, top: '60%', left: '80%', bg: 'radial-gradient(circle, rgba(147,197,253,0.85), transparent 65%)', delay: 3 },
+          { w: 120, h: 120, top: '10%', left: '70%', bg: 'radial-gradient(circle, rgba(255,255,255,0.85), transparent 65%)', delay: 0.5 },
         ].map((o, i) => (
-          <motion.div
+          <div
             key={i}
-            className="absolute rounded-full blur-[60px]"
-            style={{ width: o.w, height: o.h, top: o.top as any, left: o.left as any, background: o.bg }}
-            animate={{ y: [0, -20, 0], scale: [1, 1.08, 1], opacity: [0.6, 0.9, 0.6] }}
-            transition={{ duration: o.dur, repeat: Infinity, ease: 'easeInOut', delay: i * 0.5 }}
-          />
-        ))}
-
-        {/* Light rays */}
-        {[10, 25, 45, 60, 75, 90].map((left, i) => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{ left: `${left}%`, width: 2, height: '150%', background: 'linear-gradient(to bottom, transparent 0%, rgba(147,197,253,0.3) 20%, rgba(196,181,253,0.5) 50%, rgba(147,197,253,0.3) 80%, transparent 100%)', opacity: 0.2 }}
-            animate={{ y: ['-100%', '100%'] }}
-            transition={{ duration: 12 + i * 2, repeat: Infinity, ease: 'linear' }}
+            className="absolute rounded-full blur-[60px] animate-breathe"
+            style={{ 
+              width: o.w, 
+              height: o.h, 
+              top: o.top, 
+              left: o.left, 
+              background: o.bg,
+              animationDuration: `${10 + i * 2}s`,
+              animationDelay: `${o.delay}s`
+            }}
           />
         ))}
       </div>
