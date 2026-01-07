@@ -5,22 +5,23 @@ import './GradualBlur.css';
 
 type GradualBlurProps = {
   position?: 'top' | 'bottom' | 'left' | 'right';
-  strength?: number; // Kept for API compatibility, but effectively controls opacity/intensity
+  strength?: number; // Controls opacity/intensity
   height?: string;
   width?: string;
   zIndex?: number;
   className?: string;
   style?: CSSProperties;
-  // Deprecated/Unused props kept for compatibility to avoid breaking existing usage
+  opacity?: number;
+  target?: 'parent' | 'page';
+  disableOnRoutes?: string[]; 
+  // Unused props kept for compatibility
   divCount?: number;
   exponential?: boolean;
   animated?: boolean | 'scroll';
   duration?: string;
   easing?: string;
-  opacity?: number;
   curve?: 'linear' | 'bezier' | 'ease-in' | 'ease-out' | 'ease-in-out';
   responsive?: boolean;
-  target?: 'parent' | 'page';
   preset?: string;
   gpuOptimized?: boolean;
   hoverIntensity?: number;
@@ -31,7 +32,6 @@ type GradualBlurProps = {
   mobileWidth?: string;
   tabletWidth?: string;
   desktopWidth?: string;
-  disableOnRoutes?: string[]; // Added to match usage in layout
 };
 
 const GradualBlur: React.FC<GradualBlurProps> = ({
@@ -43,40 +43,38 @@ const GradualBlur: React.FC<GradualBlurProps> = ({
   style = {},
   opacity = 1,
   target = 'parent',
-  // unused props ignored
 }) => {
   
   const containerStyle: CSSProperties = useMemo(() => {
     const isVertical = position === 'top' || position === 'bottom';
     
-    // Gradient direction for the mask
-    // If position is 'bottom', we want the blur to be visible at the bottom and fade out going up.
-    // mask-image: linear-gradient(to top, black, transparent)
-    let maskImage = '';
-    
-    switch (position) {
-      case 'bottom':
-        maskImage = 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)';
-        break;
-      case 'top':
-        maskImage = 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)';
-        break;
-      case 'left':
-        maskImage = 'linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)';
-        break;
-      case 'right':
-        maskImage = 'linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)';
-        break;
-    }
+    // Non-linear gradient mask for "softer" fade
+    // 0% -> 100% opacity with an eased curve
+    const maskGradient = `
+      linear-gradient(
+        to ${position === 'bottom' ? 'top' : position === 'top' ? 'bottom' : position === 'right' ? 'left' : 'right'},
+        rgba(0,0,0,1) 0%,
+        rgba(0,0,0,0.95) 10%,
+        rgba(0,0,0,0.85) 20%,
+        rgba(0,0,0,0.7) 30%,
+        rgba(0,0,0,0.5) 45%,
+        rgba(0,0,0,0.3) 60%,
+        rgba(0,0,0,0.1) 80%,
+        rgba(0,0,0,0) 100%
+      )
+    `;
 
     const baseStyle: CSSProperties = {
       position: target === 'page' ? 'fixed' : 'absolute',
       zIndex,
       pointerEvents: 'none',
-      backdropFilter: 'blur(12px)',
-      WebkitBackdropFilter: 'blur(12px)', // Safari support
-      maskImage,
-      WebkitMaskImage: maskImage,
+      // Hybrid approach: 
+      // 1. Heavy blur for the main body
+      // 2. We could add a second layer if needed, but a quality mask usually suffices.
+      backdropFilter: 'blur(16px)', 
+      WebkitBackdropFilter: 'blur(16px)', 
+      maskImage: maskGradient,
+      WebkitMaskImage: maskGradient,
       opacity,
       ...style,
     };
@@ -98,7 +96,16 @@ const GradualBlur: React.FC<GradualBlurProps> = ({
     return baseStyle;
   }, [position, height, width, zIndex, style, opacity, target]);
 
-  return <div className={`gradual-blur ${className}`} style={containerStyle} />;
+  return (
+    <>
+      {/* Primary Blur Layer - The heavy lifter */}
+      <div className={`gradual-blur ${className}`} style={containerStyle} />
+      
+      {/* Secondary "Feather" Layer - Optional for extra smoothness, 
+          can be enabled if the edge still looks hard. 
+          For now, the eased mask above should handle it. */}
+    </>
+  );
 };
 
 export default GradualBlur;

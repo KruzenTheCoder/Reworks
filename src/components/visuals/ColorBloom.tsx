@@ -6,7 +6,6 @@ import "./ColorBloom.css";
 
 export default function ColorBloom() {
   const mouseRef = useRef<HTMLDivElement>(null);
-  const rafId = useRef<number>(null);
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -40,71 +39,37 @@ export default function ColorBloom() {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none" aria-hidden>
-      {/* Base gradient */}
+    <div className="fixed inset-0 -z-10 pointer-events-none bloom-container" aria-hidden>
+      {/* Deep, rich base background */}
       <div
-        className="absolute inset-0 bloom-bg-shift"
+        className="absolute inset-0"
         style={{
-          background: "linear-gradient(120deg, rgba(59,130,246,0.06), rgba(99,102,241,0.05), rgba(59,130,246,0.06))",
-          willChange: "background-position"
+          background: "linear-gradient(135deg, #020617 0%, #0f172a 100%)",
         }}
       />
       
-      {/* Animated mesh gradient overlay */}
-      <div
-        className="absolute inset-0 bloom-float"
-        style={{ 
-          opacity: 0.75,
-          background: "radial-gradient(ellipse at 20% 80%, rgba(99,102,241,0.18) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.18) 0%, transparent 55%)",
-          animationDuration: "10s",
-          willChange: "transform, opacity"
-        }}
-      />
-      
-      {/* Blobs */}
-      <div
-        className="absolute -top-24 -left-24 w-[55vw] h-[55vw] rounded-full blur-[80px] bloom-float"
-        style={{ 
-          background: "radial-gradient(circle, rgba(99,102,241,0.2), transparent 60%)",
-          animationDuration: "14s",
-          animationDelay: "0s"
-        }}
-      />
-      <div
-        className="absolute bottom-[-20vh] right-[-20vw] w-[50vw] h-[50vw] rounded-full blur-[90px] bloom-float"
-        style={{ 
-          background: "radial-gradient(circle, rgba(59,130,246,0.18), transparent 60%)",
-          animationDuration: "16s",
-          animationDelay: "-5s"
-        }}
-      />
-      <div
-        className="absolute top-[30vh] left-[60vw] w-[32vw] h-[32vw] rounded-full blur-[70px] bloom-float"
-        style={{ 
-          background: "radial-gradient(circle, rgba(17,94,160,0.16), transparent 60%)",
-          animationDuration: "18s",
-          animationDelay: "-10s"
-        }}
-      />
+      {/* Organic Blobs with CSS Keyframe Animation */}
+      <div className="bloom-blob blob-1" />
+      <div className="bloom-blob blob-2" />
+      <div className="bloom-blob blob-3" />
 
-      {/* Particle layers */}
-      <ParticleField count={70} color="rgba(59,130,246,0.25)" size={4} blur={1} amplitude={6} opacity={[0.2, 0.8]} durationBase={10} />
-      <ParticleField count={24} color="rgba(139,92,246,0.35)" size={6} blur={2} amplitude={10} opacity={[0.3, 0.9]} durationBase={8} twinkle />
+      {/* Particle layers - Kept subtle */}
+      <ParticleField count={60} color="rgba(96, 165, 250, 0.3)" size={3} blur={1} amplitude={8} opacity={[0.1, 0.6]} durationBase={12} />
+      <ParticleField count={20} color="rgba(167, 139, 250, 0.4)" size={5} blur={2} amplitude={12} opacity={[0.2, 0.7]} durationBase={10} twinkle />
 
-      {/* Noise and vignette overlays */}
-      <div className="absolute inset-0" style={{ opacity: 0.03, mixBlendMode: 'overlay', pointerEvents: 'none', backgroundImage: "url(data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
-      <div className="absolute inset-0" style={{ pointerEvents: 'none', background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.06) 100%)' }} />
+      {/* Noise overlay for texture */}
+      <div className="bloom-noise" />
 
       {/* Mouse follower glow */}
       <div
         ref={mouseRef}
         className="fixed top-0 left-0"
         style={{
-          width: 300,
-          height: 300,
+          width: 400,
+          height: 400,
           borderRadius: 9999,
-          background: 'radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)',
-          filter: 'blur(40px)',
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+          filter: 'blur(50px)',
           mixBlendMode: 'screen',
           willChange: 'transform',
           transform: 'translate(-1000px, -1000px)' // Initial off-screen
