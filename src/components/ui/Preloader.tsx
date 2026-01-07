@@ -118,7 +118,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
               ease: "easeInOut",
             },
           }}
-          className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
           style={{ willChange: "transform, opacity" }}
         >
           {/* Animated Gradient Background - GPU offloaded by Tailwind & simple animation */}

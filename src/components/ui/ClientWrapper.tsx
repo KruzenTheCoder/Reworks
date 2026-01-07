@@ -34,6 +34,7 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="w-full"
+            onAnimationComplete={() => window.scrollTo(0, 0)}
           >
             {children}
           </motion.div>

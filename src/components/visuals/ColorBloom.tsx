@@ -13,34 +13,29 @@ export default function ColorBloom() {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (mediaQuery.matches) return;
 
+    let rafId: number;
     let targetX = -1000;
     let targetY = -1000;
-    let currentX = -1000;
-    let currentY = -1000;
 
     const onMove = (e: MouseEvent) => {
       targetX = e.clientX;
       targetY = e.clientY;
-    };
-
-    const animate = () => {
-      // Smooth lerp
-      currentX += (targetX - currentX) * 0.1;
-      currentY += (targetY - currentY) * 0.1;
-
-      if (mouseRef.current) {
-        mouseRef.current.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-      }
-      // @ts-ignore
-      rafId.current = requestAnimationFrame(animate);
+      
+      // Cancel previous frame if it hasn't run yet to prevent stacking
+      if (rafId) cancelAnimationFrame(rafId);
+      
+      rafId = requestAnimationFrame(() => {
+        if (mouseRef.current) {
+          mouseRef.current.style.transform = `translate(${targetX}px, ${targetY}px) translate(-50%, -50%)`;
+        }
+      });
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    animate();
 
     return () => {
       window.removeEventListener("mousemove", onMove);
-      if (rafId.current) cancelAnimationFrame(rafId.current);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
