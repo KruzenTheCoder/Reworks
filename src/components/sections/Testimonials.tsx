@@ -83,7 +83,6 @@ export default function Testimonials() {
     { name: 'Ruby ABA', href: 'https://www.rubyaba.com/' },
     { name: '4MD Medical', href: 'https://4mdmedical.com/' },
     { name: 'Woodmere Financial', href: 'https://woodmerefinancial.com/' },
-    { name: 'Quick Fund Partner', href: 'https://quickfundpartnerny.com/' },
     { name: 'Kennedy ABA', href: 'https://www.kennedyaba.com/' },
     { name: 'Fame on Central', href: 'https://fameoncentral.com/' },
     { name: 'RXD Co', href: 'https://rxdco.com/' },
@@ -125,9 +124,13 @@ export default function Testimonials() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-white/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                 
                 <img
-                  src={b.name === 'United Supply Corp' 
-                    ? 'https://i.ibb.co/tTKppSR5/Whats-App-Image-2026-01-01-at-18-07-23.jpg' 
-                    : `https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`}
+                  src={
+                    b.name === 'United Supply Corp' 
+                      ? 'https://i.ibb.co/tTKppSR5/Whats-App-Image-2026-01-01-at-18-07-23.jpg' 
+                      : b.name === 'Woodmere Financial'
+                        ? 'https://i.ibb.co/9kc6v0Lk/1766421829009.jpg'
+                        : `https://www.google.com/s2/favicons?domain=${encodeURIComponent(b.href)}&sz=128`
+                  }
                   alt={`${b.name} logo`}
                   className="w-16 h-16 object-contain rounded-xl drop-shadow-sm transition-transform duration-300 group-hover:scale-110"
                 />
