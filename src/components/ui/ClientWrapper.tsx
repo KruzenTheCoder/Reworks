@@ -1,6 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { AnimatePresence, motion } from 'framer-motion'
 import Preloader from './Preloader'
 
 interface ClientWrapperProps {
@@ -9,6 +11,7 @@ interface ClientWrapperProps {
 
 export default function ClientWrapper({ children }: ClientWrapperProps) {
   const [isLoading, setIsLoading] = useState(true)
+  const pathname = usePathname()
 
   const handlePreloaderComplete = () => {
     setIsLoading(false)
@@ -16,11 +19,25 @@ export default function ClientWrapper({ children }: ClientWrapperProps) {
 
   return (
     <>
-      {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <Preloader key="preloader" onComplete={handlePreloaderComplete} />
+        )}
+      </AnimatePresence>
+      
       {!isLoading && (
-        <div className="transition-opacity duration-500 opacity-100">
-          {children}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={pathname}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="w-full"
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       )}
     </>
   )

@@ -7,6 +7,7 @@ import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
 import { Suspense } from "react";
 import ClientSplashCursor from "@/components/ui/ClientSplashCursor";
+import ClientWrapper from "@/components/ui/ClientWrapper";
 import ColorBloom from "@/components/visuals/ColorBloom";
 //import ScrollStack from "@/components/visuals/ScrollStack";
 
@@ -94,7 +95,9 @@ export default function RootLayout({
           
           {/* Main content */}
           <main className="relative z-0">
-            {children}
+            <ClientWrapper>
+              {children}
+            </ClientWrapper>
           </main>
         </div>
         

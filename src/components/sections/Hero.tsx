@@ -1,8 +1,32 @@
 "use client";
 import Button from "@/components/common/Button";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import TypewriterText from "../ui/TypewriterText";
+
+// Define variants for staggered animation
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2, // Delay between each child animation
+      delayChildren: 0.1,   // Initial delay before starting
+    }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut"
+    }
+  }
+};
 
 export default function Hero() {
   const ref = useRef(null);
@@ -89,17 +113,17 @@ export default function Hero() {
         className="relative z-10 flex min-h-[85vh] sm:min-h-screen items-center"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-20 pb-16 sm:pb-20">
-          <div className="text-center">
-            {/* Top badge removed per request to raise hero content */}
-
+          <motion.div 
+            className="text-center"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Main Heading with Enhanced Typewriter Animation */}
             <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+              variants={itemVariants}
               className="mb-10"
             >
-              {/* Fallback for iOS: Show static text if JS animation fails or is delayed */}
               <h1 className="mb-6 text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-text-base font-display tracking-tight">
                 <span className="block sm:hidden bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent">
                   Premium Remote Staffing Without Compromise
@@ -120,7 +144,7 @@ export default function Hero() {
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, delay: 2.5, ease: "easeOut" }}
+                transition={{ duration: 1.5, delay: 1, ease: "easeOut" }} // Delays are now relative or absolute? Here absolute delay is fine if we want it after text
                 className="h-1 bg-gradient-to-r from-primary-blue/30 via-accent-blue/50 to-primary-blue/30 rounded-full max-w-2xl mx-auto"
                 style={{ transformOrigin: "center" }}
               />
@@ -128,9 +152,7 @@ export default function Hero() {
 
             {/* Subtitle with Enhanced Animation */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+              variants={itemVariants}
               className="mb-14"
             >
               <p className="mb-12 mx-auto max-w-3xl text-base sm:text-xl text-text-muted leading-relaxed font-medium tracking-wide">
@@ -139,12 +161,9 @@ export default function Hero() {
               </p>
 
               {/* CTA Buttons with Enhanced Spacing and Animations */}
-            <motion.div 
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-6"
-            >
+              <motion.div 
+                className="flex flex-col sm:flex-row items-center justify-center gap-6"
+              >
                 <Button href="contact" variant="luxury" size="lg" className="min-w-[340px]">
                   Schedule Your Free Consultation
                 </Button>
@@ -156,11 +175,9 @@ export default function Hero() {
 
             {/* Stats: ReWorks By the Numbers with Enhanced Animations */}
             <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 1.6, ease: "easeOut" }}
-            className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 max-w-5xl mx-auto px-2"
-          >
+              variants={itemVariants}
+              className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 max-w-5xl mx-auto px-2"
+            >
               {[
                 { number: "30% – 40%", label: "Increased Productivity" },
                 { number: "Up to 60%", label: "Saving on Payroll" },
@@ -168,15 +185,7 @@ export default function Hero() {
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, scale: 0.7, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.8, 
-                    delay: 1.8 + index * 0.15,
-                    type: "spring",
-                    stiffness: 100,
-                    damping: 10
-                  }}
+                  variants={itemVariants} // Inherit fade-up behavior
                   whileHover={{ 
                     scale: 1.05,
                     y: -5,
@@ -193,7 +202,7 @@ export default function Hero() {
                 </motion.div>
               ))}
             </motion.div>
-          </div>
+          </motion.div>
         </div>
       </motion.div>
 
@@ -201,7 +210,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2 }}
+        transition={{ delay: 2.5 }}
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
       >
         <motion.div

@@ -1,0 +1,20 @@
+.particle-float {
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% { transform: translate(0, 0); opacity: var(--min-opacity); }
+  25% { transform: translate(var(--amplitude), calc(var(--amplitude) * -1)); opacity: var(--max-opacity); }
+  50% { transform: translate(0, calc(var(--amplitude) * -2)); opacity: var(--min-opacity); }
+  75% { transform: translate(calc(var(--amplitude) * -1), calc(var(--amplitude) * -1)); opacity: var(--max-opacity); }
+  100% { transform: translate(0, 0); opacity: var(--min-opacity); }
+}
+
+.particle-twinkle {
+  animation: particle-twinkle linear infinite;
+}
+
+@keyframes particle-twinkle {
+  0%, 100% { transform: scale(1); opacity: var(--min-opacity); }
+  50% { transform: scale(1.5); opacity: var(--max-opacity); }
+}
