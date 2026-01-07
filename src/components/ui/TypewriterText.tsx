@@ -39,8 +39,9 @@ export default function TypewriterText({
       as={"span"}
       shimmerOnComplete={shimmerOnComplete}
       onSentenceComplete={() => {
-        if (onComplete) onComplete();
+        // empty callback
       }}
+      onComplete={onComplete}
     />
   );
 }

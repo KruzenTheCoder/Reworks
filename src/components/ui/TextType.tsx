@@ -102,13 +102,10 @@ const TextType = ({
 
     // Cursor Blink Animation
     if (showCursor && cursorRef.current) {
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: "power2.inOut"
-      });
+      // Hide cursor when typing starts
+      gsap.set(cursorRef.current, { opacity: 1 });
+      
+      // We'll manage blink state manually during typing phases
     }
 
     // Initial Delay
@@ -119,6 +116,9 @@ const TextType = ({
     textArray.forEach((phrase, index) => {
       // Typing Phase
       const typeDuration = phrase.length * (typingSpeed / 1000); // Rough duration calc
+      
+      // Stop blinking, keep visible during typing
+      masterTl.to(cursorRef.current, { opacity: 1, duration: 0.1 }, "<");
       
       masterTl.to(textRef.current, {
         duration: typeDuration,
@@ -131,13 +131,26 @@ const TextType = ({
           if (onSentenceComplete) onSentenceComplete(phrase, index);
         }
       });
+      
+      // Start blinking after typing finishes
+      masterTl.to(cursorRef.current, { 
+        opacity: 0, 
+        duration: cursorBlinkDuration, 
+        repeat: 3, // Blink a few times before deleting
+        yoyo: true, 
+        ease: "power2.inOut" 
+      });
 
       // Pause Phase
       if (textArray.length > 1 && (loop || index < textArray.length - 1)) {
-        masterTl.to({}, { duration: pauseDuration / 1000 });
+        // masterTl.to({}, { duration: pauseDuration / 1000 }); // Pause duration is now handled by the blink loop above
         
         // Deleting Phase
         const deleteDuration = phrase.length * (deletingSpeed / 1000);
+        
+        // Stop blinking, keep visible during deleting
+        masterTl.to(cursorRef.current, { opacity: 1, duration: 0.1, overwrite: true });
+
         masterTl.to(textRef.current, {
           duration: deleteDuration,
           text: {
@@ -149,6 +162,15 @@ const TextType = ({
         
         // Short pause before next word
         masterTl.to({}, { duration: 0.2 });
+      } else {
+        // Final state: Infinite blink
+        masterTl.to(cursorRef.current, {
+            opacity: 0,
+            duration: cursorBlinkDuration,
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut"
+        });
       }
     });
 

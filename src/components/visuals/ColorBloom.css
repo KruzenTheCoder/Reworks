@@ -1,15 +1,21 @@
 .bloom-container {
-  background: #ffffff; /* Reverted to white/light base */
+  background: #ffffff;
   overflow: hidden;
+  /* Hardware acceleration for the container */
+  transform: translateZ(0);
 }
 
 .bloom-blob {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  mix-blend-mode: normal; /* Removed 'screen' to avoid overly glowing dark mode look */
-  opacity: 0.5; /* Reduced opacity for subtlety */
+  /* Optimization: Use translate3d for GPU composition */
+  transform: translate3d(0, 0, 0);
+  mix-blend-mode: normal;
+  opacity: 0.5;
   animation: bloom-float infinite alternate ease-in-out;
+  /* Performance hint */
+  will-change: transform;
 }
 
 /* Original Lighter/Subtle Palette */
@@ -43,10 +49,10 @@
 }
 
 @keyframes bloom-float {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(5%, 10%) scale(1.1); }
-  66% { transform: translate(-5%, 5%) scale(0.95); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  33% { transform: translate3d(5%, 10%, 0) scale(1.1); }
+  66% { transform: translate3d(-5%, 5%, 0) scale(0.95); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
 .bloom-noise {

@@ -131,9 +131,8 @@ export default function Hero() {
                 <span className="hidden sm:block">
                   <TypewriterText 
                     text="Premium Remote Staffing Without Compromise"
-                    speed={25}
+                    speed={40}
                     className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent gradient-animate"
-                    caretHeightClass="h-12"
                     shimmerOnComplete={false}
                     onComplete={() => console.log("Hero title complete")}
                   />
