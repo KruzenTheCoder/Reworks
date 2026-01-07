@@ -99,15 +99,21 @@ export default function Hero() {
               transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
               className="mb-10"
             >
+              {/* Fallback for iOS: Show static text if JS animation fails or is delayed */}
               <h1 className="mb-6 text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight text-text-base font-display tracking-tight">
-                <TypewriterText 
-                  text="Premium Remote Staffing Without Compromise"
-                  speed={25}
-                  className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent gradient-animate"
-                  caretHeightClass="h-12"
-                  shimmerOnComplete={false}
-                  onComplete={() => console.log("Hero title complete")}
-                />
+                <span className="block sm:hidden bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent">
+                  Premium Remote Staffing Without Compromise
+                </span>
+                <span className="hidden sm:block">
+                  <TypewriterText 
+                    text="Premium Remote Staffing Without Compromise"
+                    speed={25}
+                    className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent gradient-animate"
+                    caretHeightClass="h-12"
+                    shimmerOnComplete={false}
+                    onComplete={() => console.log("Hero title complete")}
+                  />
+                </span>
               </h1>
 
               {/* Subtle underline animation */}

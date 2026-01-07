@@ -27,11 +27,11 @@ function getVariantClasses(variant: ButtonVariant = "primary", size: "sm" | "md"
   
   const map: Record<ButtonVariant, string> = {
     // Blue-forward palette unified to match Navbar "Start Hiring" gradient
-    primary: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
+    primary: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0 bg-[length:200%_auto]",
     secondary: "border-2 border-primary-blue text-primary-blue bg-white hover:bg-gradient-to-r hover:from-primary-blue hover:to-accent-blue hover:text-white shadow-md hover:shadow-lg hover:ring-2 hover:ring-primary-blue/30",
-    ghost: "text-white bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] shadow-sm hover:shadow-lg hover:brightness-110 hover:saturate-125 border-0",
-    luxury: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0",
-    glow: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:brightness-110 hover:saturate-125 pulse-glow border-0"
+    ghost: "text-white bg-gradient-to-r from-[#ff9442] via-[#cc6f24] to-[#0a0a0a] shadow-sm hover:shadow-lg hover:brightness-110 hover:saturate-125 border-0 bg-[length:200%_auto]",
+    luxury: "bg-gradient-to-r from-slate-700 via-primary-blue to-accent-blue text-white shadow-xl hover:shadow-2xl hover:brightness-110 hover:saturate-125 relative overflow-hidden border-0 bg-[length:200%_auto]",
+    glow: "bg-gradient-to-r from-primary-blue to-accent-blue text-white shadow-lg hover:shadow-xl hover:brightness-110 hover:saturate-125 pulse-glow border-0 bg-[length:200%_auto]"
   };
   
   return `${base} ${map[variant]}`;

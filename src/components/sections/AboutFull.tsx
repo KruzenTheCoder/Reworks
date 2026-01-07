@@ -30,7 +30,7 @@ const portraits: Record<string, string> = {
   "Subhaana Malek": "https://i.ibb.co/QFHCJrqK/Subhanna.png",
   // Recruiters
   "Janique Bruyns": "https://i.ibb.co/9mDdb4b7/Janique-Bruyns.png",
-  "Kaylin Lavelot": "https://i.ibb.co/spG0whnk/Kaylin-Lavelot.png",
+  "Kaylin Lavelot": "https://i.ibb.co/v4tr2tNx/Kaylin-Reworks.png",
   "Kayleigh Pontinhas": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Kayleigh Pontin": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
