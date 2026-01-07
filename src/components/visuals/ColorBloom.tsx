@@ -40,11 +40,11 @@ export default function ColorBloom() {
 
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none bloom-container" aria-hidden>
-      {/* Deep, rich base background */}
+      {/* Light/Subtle base background */}
       <div
         className="absolute inset-0"
         style={{
-          background: "linear-gradient(135deg, #020617 0%, #0f172a 100%)",
+          background: "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)",
         }}
       />
       
@@ -54,8 +54,8 @@ export default function ColorBloom() {
       <div className="bloom-blob blob-3" />
 
       {/* Particle layers - Kept subtle */}
-      <ParticleField count={60} color="rgba(96, 165, 250, 0.3)" size={3} blur={1} amplitude={8} opacity={[0.1, 0.6]} durationBase={12} />
-      <ParticleField count={20} color="rgba(167, 139, 250, 0.4)" size={5} blur={2} amplitude={12} opacity={[0.2, 0.7]} durationBase={10} twinkle />
+      <ParticleField count={60} color="rgba(96, 165, 250, 0.25)" size={3} blur={1} amplitude={8} opacity={[0.1, 0.5]} durationBase={12} />
+      <ParticleField count={20} color="rgba(167, 139, 250, 0.3)" size={5} blur={2} amplitude={12} opacity={[0.1, 0.6]} durationBase={10} twinkle />
 
       {/* Noise overlay for texture */}
       <div className="bloom-noise" />
@@ -68,9 +68,9 @@ export default function ColorBloom() {
           width: 400,
           height: 400,
           borderRadius: 9999,
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
           filter: 'blur(50px)',
-          mixBlendMode: 'screen',
+          mixBlendMode: 'multiply', /* Changed for light mode */
           willChange: 'transform',
           transform: 'translate(-1000px, -1000px)' // Initial off-screen
         }}
