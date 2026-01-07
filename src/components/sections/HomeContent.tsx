@@ -1,0 +1,286 @@
+"use client";
+import Button from "@/components/common/Button";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import MotionSection from "../ui/MotionSection";
+import Image from "next/image";
+import { Check } from "lucide-react";
+import { useRef, useEffect, useState, memo } from "react";
+import TypewriterText from "../ui/TypewriterText";
+
+// Using shared TypewriterText to ensure text always renders
+
+// Animated Counter Component
+const AnimatedCounter = ({ value, suffix = "%" }: { value: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (isInView && ref.current) {
+      const element = ref.current;
+      let startTime: number | null = null;
+      const duration = 2000;
+      
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = (x: number): number => 1 - Math.pow(1 - x, 4);
+        const easedProgress = easeOutQuart(progress);
+        
+        // Direct DOM update for better performance (avoids React re-renders)
+        element.textContent = `${Math.floor(easedProgress * value)}${suffix}`;
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }
+  }, [isInView, value, suffix]);
+
+  return (
+    <span ref={ref} className="font-bold text-4xl gradient-text inline-block min-w-[3ch]">
+      0{suffix}
+    </span>
+  );
+};
+
+function HomeContent() {
+  const { scrollYProgress } = useScroll();
+  const heroRef = useRef(null);
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+
+  return (
+    <MotionSection className="section-wrap space-y-16" variant="fadeUp">
+      {/* Strategic outsourcing hero copy */}
+      <motion.div
+        ref={heroRef}
+        className="text-center relative"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={heroInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="mb-8"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={heroInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 tracking-tight">
+              <TypewriterText 
+                text="Strategic outsourcing, built around your business" 
+                speed={25}
+                caretHeightClass="h-10"
+                onComplete={() => console.log("Main heading complete")}
+              />
+            </h2>
+          </motion.div>
+        </motion.div>
+        
+        <motion.p
+          initial={{ opacity: 0, y: 25 }}
+          animate={heroInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
+          className="mt-6 text-lg md:text-xl text-slate-600 leading-relaxed tracking-wide"
+        >
+          <TypewriterText 
+            text="Your vision, our solutions. Exceptional results" 
+            speed={30}
+            caretHeightClass="h-6"
+          />
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          animate={heroInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 2.5, type: "spring", stiffness: 80, damping: 12 }}
+          className="mt-10"
+        >
+          <Button href="/contact" variant="primary" size="lg">BUILD MY TEAM</Button>
+        </motion.div>
+      </motion.div>
+
+      {/* Two feature cards side by side */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <div className="grid md:grid-cols-2 gap-6 items-stretch">
+          {/* Card 1: Offshore Staffing, Reimagined. */}
+          <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+              <TypewriterText 
+                text="Offshore Staffing, Reimagined."
+                speed={28}
+                caretHeightClass="h-10"
+                className="title-gradient font-display"
+              />
+            </h3>
+            <p className="text-text-muted mb-6">When you think offshore staffing, concerns rise about risking your brand or disrupting operations:</p>
+            <ul className="space-y-2 text-text-muted text-left max-w-2xl mx-auto">
+              <li>• Poor communication and heavy accents that frustrate clients and teams</li>
+              <li>• Low-quality hires who lack commitment or professionalism</li>
+              <li>• Lack of transparency and oversight, causing missed deadlines and errors</li>
+              <li>• Minimal support or employee coaching</li>
+              <li>• Risk of HIPAA non-compliance and data security issues</li>
+            </ul>
+            <p className="mt-6 text-text-muted">But what if offshore talent could be your company’s secret weapon, without the headaches?</p>
+          </div>
+
+          {/* Card 2: Elite Talent. Real Results. */}
+          <div className="luxury-card glass-card rounded-3xl p-8 md:p-10 text-center bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative h-full">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-blue to-accent-blue" />
+            <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+              <TypewriterText 
+                text="Elite Talent. Real Results."
+                speed={28}
+                caretHeightClass="h-10"
+                className="title-gradient font-display"
+              />
+            </h3>
+            <div className="space-y-4 text-text-muted max-w-3xl mx-auto">
+              <p>ReWorks delivers only the top 1% of South African talent, carefully chosen for skill, professionalism, and communication. We hire native English speakers with neutral accents to ensure seamless client-facing interactions.</p>
+              <p>Hiring great people is only the start. Our commitment extends beyond recruitment. Through meticulous background checks, continuous performance monitoring, and dedicated coaching, we proactively manage your remote team to maximize engagement and productivity, with significant cost savings to your company.</p>
+              <p>We’re not just a staffing agency. We’re your trusted partner. From onboarding to ongoing support, our impeccable service keeps your team aligned, motivated, and ready to scale.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Why ReWorks */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative pt-24"
+      >
+        {/* Subtle orange glow for this section only */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[60vh] bg-orange-400/10 rounded-full blur-[100px] pointer-events-none -z-10" />
+        
+        <div className="text-center max-w-4xl mx-auto relative z-10">
+          <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4">
+            <TypewriterText 
+              text="ReWorks Delivers More Than Staffing"
+              speed={28}
+              caretHeightClass="h-10"
+              className="title-gradient font-display"
+            />
+          </h3>
+          <p className="text-text-muted mb-6">Premium offshore talent, managed end‑to‑end. No compromise.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6 relative z-10">
+          {[
+            { title: "Carefully Selected Talent Pool", text: "Top 1% hires. Native English. Neutral accents." },
+            { title: "Proactive Team Management", text: "Live tracking. Constant communication. Dedicated coaching." },
+            { title: "Ongoing Client Support", text: "Seamless onboarding. Scale-ready. Partnership‑driven." }
+          ].map((item) => (
+            <div key={item.title} className="luxury-card glass-card rounded-3xl p-9 bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl relative overflow-hidden group hover:border-[#ff881e] hover:shadow-[0_10px_40px_-10px_rgba(255,136,30,0.2)] transition-all duration-300">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#ff881e]" />
+              {/* Add orange shimmer effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[#ff881e]/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <h4 className="font-semibold title-gradient font-display mb-3 relative z-10">{item.title}</h4>
+              <p className="text-text-muted text-sm relative z-10">{item.text}</p>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-48">
+          <h3 className="text-2xl md:text-3xl font-bold title-gradient font-display tracking-tight">
+            <TypewriterText 
+              text="Built to Elevate Your Remote Workforce"
+              speed={28}
+              caretHeightClass="h-8"
+              className="title-gradient font-display"
+            />
+          </h3>
+        </div>
+      </motion.div>
+
+      {/* Key features merged into previous section to fit one viewport */}
+
+      {/* Client types */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative"
+      >
+        <h3 className="text-3xl md:text-4xl font-bold title-gradient font-display tracking-tight mb-4 text-center">
+          <TypewriterText 
+            text="Trusted by Healthcare Leaders and Teams Across the US"
+            speed={28}
+            caretHeightClass="h-10"
+            className="title-gradient font-display"
+          />
+        </h3>
+        <p className="text-text-muted mb-8 text-center max-w-3xl mx-auto">HIPAA‑compliant remote teams for healthcare—client‑facing and backend—built for quality and savings.</p>
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
+            <h4 className="font-semibold text-slate-900 mb-3">Key Use Cases</h4>
+            <ul className="space-y-2 text-slate-700 text-sm">
+              <li>• Healthcare administration and customer service</li>
+              <li>• Medical billing, data migration, and analytics</li>
+              <li>• Nursing homes, home care agencies, and ABA therapy providers</li>
+              <li>• Small businesses reducing overhead with handpicked remote workers</li>
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-gray-200 shadow-sm p-6">
+            <h4 className="font-semibold title-gradient font-display mb-4 text-center">
+              <TypewriterText 
+                text="ReWorks By the Numbers"
+                speed={30}
+                caretHeightClass="h-8"
+                className="title-gradient font-display"
+              />
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <AnimatedCounter value={60} suffix="%" />
+                  <span className="text-text-muted text-xs sm:text-sm">Cost Reduction</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <AnimatedCounter value={98} suffix="%" />
+                  <span className="text-text-muted text-xs sm:text-sm">Client Satisfaction</span>
+                </div>
+              </div>
+              <div className="p-3 rounded-xl text-center">
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <AnimatedCounter value={200} suffix="+" />
+                  <span className="text-text-muted text-xs sm:text-sm">Happy Clients</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+
+
+      {/* ReWorks Solutions – Your Outsourcing HR Partner (removed) */}
+
+      {/* Stats Section */}
+      {/* Bottom stats section removed per request */}
+
+      {/* Operational solutions across industries (removed) */}
+
+      {/* Home Care Support Operations — duplicate block removed to prevent repetition */}
+
+      {/* Bottom CTA removed per request */}
+    </MotionSection>
+  );
+}
+
+export default memo(HomeContent)
