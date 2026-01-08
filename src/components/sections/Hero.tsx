@@ -111,6 +111,7 @@ export default function Hero() {
                     className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent gradient-animate"
                     caretHeightClass="h-12"
                     shimmerOnComplete={false}
+                    preserveLayout={true}
                     onComplete={() => console.log("Hero title complete")}
                   />
                 </span>

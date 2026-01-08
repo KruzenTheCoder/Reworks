@@ -25,6 +25,7 @@ interface TextTypeProps {
   startOnVisible?: boolean;
   reverseMode?: boolean;
   shimmerOnComplete?: boolean;
+  preserveLayout?: boolean;
 }
 
 const TextType = ({
@@ -47,6 +48,7 @@ const TextType = ({
   startOnVisible = false,
   reverseMode = false,
   shimmerOnComplete = false,
+  preserveLayout = false,
   ...props
 }: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
   const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -256,6 +258,39 @@ const TextType = ({
 
   const shouldHideCursor =
     (hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting)) || isFinished;
+
+  if (preserveLayout) {
+    return (
+      <Component
+        ref={containerRef}
+        className={`text-type relative inline-block ${className}`}
+        {...props}
+      >
+        {/* Invisible text to reserve space */}
+        <span className="invisible" aria-hidden="true">
+          {textArray[currentTextIndex]}
+        </span>
+        
+        {/* Visible typing text overlay */}
+        <span className="absolute inset-0 top-0 left-0">
+          <ShinyText
+            text={displayedText}
+            disabled={!shimmerOnComplete || !isFinished}
+            speed={3}
+            className={className}
+          />
+          {showCursor && (
+            <span
+              ref={cursorRef}
+              className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+            >
+              {cursorCharacter}
+            </span>
+          )}
+        </span>
+      </Component>
+    );
+  }
 
   return createElement(
     Component,

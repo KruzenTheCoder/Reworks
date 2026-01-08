@@ -11,6 +11,7 @@ type TypewriterProps = {
   onComplete?: () => void;
   shimmerOnComplete?: boolean;
   as?: ElementType;
+  preserveLayout?: boolean;
 };
 
 // Wrapper that maps existing TypewriterText API to the new TextType logic
@@ -22,6 +23,7 @@ export default function TypewriterText({
   caretHeightClass = "h-6",
   onComplete,
   shimmerOnComplete = true,
+  preserveLayout = false,
 }: TypewriterProps) {
   return (
     <TextType
@@ -38,6 +40,7 @@ export default function TypewriterText({
       className={className}
       as={"span"}
       shimmerOnComplete={shimmerOnComplete}
+      preserveLayout={preserveLayout}
       onSentenceComplete={() => {
         if (onComplete) onComplete();
       }}
