@@ -96,7 +96,7 @@ export default function Hero() {
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="mb-10"
             >
               {/* Fallback for iOS: Show static text if JS animation fails or is delayed */}
@@ -120,7 +120,7 @@ export default function Hero() {
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: 1 }}
-                transition={{ duration: 1.5, delay: 2.5, ease: "easeOut" }}
+                transition={{ duration: 1.0, delay: 1.3, ease: "easeOut" }}
                 className="h-1 bg-gradient-to-r from-primary-blue/30 via-accent-blue/50 to-primary-blue/30 rounded-full max-w-2xl mx-auto"
                 style={{ transformOrigin: "center" }}
               />
@@ -130,7 +130,7 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+              transition={{ duration: 1, delay: 1.6, ease: "easeOut" }}
               className="mb-14"
             >
               <p className="mb-12 mx-auto max-w-3xl text-base sm:text-xl text-text-muted leading-relaxed font-medium tracking-wide">
@@ -142,7 +142,7 @@ export default function Hero() {
             <motion.div 
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
+              transition={{ duration: 1, delay: 2.1, ease: "easeOut" }}
               className="flex flex-col sm:flex-row items-center justify-center gap-6"
             >
                 <Button href="contact" variant="luxury" size="lg" className="min-w-[340px]">
@@ -158,7 +158,7 @@ export default function Hero() {
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, delay: 1.6, ease: "easeOut" }}
+              transition={{ duration: 1.2, delay: 2.6, ease: "easeOut" }}
             className="mt-14 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-10 max-w-5xl mx-auto px-2"
           >
               {[
@@ -172,7 +172,7 @@ export default function Hero() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ 
                     duration: 0.8, 
-                    delay: 1.8 + index * 0.15,
+                    delay: 2.8 + index * 0.15,
                     type: "spring",
                     stiffness: 100,
                     damping: 10
