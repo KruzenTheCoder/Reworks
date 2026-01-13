@@ -1,7 +1,6 @@
 "use client";
 
 import { ElementType, useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
-import { gsap } from 'gsap';
 import './TextType.css';
 import ShinyText from './ShinyText';
 
@@ -70,6 +69,7 @@ const TextType = ({
   const displayedTextRef = useRef<string>('');
   const isDeletingRef = useRef<boolean>(false);
   const currentTextIndexRef = useRef<number>(0);
+  const isFinishedRef = useRef<boolean>(false);
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
@@ -113,19 +113,6 @@ const TextType = ({
   }, [startOnVisible]);
 
   useEffect(() => {
-    if (showCursor && cursorRef.current) {
-      gsap.set(cursorRef.current, { opacity: 1 });
-      gsap.to(cursorRef.current, {
-        opacity: 0,
-        duration: cursorBlinkDuration,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power2.inOut'
-      });
-    }
-  }, [showCursor, cursorBlinkDuration]);
-
-  useEffect(() => {
     if (!isVisible) return;
 
     // Sync refs with current state
@@ -134,6 +121,7 @@ const TextType = ({
     isDeletingRef.current = isDeleting;
     currentTextIndexRef.current = currentTextIndex;
     charIntervalRef.current = typingSpeed;
+    isFinishedRef.current = isFinished;
 
     const startLoop = () => {
       if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
@@ -154,70 +142,134 @@ const TextType = ({
         const currentText = textArray[currentTextIndexRef.current];
         const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
 
-        // Determine interval; keep constant for smoothness, optionally vary slightly
-        const interval = variableSpeed ? getRandomSpeed() : charIntervalRef.current;
+        if (!variableSpeed) {
+          const interval = isDeletingRef.current ? deletingSpeed : charIntervalRef.current;
+          const tickCount = Math.floor(accumulatorRef.current / interval);
+          if (tickCount > 0) {
+            accumulatorRef.current -= tickCount * interval;
 
-        while (accumulatorRef.current >= interval) {
-          accumulatorRef.current -= interval;
+            if (!isDeletingRef.current) {
+              const remaining = processedText.length - currentCharIndexRef.current;
+              const advance = Math.min(tickCount, remaining);
+              if (advance > 0) {
+                const start = currentCharIndexRef.current;
+                const end = start + advance;
+                displayedTextRef.current += processedText.slice(start, end);
+                currentCharIndexRef.current = end;
+                if (isFinishedRef.current) {
+                  isFinishedRef.current = false;
+                  setIsFinished(false);
+                }
+                setDisplayedText(displayedTextRef.current);
+                setCurrentCharIndex(currentCharIndexRef.current);
+              } else if (!isFinishedRef.current) {
+                isFinishedRef.current = true;
+                setIsFinished(true);
+                if (onSentenceComplete) {
+                  onSentenceComplete(textArray[currentTextIndexRef.current], currentTextIndexRef.current);
+                }
 
-          if (!isDeletingRef.current) {
-            if (currentCharIndexRef.current < processedText.length) {
-              const nextChar = processedText[currentCharIndexRef.current];
-              setDisplayedText(prev => {
-                displayedTextRef.current = prev + nextChar;
-                return displayedTextRef.current;
-              });
-              currentCharIndexRef.current += 1;
-              setCurrentCharIndex(currentCharIndexRef.current);
-            } else {
-              // Finished typing current text
-              setIsFinished(true);
-              if (onSentenceComplete) {
-                onSentenceComplete(textArray[currentTextIndexRef.current], currentTextIndexRef.current);
+                if (textArray.length > 1 && loop) {
+                  const pauseUntil = now + pauseDuration;
+                  const waitPause = () => {
+                    if (performance.now() >= pauseUntil) {
+                      isDeletingRef.current = true;
+                      setIsDeleting(true);
+                    } else {
+                      requestAnimationFrame(waitPause);
+                    }
+                  };
+                  requestAnimationFrame(waitPause);
+                } else {
+                  if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                  rafIdRef.current = null;
+                  return;
+                }
               }
-
-              if (textArray.length > 1 && loop) {
-                // Begin deletion after pause
-                const pauseUntil = now + pauseDuration;
-                const waitPause = () => {
-                  if (performance.now() >= pauseUntil) {
-                    isDeletingRef.current = true;
-                    setIsDeleting(true);
-                  } else {
-                    requestAnimationFrame(waitPause);
-                  }
-                };
-                requestAnimationFrame(waitPause);
+            } else {
+              const currentLen = displayedTextRef.current.length;
+              const remove = Math.min(tickCount, currentLen);
+              if (remove > 0) {
+                displayedTextRef.current = displayedTextRef.current.slice(0, currentLen - remove);
+                setDisplayedText(displayedTextRef.current);
               } else {
-                // Stop loop
-                if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-                rafIdRef.current = null;
-                return;
+                isDeletingRef.current = false;
+                setIsDeleting(false);
+                if (currentTextIndexRef.current === textArray.length - 1 && !loop) {
+                  if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                  rafIdRef.current = null;
+                  return;
+                }
+                setCurrentTextIndex(prev => {
+                  const nextIndex = (prev + 1) % textArray.length;
+                  currentTextIndexRef.current = nextIndex;
+                  return nextIndex;
+                });
+                setCurrentCharIndex(0);
+                currentCharIndexRef.current = 0;
               }
             }
-          } else {
-            // Deleting path (for looping text arrays)
-            if (displayedTextRef.current.length > 0) {
-              setDisplayedText(prev => {
-                displayedTextRef.current = prev.slice(0, -1);
-                return displayedTextRef.current;
-              });
-            } else {
-              isDeletingRef.current = false;
-              setIsDeleting(false);
-              // Advance to next text
-              if (currentTextIndexRef.current === textArray.length - 1 && !loop) {
-                if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-                rafIdRef.current = null;
-                return;
+          }
+        } else {
+          const interval = getRandomSpeed();
+          while (accumulatorRef.current >= interval) {
+            accumulatorRef.current -= interval;
+
+            if (!isDeletingRef.current) {
+              if (currentCharIndexRef.current < processedText.length) {
+                const nextChar = processedText[currentCharIndexRef.current];
+                setDisplayedText(prev => {
+                  displayedTextRef.current = prev + nextChar;
+                  return displayedTextRef.current;
+                });
+                currentCharIndexRef.current += 1;
+                setCurrentCharIndex(currentCharIndexRef.current);
+              } else if (!isFinishedRef.current) {
+                isFinishedRef.current = true;
+                setIsFinished(true);
+                if (onSentenceComplete) {
+                  onSentenceComplete(textArray[currentTextIndexRef.current], currentTextIndexRef.current);
+                }
+
+                if (textArray.length > 1 && loop) {
+                  const pauseUntil = now + pauseDuration;
+                  const waitPause = () => {
+                    if (performance.now() >= pauseUntil) {
+                      isDeletingRef.current = true;
+                      setIsDeleting(true);
+                    } else {
+                      requestAnimationFrame(waitPause);
+                    }
+                  };
+                  requestAnimationFrame(waitPause);
+                } else {
+                  if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                  rafIdRef.current = null;
+                  return;
+                }
               }
-              setCurrentTextIndex(prev => {
-                const nextIndex = (prev + 1) % textArray.length;
-                currentTextIndexRef.current = nextIndex;
-                return nextIndex;
-              });
-              setCurrentCharIndex(0);
-              currentCharIndexRef.current = 0;
+            } else {
+              if (displayedTextRef.current.length > 0) {
+                setDisplayedText(prev => {
+                  displayedTextRef.current = prev.slice(0, -1);
+                  return displayedTextRef.current;
+                });
+              } else {
+                isDeletingRef.current = false;
+                setIsDeleting(false);
+                if (currentTextIndexRef.current === textArray.length - 1 && !loop) {
+                  if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+                  rafIdRef.current = null;
+                  return;
+                }
+                setCurrentTextIndex(prev => {
+                  const nextIndex = (prev + 1) % textArray.length;
+                  currentTextIndexRef.current = nextIndex;
+                  return nextIndex;
+                });
+                setCurrentCharIndex(0);
+                currentCharIndexRef.current = 0;
+              }
             }
           }
         }
@@ -253,7 +305,9 @@ const TextType = ({
     initialDelay,
     reverseMode,
     variableSpeed,
-    onSentenceComplete
+    onSentenceComplete,
+    isFinished,
+    getRandomSpeed
   ]);
 
   const shouldHideCursor =
@@ -282,7 +336,8 @@ const TextType = ({
           {showCursor && (
             <span
               ref={cursorRef}
-              className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+              className={`text-type__cursor text-type__cursor--blink ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+              style={{ animationDuration: `${cursorBlinkDuration * 2}s` }}
             >
               {cursorCharacter}
             </span>
@@ -308,7 +363,8 @@ const TextType = ({
     showCursor && (
       <span
         ref={cursorRef}
-        className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+        className={`text-type__cursor text-type__cursor--blink ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+        style={{ animationDuration: `${cursorBlinkDuration * 2}s` }}
       >
         {cursorCharacter}
       </span>

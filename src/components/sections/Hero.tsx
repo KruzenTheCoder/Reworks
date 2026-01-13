@@ -29,58 +29,8 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-transparent"
     >
-      {/* Sleek animated gradient background - CSS optimized */}
       <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 animate-bg-shift"
-          style={{
-            background: "linear-gradient(120deg, rgba(59,130,246,0.08), rgba(99,102,241,0.08), rgba(59,130,246,0.08))",
-          }}
-        />
-        
-        {/* CSS Animated Orbs */}
-        <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vh] rounded-full blur-[120px] animate-breathe"
-          style={{ 
-            background: "radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0.6), transparent 70%)",
-            animationDelay: "0s"
-          }}
-        />
-        <div
-          className="absolute -top-32 -left-24 w-[60vw] h-[60vw] rounded-full blur-[100px] animate-breathe"
-          style={{ 
-            background: "radial-gradient(circle, rgba(99,102,241,0.28), transparent 55%)",
-            animationDelay: "2s"
-          }}
-        />
-        <div
-          className="absolute bottom-[-20vh] right-[-20vw] w-[55vw] h-[55vw] rounded-full blur-[110px] animate-breathe"
-          style={{ 
-            background: "radial-gradient(circle, rgba(59,130,246,0.26), transparent 55%)",
-            animationDelay: "4s"
-          }}
-        />
-
-        {/* Smaller blurred orbs - Reduced count and switched to CSS animation */}
-        {[
-          { w: 180, h: 180, top: '20%', left: '15%', bg: 'radial-gradient(circle, rgba(255,255,255,0.9), transparent 65%)', delay: 1 },
-          { w: 140, h: 140, top: '60%', left: '80%', bg: 'radial-gradient(circle, rgba(147,197,253,0.85), transparent 65%)', delay: 3 },
-          { w: 120, h: 120, top: '10%', left: '70%', bg: 'radial-gradient(circle, rgba(255,255,255,0.85), transparent 65%)', delay: 0.5 },
-        ].map((o, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full blur-[60px] animate-breathe"
-            style={{ 
-              width: o.w, 
-              height: o.h, 
-              top: o.top, 
-              left: o.left, 
-              background: o.bg,
-              animationDuration: `${10 + i * 2}s`,
-              animationDelay: `${o.delay}s`
-            }}
-          />
-        ))}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
       </div>
 
       {/* Parallax Content */}
@@ -112,7 +62,7 @@ export default function Hero() {
                     caretHeightClass="h-12"
                     shimmerOnComplete={false}
                     preserveLayout={true}
-                    onComplete={() => console.log("Hero title complete")}
+                    enabled={true}
                   />
                 </span>
               </h1>

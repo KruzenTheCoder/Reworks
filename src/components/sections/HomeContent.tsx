@@ -75,6 +75,7 @@ function HomeContent() {
                 text="Strategic outsourcing, built around your business" 
                 speed={25}
                 caretHeightClass="h-10"
+                enabled={true}
                 onComplete={() => console.log("Main heading complete")}
               />
             </h2>
@@ -91,6 +92,7 @@ function HomeContent() {
             text="Your vision, our solutions. Exceptional results" 
             speed={30}
             caretHeightClass="h-6"
+            enabled={true}
           />
         </motion.p>
         
@@ -122,6 +124,7 @@ function HomeContent() {
                 speed={28}
                 caretHeightClass="h-10"
                 className="title-gradient font-display"
+                enabled={true}
               />
             </h3>
             <p className="text-text-muted mb-6">When you think offshore staffing, concerns rise about risking your brand or disrupting operations:</p>
@@ -144,6 +147,7 @@ function HomeContent() {
                 speed={28}
                 caretHeightClass="h-10"
                 className="title-gradient font-display"
+                enabled={true}
               />
             </h3>
             <div className="space-y-4 text-text-muted max-w-3xl mx-auto">
@@ -173,6 +177,7 @@ function HomeContent() {
               speed={28}
               caretHeightClass="h-10"
               className="title-gradient font-display"
+              enabled={true}
             />
           </h3>
           <p className="text-text-muted mb-6">Premium offshore talent, managed end‑to‑end. No compromise.</p>
@@ -200,6 +205,7 @@ function HomeContent() {
               speed={28}
               caretHeightClass="h-8"
               className="title-gradient font-display"
+              enabled={true}
             />
           </h3>
         </div>
@@ -221,6 +227,7 @@ function HomeContent() {
             speed={28}
             caretHeightClass="h-10"
             className="title-gradient font-display"
+            enabled={true}
           />
         </h3>
         <p className="text-text-muted mb-8 text-center max-w-3xl mx-auto">HIPAA‑compliant remote teams for healthcare—client‑facing and backend—built for quality and savings.</p>

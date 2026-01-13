@@ -14,12 +14,11 @@ export default function Home() {
       <FAQ />
       <FinalCTA />
 
-      {/* Home-specific stronger bottom blur overlay (hides at footer) */}
       <GlobalBlur
         position="bottom"
         height="10rem"
         strength={3}
-        divCount={3} // Optimized from 8
+        divCount={3}
         curve="bezier"
         exponential
         opacity={1}

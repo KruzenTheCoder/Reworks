@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function ResourcesPage() {
   return (
-    <section className="bg-gray-light">
+    <section className="bg-transparent">
       <div className="section-wrap fade-in-up">
         <ClientPageTitle text="Resources" />
         <p className="mt-3 max-w-2xl text-text-base/80">

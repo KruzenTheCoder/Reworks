@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function HirePage() {
   return (
-    <div className="min-h-[70vh] bg-gradient-to-br from-gray-50 via-blue-50/40 to-indigo-50/60">
+    <div className="min-h-[70vh] bg-transparent">
       <MotionSection className="section-wrap" variant="fadeUp">
         <div className="text-center mb-10">
           <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
@@ -15,6 +15,7 @@ export default function HirePage() {
               speed={32}
               caretHeightClass="h-10"
               shimmerOnComplete
+              enabled={true}
             />
           </h1>
           <p className="text-lg text-text-muted max-w-3xl mx-auto">

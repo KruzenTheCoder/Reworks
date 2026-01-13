@@ -82,6 +82,7 @@ export default function About() {
             <TypewriterText 
               text="Strategic outsourcing, built around your business" 
               speed={40}
+              enabled={true}
             />
           </motion.h2>
           
@@ -136,6 +137,7 @@ export default function About() {
               text="ReWorks Solutions – Your Outsourcing HR Partner"
               speed={30}
               delay={500}
+              enabled={true}
             />
           </motion.h3>
           

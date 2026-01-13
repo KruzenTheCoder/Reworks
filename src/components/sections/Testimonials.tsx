@@ -100,7 +100,7 @@ export default function Testimonials() {
           className="text-center mb-10"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-text-base mb-4 font-display">
-            <TypewriterText text="Trusted By" speed={28} caretHeightClass="h-12" className="title-gradient font-display" />
+            <TypewriterText text="Trusted By" speed={28} caretHeightClass="h-12" className="title-gradient font-display" enabled={true} />
           </h2>
           <p className="text-xl text-text-muted">Partners that trust in us.</p>
         </motion.div>

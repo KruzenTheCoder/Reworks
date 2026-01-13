@@ -88,8 +88,28 @@ body {
   overflow-x: hidden;
   width: 100%;
   position: relative;
-  /* Revert to original neutral site background */
-  background-color: #ffffff;
+  background-color: transparent;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -20;
+  pointer-events: none;
+  background-image: url('/images/site-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -15;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.22);
 }
 
 /* Apply Nohemi (fallbacks to Jakarta Sans) for headings and title utilities */

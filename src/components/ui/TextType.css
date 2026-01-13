@@ -9,6 +9,24 @@
   opacity: 1;
 }
 
+.text-type__cursor--blink {
+  animation-name: text-type-blink;
+  animation-timing-function: steps(2, end);
+  animation-iteration-count: infinite;
+}
+
+@keyframes text-type-blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .text-type__cursor--hidden {
   display: none;
 }

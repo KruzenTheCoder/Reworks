@@ -111,6 +111,7 @@ export default function RolesWeSource() {
               speed={40}
               shimmerOnComplete
               caretHeightClass="h-12"
+              enabled={true}
             />
           </h2>
           <p className="text-xl text-text-muted max-w-3xl mx-auto">

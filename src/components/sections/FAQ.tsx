@@ -296,6 +296,7 @@ function FAQ() {
               speed={40}
               shimmerOnComplete
               caretHeightClass="h-12"
+              enabled={true}
             />
           </motion.h2>
           
@@ -548,6 +549,7 @@ function FAQ() {
               speed={40}
               shimmerOnComplete
               caretHeightClass="h-10"
+              enabled={true}
             />
           </h2>
           <p className="text-xl text-gray-600 mb-8">

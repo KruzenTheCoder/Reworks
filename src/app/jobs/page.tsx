@@ -133,6 +133,7 @@ export default async function JobsPage({ searchParams }: any) {
               speed={32}
               caretHeightClass="h-10"
               shimmerOnComplete
+              enabled={true}
             />
           </h1>
           <p className="text-lg text-text-muted max-w-3xl mx-auto">

@@ -277,7 +277,7 @@ const operations = [
 function Solutions() {
   const [active, setActive] = useState(0);
   return (
-    <section id="solutions" className="pt-0 pb-24 bg-white">
+    <section id="solutions" className="pt-0 pb-24 bg-transparent">
           <MotionSection className="section-wrap" variant="fadeUp" viewportAmount={0}>
         <div className="text-center mb-10 md:mb-16">
           <h2 className="text-2xl md:text-3xl font-bold text-text-base mb-3 font-display tracking-tight">
@@ -286,6 +286,7 @@ function Solutions() {
               speed={28}
               caretHeightClass="h-8"
               className="title-gradient font-display"
+              enabled={true}
             />
           </h2>
           <p className="text-text-muted max-w-3xl mx-auto">
@@ -365,6 +366,7 @@ function Solutions() {
                 caretHeightClass="h-8"
                 shimmerOnComplete
                 className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-blue bg-clip-text text-transparent"
+                enabled={true}
               />
             </h3>
             <motion.div

@@ -20,10 +20,10 @@ export default function Page() {
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight"
-              >
-                <TypewriterText text="Book a call. Build a world-class team." speed={28} caretHeightClass="h-10" shimmerOnComplete />
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight"
+            >
+                <TypewriterText text="Book a call. Build a world-class team." speed={28} caretHeightClass="h-10" shimmerOnComplete enabled={true} />
               </motion.h1>
               <p className="mt-6 text-lg text-gray-700 max-w-xl">We’ll help you hire vetted, native English-speaking professionals, guided by hands-on account managers and proactive support.</p>
               <div className="mt-8 flex gap-4">

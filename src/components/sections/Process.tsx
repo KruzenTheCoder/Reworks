@@ -104,6 +104,7 @@ function Process() {
             <TypewriterText 
               text="The ReWorks process: Thorough, logical, for extraordinary results" 
               speed={40}
+              enabled={true}
             />
           </motion.h2>
           

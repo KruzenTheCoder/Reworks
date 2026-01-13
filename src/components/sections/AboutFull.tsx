@@ -106,6 +106,7 @@ function AboutFull() {
               <TypewriterText 
                 text="We know what winning teams are made of." 
                 speed={40}
+                enabled={true}
               />
             </motion.h1>
             

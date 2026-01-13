@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   return (
-    <section className="bg-white">
+    <section className="bg-transparent">
       <MotionSection className="section-wrap" variant="fadeUp">
         <ClientPageTitle text="Pricing" />
         <p className="mt-3 max-w-2xl text-text-base/80">

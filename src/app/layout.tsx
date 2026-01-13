@@ -7,7 +7,6 @@ import ClientScrollTop from "@/components/ClientScrollTop";
 import GlobalBlur from "@/components/visuals/GlobalBlur";
 import { Suspense } from "react";
 import ClientSplashCursor from "@/components/ui/ClientSplashCursor";
-import ColorBloom from "@/components/visuals/ColorBloom";
 //import ScrollStack from "@/components/visuals/ScrollStack";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -82,7 +81,6 @@ export default function RootLayout({
       >
         {/* Mount global scroll control immediately */}
         <ClientScrollTop />
-        <ColorBloom />
         
         {/* Fixed header */}
         <Header />
@@ -110,12 +108,11 @@ export default function RootLayout({
           </Suspense>
         )}
 
-        {/* Site-wide bottom blur overlay that hides when footer is visible */}
         <GlobalBlur
           position="bottom"
           height="6rem"
           strength={2}
-          divCount={5}
+          divCount={3}
           curve="bezier"
           exponential
           opacity={1}
