@@ -81,6 +81,7 @@ export default function MotionSection({
       transition={{ duration: prefersReduced ? 0.4 : 0.6, ease: 'easeOut', delay }}
       viewport={effectiveViewport}
       className={className}
+      style={{ willChange: 'opacity, transform' }}
     >
       {children}
     </motion.section>

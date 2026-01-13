@@ -109,7 +109,7 @@ export default function Testimonials() {
           <motion.div
             className="flex gap-6 px-6"
             animate={{ x: ['0%', '-50%'] }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
             style={{ width: "max-content" }}
           >
             {businessesLoop.map((b, idx) => (

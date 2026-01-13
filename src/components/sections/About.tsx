@@ -69,7 +69,7 @@ export default function About() {
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
 
   return (
-    <section id="about" className="py-24 bg-white overflow-hidden">
+    <section id="about" className="py-24 bg-transparent overflow-hidden">
       <MotionSection className="section-wrap" variant="fadeUp">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16">

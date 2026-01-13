@@ -79,6 +79,15 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${jakarta.variable} antialiased font-sans overflow-x-hidden min-w-[320px]`}
       >
+        {/* Fixed background layer for buttery smooth scrolling */}
+        <div 
+          className="fixed inset-0 z-[-50] bg-cover bg-center bg-no-repeat pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('/images/site-bg-1.jpg')`
+          }}
+          aria-hidden="true"
+        />
+
         {/* Mount global scroll control immediately */}
         <ClientScrollTop />
         

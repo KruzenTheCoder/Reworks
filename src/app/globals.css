@@ -91,27 +91,6 @@ body {
   background-color: transparent;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -20;
-  pointer-events: none;
-  background-image: url('/images/site-bg.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -15;
-  pointer-events: none;
-  background: rgba(255, 255, 255, 0.22);
-}
-
 /* Apply Nohemi (fallbacks to Jakarta Sans) for headings and title utilities */
 h1,
 h2,
@@ -296,6 +275,35 @@ h4,
 
 .pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .glass,
+  .glass-card,
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl,
+  .backdrop-blur-3xl {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .gradient-animate,
+  .float,
+  .pulse-glow {
+    animation: none !important;
+  }
 }
 
 .shiny-strong {

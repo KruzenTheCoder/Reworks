@@ -33,6 +33,16 @@ export default function GlobalBlur({
 }: GlobalBlurProps) {
   const pathname = usePathname();
   const [footerVisible, setFooterVisible] = useState(false);
+  const [useLite, setUseLite] = useState(false);
+
+  useEffect(() => {
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent : '';
+    const isIOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (ua.includes('Mac') && typeof document !== 'undefined' && 'ontouchend' in document);
+    const isSafari = /Safari/.test(ua) && !/Chrome|CriOS|Edg|OPR|FxiOS|Firefox/.test(ua);
+    setUseLite(isIOS || isSafari);
+  }, []);
 
   useEffect(() => {
     const footerEl = document.querySelector('footer');
@@ -51,6 +61,29 @@ export default function GlobalBlur({
   }, [pathname]);
 
   if (disableOnRoutes.includes(pathname)) return null;
+
+  if (useLite) {
+    return (
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height,
+          pointerEvents: 'none',
+          zIndex,
+          opacity: footerVisible ? 0 : opacity,
+          transition: `opacity ${duration} ${easing}`,
+          background:
+            position === 'top'
+              ? 'linear-gradient(to bottom, rgba(255,255,255,0.55), rgba(255,255,255,0))'
+              : 'linear-gradient(to top, rgba(255,255,255,0.55), rgba(255,255,255,0))'
+        }}
+      />
+    );
+  }
 
   return (
     <GradualBlur
