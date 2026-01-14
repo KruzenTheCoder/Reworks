@@ -29,13 +29,10 @@ export default function Hero() {
       ref={ref}
       className="relative min-h-[85vh] sm:min-h-screen overflow-hidden bg-transparent"
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/15 to-transparent" />
-      </div>
+      {/* Removed gradient overlays for pure AVIF background */}
 
-      {/* Parallax Content */}
-      <motion.div 
-        style={{ y: isMobile ? undefined : y, opacity: isMobile ? 1 : opacity }}
+      {/* Static Content (Parallax removed for smoothness) */}
+      <div 
         className="relative z-10 flex min-h-[85vh] sm:min-h-screen items-center"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-16 sm:pt-20 pb-16 sm:pb-20">
@@ -146,7 +143,7 @@ export default function Hero() {
             </motion.div>
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll Indicator */}
       <motion.div

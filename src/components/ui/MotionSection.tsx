@@ -35,22 +35,23 @@ export default function MotionSection({
   }
 
   const getInitial = () => {
+    // Simplified for "buttery smooth" performance - mostly just fade or small y-shift
     if (prefersReduced) {
       return { opacity: 0 }
     }
     switch (variant) {
       case 'fadeUp':
-        return { opacity: 0, y: 24 }
+        return { opacity: 0, y: 15 } // Reduced travel
       case 'fade':
         return { opacity: 0 }
       case 'slideLeft':
-        return { opacity: 0, x: -24 }
+        return { opacity: 0, x: -15 } // Reduced travel
       case 'slideRight':
-        return { opacity: 0, x: 24 }
+        return { opacity: 0, x: 15 } // Reduced travel
       case 'zoom':
-        return { opacity: 0, scale: 0.95 }
+        return { opacity: 0, scale: 0.98 } // Reduced scale change
       default:
-        return { opacity: 0, y: 24 }
+        return { opacity: 0, y: 15 }
     }
   }
 

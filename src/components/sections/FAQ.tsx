@@ -545,7 +545,7 @@ function FAQ() {
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             <TypewriterText
-              text="You can envision your dream team."
+              text="Or you can make it happen with ReWorks Solutions."
               speed={40}
               shimmerOnComplete
               caretHeightClass="h-10"
@@ -553,7 +553,7 @@ function FAQ() {
             />
           </h2>
           <p className="text-xl text-gray-600 mb-8">
-            Or you can make it happen with ReWorks Solutions.
+            You can envision your dream team.
           </p>
           <div className="text-center">
             <Button href="contact" variant="primary" size="lg">

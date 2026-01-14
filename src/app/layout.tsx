@@ -83,7 +83,7 @@ export default function RootLayout({
         <div 
           className="fixed inset-0 z-[-50] bg-cover bg-center bg-no-repeat pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.22)), url('/images/site-bg-1.jpg')`
+            backgroundImage: `url('/images/site-bg.avif')`
           }}
           aria-hidden="true"
         />
