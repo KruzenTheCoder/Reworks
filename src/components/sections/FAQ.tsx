@@ -543,7 +543,10 @@ function FAQ() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           viewport={{ once: true, amount: 0, margin: '0px' }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <p className="text-xl text-gray-600 mb-4">
+            You can envision your dream team.
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
             <TypewriterText
               text="Or you can make it happen with ReWorks Solutions."
               speed={40}
@@ -552,9 +555,6 @@ function FAQ() {
               enabled={true}
             />
           </h2>
-          <p className="text-xl text-gray-600 mb-8">
-            You can envision your dream team.
-          </p>
           <div className="text-center">
             <Button href="contact" variant="primary" size="lg">
               OUTSOURCE WITH THE EXPERTS!
