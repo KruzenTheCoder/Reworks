@@ -37,6 +37,9 @@ const portraits: Record<string, string> = {
   "Alexandra May": "https://i.ibb.co/rG822sH0/Alexandra.png",
   "Rachelle Visser": "https://i.ibb.co/5hV3HHB4/Rachelle.png",
   "Nicole Erasmus": "https://i.ibb.co/8DRMxLfn/Nicole.png",
+  // New Additions
+  "Linda Senekal": "https://i.ibb.co/svhchTXV/Linda-Senekal-Customer-Success-Manager.png",
+  "Monique Van As": "https://i.ibb.co/3yZSMYGL/Monique-Van-As-Account-Manager.png",
 };
 
 const getPortraitUrl = (name: string): string | undefined => portraits[name];
@@ -418,6 +421,8 @@ function AboutFull() {
                 { name: 'Alicia Nadasen', role: 'HR Manager' },
                 { name: 'Subhaana Malek', role: 'Contract Relations Supervisor' },
                 { name: 'Chane du Toit', role: 'Bookkeeper' },
+                { name: 'Linda Senekal', role: 'Customer Success Manager' },
+                { name: 'Monique Van As', role: 'Account Manager' },
               ].map((person, i) => (
                 <motion.div
                   key={person.name}
