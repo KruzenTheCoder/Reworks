@@ -40,6 +40,7 @@ const portraits: Record<string, string> = {
   // New Additions
   "Linda Senekal": "https://i.ibb.co/svhchTXV/Linda-Senekal-Customer-Success-Manager.png",
   "Monique Van As": "https://i.ibb.co/3yZSMYGL/Monique-Van-As-Account-Manager.png",
+  "Lee-Ann Wyatt": "https://i.ibb.co/b5b0XxNB/Lee-Ann-Wyatt-Recruiter.png",
 };
 
 const getPortraitUrl = (name: string): string | undefined => portraits[name];
@@ -173,15 +174,15 @@ function AboutFull() {
               {
                 name: "Moshe Sender",
                 role: "CEO",
-                bio: "Moshe connects businesses with growth opportunities, leveraging strategic relationships and keen insight. He goes beyond hiring, recognizing how the right talent and ambitious goals drive transformation.",
-                quote: "ReWorks is not just about providing employees – it's about building your crew, understanding where your company is going, and helping you grow bigger, faster. That's our mission.",
+                bio: "",
+                quote: "",
                 linkedin: "https://www.linkedin.com/in/moshe-sender-70b11b267?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
               },
               {
                 name: "Faigy Weinstock",
                 role: "COO",
-                bio: "Faigy brings hands-on experience in managing remote teams, with deep insight into seamless workflows. She perfects operations through strategic team building and process optimization.",
-                quote: "I have hands-on experience leading remote operations. I know what drives and motivates people. This isn't about matching resumes – I invest deeply in every business I work with.",
+                bio: "",
+                quote: "",
                 linkedin: "https://www.linkedin.com/in/faigy-weinstock-739a87318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
               }
             ].map((leader, index) => (
@@ -279,26 +280,30 @@ function AboutFull() {
                   </motion.div>
 
                   {/* Little saying directly below the image */}
-                  <motion.blockquote 
-                    className="mt-3 text-slate-800 italic border-l-4 border-primary-blue pl-4 bg-blue-50/50 py-2 rounded-r-lg text-sm"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 + 0.7 }}
-                  >
-                    "{leader.quote}"
-                  </motion.blockquote>
+                  {leader.quote && (
+                    <motion.blockquote 
+                      className="mt-3 text-slate-800 italic border-l-4 border-primary-blue pl-4 bg-blue-50/50 py-2 rounded-r-lg text-sm"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.2 + 0.7 }}
+                    >
+                      "{leader.quote}"
+                    </motion.blockquote>
+                  )}
 
                   {/* Bio below quote */}
-                  <motion.p 
-                    className="mt-3 text-gray-700 leading-relaxed text-sm"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 + 0.8 }}
-                  >
-                    {leader.bio}
-                  </motion.p>
+                  {leader.bio && (
+                    <motion.p 
+                      className="mt-3 text-gray-700 leading-relaxed text-sm"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.2 + 0.8 }}
+                    >
+                      {leader.bio}
+                    </motion.p>
+                  )}
                 </div>
               </motion.div>
             ))}
@@ -509,6 +514,7 @@ function AboutFull() {
                 { name: 'Alexandra May', role: 'Talent Acquisition Specialist' },
                 { name: 'Rachelle Visser', role: 'Recruitment Administrator' },
                 { name: 'Nicole Erasmus', role: 'Recruitment Administrator' },
+                { name: 'Lee-Ann Wyatt', role: 'Recruiter' },
               ].map((person, i) => (
                 <motion.div
                   key={person.name}
