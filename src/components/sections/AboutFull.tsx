@@ -35,7 +35,6 @@ const portraits: Record<string, string> = {
   "Kayleigh Pontin": "https://i.ibb.co/ZzfH0LTz/Kayleigh-Pontin.png",
   "Alicia Nadasen": "https://i.ibb.co/4ZHgjnLB/Alicia-Nadasen.png",
   "Alexandra May": "https://i.ibb.co/rG822sH0/Alexandra.png",
-  "Rachelle Visser": "https://i.ibb.co/5hV3HHB4/Rachelle.png",
   "Nicole Erasmus": "https://i.ibb.co/8DRMxLfn/Nicole.png",
   // New Additions
   "Linda Senekal": "https://i.ibb.co/svhchTXV/Linda-Senekal-Customer-Success-Manager.png",
@@ -512,7 +511,6 @@ function AboutFull() {
                 { name: 'Kayleigh Pontinhas', role: 'HR Assistant' },
                 { name: 'Kaylin Lavelot', role: 'Strategic Talent Dev Manager' },
                 { name: 'Alexandra May', role: 'Talent Acquisition Specialist' },
-                { name: 'Rachelle Visser', role: 'Recruitment Administrator' },
                 { name: 'Nicole Erasmus', role: 'Recruitment Administrator' },
                 { name: 'Lee-Ann Wyatt', role: 'Recruiter' },
               ].map((person, i) => (
